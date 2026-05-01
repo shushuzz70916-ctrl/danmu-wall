@@ -61,14 +61,6 @@
     .status-ok { color: #4ade80; }
     .status-error { color: #f87171; }
     .status-info { color: #666; }
-
-    .count-badge {
-      text-align: center; margin-bottom: 12px;
-    }
-    .count-badge span {
-      display: inline-block; background: #222; color: #888;
-      padding: 4px 14px; border-radius: 20px; font-size: 12px;
-    }
   </style>
 </head>
 <body>
@@ -76,13 +68,11 @@
     <div class="title">📺 发送弹幕到大屏</div>
     <div class="subtitle">文明发言，守护未成年人</div>
 
-    <div class="count-badge"><span id="remain-count">剩余 3 条</span></div>
-
     <textarea id="danmu-input" rows="2" placeholder="输入弹幕内容..." maxlength="80"></textarea>
 
     <div class="hint">
       ⚠️ 请文明发言，系统自动过滤不良信息<br>
-      每个设备最多发送 3 条弹幕
+      每次发送需间隔 10 秒
     </div>
 
     <button id="send-btn">发 送</button>
@@ -95,23 +85,10 @@
     const input = document.getElementById('danmu-input');
     const sendBtn = document.getElementById('send-btn');
     const statusEl = document.getElementById('status');
-    const remainEl = document.getElementById('remain-count');
-
-    let remainCount = 3;
 
     function setStatus(msg, type) {
       statusEl.textContent = msg;
       statusEl.className = 'status-' + type;
-    }
-
-    function updateRemain() {
-      remainEl.textContent = '剩余 ' + remainCount + ' 条';
-      if (remainCount <= 0) {
-        sendBtn.disabled = true;
-        sendBtn.textContent = '已达上限';
-        input.disabled = true;
-        input.placeholder = '已发送 3 条，无法再发';
-      }
     }
 
     function sendDanmu() {
@@ -128,10 +105,8 @@
       socket.emit('danmu', { text });
 
       setTimeout(() => {
-        remainCount--;
-        updateRemain();
-        sendBtn.textContent = remainCount > 0 ? '发 送' : '已达上限';
-        if (remainCount > 0) sendBtn.disabled = false;
+        sendBtn.disabled = false;
+        sendBtn.textContent = '发 送';
         input.value = '';
         input.focus();
       }, 300);
@@ -148,8 +123,8 @@
 
     socket.on('error_msg', (msg) => {
       setStatus(msg, 'error');
-      sendBtn.disabled = remainCount <= 0;
-      sendBtn.textContent = remainCount > 0 ? '发 送' : '已达上限';
+      sendBtn.disabled = false;
+      sendBtn.textContent = '发 送';
     });
 
     socket.on('danmu', () => {
