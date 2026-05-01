@@ -42,18 +42,16 @@ function filterText(text) {
   return filtered.substring(0, 80);
 }
 
-// ===================== 频率/总次数限制 =====================
-const ipSendCount = new Map();
-const MAX_TOTAL = 3;
+// ===================== 频率限制（10秒1条） =====================
+const ipLastSend = new Map();
 
 function canSend(ip) {
-  const count = ipSendCount.get(ip) || 0;
-  return count < MAX_TOTAL;
+  const last = ipLastSend.get(ip) || 0;
+  return Date.now() - last > 10000; // 10秒
 }
 
 function recordSend(ip) {
-  const count = ipSendCount.get(ip) || 0;
-  ipSendCount.set(ip, count + 1);
+  ipLastSend.set(ip, Date.now());
 }
 
 // ===================== 数据库操作 =====================
