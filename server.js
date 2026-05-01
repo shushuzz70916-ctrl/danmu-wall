@@ -76,7 +76,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // 二维码接口
 app.get('/qrcode', async (req, res) => {
   try {
-    const domain = process.env.RENDER_EXTERNAL_URL || `http://localhost:3000`;
+    const domain = 'https://danmu-wall.onrender.com';
     const qrDataUrl = await QRCode.toDataURL(`${domain}/send`);
     res.json({ qrcode: qrDataUrl });
   } catch (err) {
