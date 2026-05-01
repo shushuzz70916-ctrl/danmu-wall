@@ -76,7 +76,8 @@ app.get('/qrcode', async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: '生成失败' });
   }
-});
+});  
+
 
 // 弹幕总数
 app.get('/api/count', (req, res) => {
