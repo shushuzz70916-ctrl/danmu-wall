@@ -22,13 +22,10 @@ db.exec(`
 
 // ===================== 敏感词库 =====================
 const bannedWords = [
-  // 脏话
   '傻逼', 'sb', '傻b', '煞笔', '尼玛', '你妈', '操你', '草你', ' fuck ', 'shit',
   '妈逼', '贱人', '婊子', '骚货', '滚蛋', '去死', '脑残', '智障', '弱智',
-  // 自杀倾向
   '自杀', '想死', '不想活', '跳楼', '割腕', '上吊', '安眠药', '结束生命',
   '活不下去', '死了算了', '我不想活了', '活着没意思',
-  // 错误价值观引导
   '退学', '辍学', '离家出走', '吸毒', '嗑药', '约炮', '一夜情',
   '不用读书', '读书没用', '骗父母', '偷钱',
 ];
@@ -47,7 +44,7 @@ const ipLastSend = new Map();
 
 function canSend(ip) {
   const last = ipLastSend.get(ip) || 0;
-  return Date.now() - last > 10000; // 10秒
+  return Date.now() - last > 10000;
 }
 
 function recordSend(ip) {
@@ -74,8 +71,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // 二维码接口
 app.get('/qrcode', async (req, res) => {
   try {
-    const domain = 'https://danmu-wall.onrender.com';
-    const qrDataUrl = await QRCode.toDataURL(`${domain}/send`);
+    const qrDataUrl = await QRCode.toDataURL('https://danmu-wall.onrender.com/send');
     res.json({ qrcode: qrDataUrl });
   } catch (err) {
     res.status(500).json({ error: '生成失败' });
@@ -102,7 +98,7 @@ io.on('connection', (socket) => {
     }
 
     if (!canSend(ip)) {
-      socket.emit('error_msg', '已达到发送上限（3条）');
+      socket.emit('error_msg', '发送太快，请10秒后再试');
       return;
     }
 
