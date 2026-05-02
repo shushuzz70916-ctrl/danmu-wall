@@ -85,10 +85,14 @@ button:disabled{opacity:.4;cursor:not-allowed}
   socket.on('connect',()=>{
     dot.className='dot on';statusText.textContent='已连接';
     btn.disabled=false;
+    console.log('Socket.IO 已连接');
   });
   socket.on('disconnect',()=>{
     dot.className='dot';statusText.textContent='已断开';
     btn.disabled=true;
+  });
+  socket.on('connect_error',(err)=>{
+    console.error('Socket.IO 错误:', err.message);
   });
 
   function updateCount(){countEl.textContent=input.value.length}

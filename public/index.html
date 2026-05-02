@@ -104,16 +104,27 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0a0a1a;font-family:
   // ── Socket.IO ──
   const socket=io();
 
-  socket.on('connect',()=>{statusEl.textContent='已连接'});
-  socket.on('disconnect',()=>{statusEl.textContent='已断开'});
-  socket.on('connect_error',()=>{statusEl.textContent='连接失败'});
+  socket.on('connect',()=>{
+    statusEl.textContent='已连接';
+    console.log('Socket.IO 已连接');
+  });
+  socket.on('disconnect',()=>{
+    statusEl.textContent='已断开';
+    console.log('Socket.IO 已断开');
+  });
+  socket.on('connect_error',(err)=>{
+    statusEl.textContent='连接失败';
+    console.error('Socket.IO 错误:', err.message);
+  });
 
   socket.on('history',(msgs)=>{
     history=msgs;historyIdx=0;
+    console.log('收到历史消息:', msgs.length, '条');
     setTimeout(startCycle,CYCLE_DELAY);
   });
 
   socket.on('new_danmu',(msg)=>{
+    console.log('收到新弹幕:', msg.text);
     addBullet(msg.text);
     history.push(msg);
     if(history.length>200)history.shift();

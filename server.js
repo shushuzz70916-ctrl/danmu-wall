@@ -8,8 +8,8 @@ const os = require('os');
 
 // ─── Config ────────────────────────────────────────────────
 const PORT = process.env.PORT || 3000;
-const RATE_LIMIT_MS = 10_000; // 10 seconds per IP
-const HISTORY_LIMIT = 100;     // keep last 100 messages
+const RATE_LIMIT_MS = 10_000;
+const HISTORY_LIMIT = 100;
 
 // ─── Local IP ──────────────────────────────────────────────
 function getLocalIP() {
@@ -57,7 +57,6 @@ function getHistory(limit = HISTORY_LIMIT) {
 
 function saveMessage(text, ip) {
   const r = insertStmt.run(text, ip);
-  // Trim old messages
   const count = db.prepare('SELECT COUNT(*) as c FROM messages').get().c;
   if (count > HISTORY_LIMIT * 2) {
     db.prepare(`DELETE FROM messages WHERE id NOT IN (SELECT id FROM messages ORDER BY created_at DESC LIMIT ?)`).run(HISTORY_LIMIT);
@@ -69,7 +68,7 @@ function saveMessage(text, ip) {
 const app = express();
 const server = http.createServer(app);
 
-// QR code endpoint (dynamic URL based on request host)
+// QR code endpoint
 app.get('/qrcode.png', (req, res) => {
   const proto = req.headers['x-forwarded-proto'] || req.protocol;
   const host = req.headers['x-forwarded-host'] || req.headers.host;
@@ -79,18 +78,17 @@ app.get('/qrcode.png', (req, res) => {
     .catch(() => { res.status(500).end(); });
 });
 
-// API: server info (used by client for fallback)
 app.get('/api/info', (req, res) => {
   res.json({ localIP: LOCAL_IP, port: PORT });
 });
 
-// Static files
 app.use(express.static(path.join(__dirname, 'public')));
 
 // ─── Socket.IO ─────────────────────────────────────────────
-const io = new Server(server);
+const io = new Server(server, {
+  cors: { origin: '*', methods: ['GET', 'POST'] },
+});
 
-// IP rate limiter (in-memory)
 const ipLimiter = new Map();
 setInterval(() => {
   const now = Date.now();
@@ -103,23 +101,19 @@ io.on('connection', (socket) => {
   const clientIP = socket.handshake.address;
   console.log(`[连接] ${clientIP}`);
 
-  // Send history on connect
   socket.emit('history', getHistory());
 
   socket.on('send_danmu', (text, ack) => {
-    // Validate
     if (!text || typeof text !== 'string') {
       return ack?.({ ok: false, msg: '内容无效' });
     }
     text = text.trim().slice(0, 200);
     if (!text) return ack?.({ ok: false, msg: '内容不能为空' });
 
-    // Sensitive filter
     if (hasSensitive(text)) {
       return ack?.({ ok: false, msg: '内容包含敏感词，请修改' });
     }
 
-    // Rate limit
     const now = Date.now();
     const last = ipLimiter.get(clientIP);
     if (last && now - last < RATE_LIMIT_MS) {
@@ -128,7 +122,6 @@ io.on('connection', (socket) => {
     }
     ipLimiter.set(clientIP, now);
 
-    // Save & broadcast
     const msg = saveMessage(text, clientIP);
     io.emit('new_danmu', msg);
     ack?.({ ok: true });
