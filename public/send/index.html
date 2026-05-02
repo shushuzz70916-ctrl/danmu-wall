@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>发送弹幕</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:linear-gradient(135deg,#0a0a1a,#1a1a3e);
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;
+  padding:20px;
+}
+.card{
+  background:rgba(255,255,255,.95);border-radius:20px;
+  padding:32px 24px 24px;width:100%;max-width:420px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);text-align:center;
+}
+h1{font-size:22px;color:#1a1a3e;margin-bottom:4px}
+.desc{font-size:14px;color:#999;margin-bottom:20px}
+textarea{
+  width:100%;height:100px;padding:14px;font-size:18px;
+  border:2px solid #ddd;border-radius:12px;outline:none;
+  resize:none;font-family:inherit;transition:border-color .3s;
+}
+textarea:focus{border-color:#667eea}
+.counter{text-align:right;font-size:12px;color:#bbb;margin-top:4px}
+button{
+  width:100%;padding:16px;font-size:18px;font-weight:bold;color:#fff;
+  background:linear-gradient(135deg,#667eea,#764ba2);
+  border:none;border-radius:12px;cursor:pointer;
+  font-family:inherit;margin-top:16px;
+  transition:opacity .3s,transform .15s;
+}
+button:active:not(:disabled){transform:scale(.97)}
+button:disabled{opacity:.4;cursor:not-allowed}
+.status{
+  display:flex;align-items:center;justify-content:center;
+  gap:6px;margin-top:16px;padding-top:16px;
+  border-top:1px solid #eee;font-size:13px;color:#aaa;
+}
+.dot{width:8px;height:8px;border-radius:50%;background:#f44}
+.dot.on{background:#4c4;box-shadow:0 0 6px rgba(68,204,68,.5)}
+#cooldown{font-size:13px;color:#f66;min-height:20px;margin-top:8px}
+#toast{
+  position:fixed;top:20px;left:50%;
+  transform:translateX(-50%) translateY(-80px);
+  background:rgba(0,0,0,.85);color:#fff;
+  padding:10px 24px;border-radius:25px;font-size:15px;z-index:999;
+  transition:transform .35s;pointer-events:none;
+}
+#toast.show{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>💬 发送弹幕</h1>
+  <div class="desc">输入内容发送到大屏幕</div>
+  <textarea id="input" placeholder="写点什么…" maxlength="200"></textarea>
+  <div class="counter"><span id="count">0</span>/200</div>
+  <button id="sendBtn" disabled>发送</button>
+  <div id="cooldown"></div>
+  <div class="status">
+    <span class="dot" id="dot"></span>
+    <span id="statusText">连接中...</span>
+  </div>
+</div>
+<div id="toast"></div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+(function(){
+  const input=document.getElementById('input');
+  const btn=document.getElementById('sendBtn');
+  const dot=document.getElementById('dot');
+  const statusText=document.getElementById('statusText');
+  const countEl=document.getElementById('count');
+  const cooldownEl=document.getElementById('cooldown');
+  const toast=document.getElementById('toast');
+
+  const socket=io();
+  let cool=false;
+
+  socket.on('connect',()=>{
+    dot.className='dot on';statusText.textContent='已连接';
+    btn.disabled=false;
+  });
+  socket.on('disconnect',()=>{
+    dot.className='dot';statusText.textContent='已断开';
+    btn.disabled=true;
+  });
+
+  function updateCount(){countEl.textContent=input.value.length}
+  input.addEventListener('input',updateCount);
+
+  function send(){
+    const text=input.value.trim();
+    if(!text||!socket.connected||cool)return;
+    btn.disabled=true;
+    socket.emit('send_danmu',text,(res)=>{
+      btn.disabled=false;
+      if(res.ok){
+        input.value='';updateCount();showToast('✓ 已发送');
+        startCool();
+      }else{
+        showToast('✗ '+res.msg);
+      }
+    });
+  }
+
+  function startCool(){
+    cool=true;let sec=10;
+    cooldownEl.textContent='⏳ '+sec+'s 后可再发送';
+    const t=setInterval(()=>{
+      sec--;
+      if(sec<=0){clearInterval(t);cooldownEl.textContent='';cool=false}
+      else cooldownEl.textContent='⏳ '+sec+'s 后可再发送';
+    },1000);
+  }
+
+  input.addEventListener('keydown',e=>{
+    if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}
+  });
+  btn.addEventListener('click',send);
+
+  let toastTimer;
+  function showToast(msg){
+    toast.textContent=msg;toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer=setTimeout(()=>toast.classList.remove('show'),2000);
+  }
+})();
+</script>
+</body>
+</html>

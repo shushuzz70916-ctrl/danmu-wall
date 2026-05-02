@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>弹幕背景板</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#0a0a1a;font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif}
+
+#wall{position:fixed;top:0;left:0;width:100%;height:100%}
+
+.bullet{
+  position:absolute;left:0;white-space:nowrap;
+  font-size:24px;font-weight:bold;color:#fff;
+  text-shadow:0 0 10px rgba(0,0,0,.95),2px 2px 4px rgba(0,0,0,.9);
+  pointer-events:none;line-height:1.3;padding:2px 0;
+}
+
+#qrcode{
+  position:fixed;bottom:24px;right:24px;z-index:100;text-align:center;
+  opacity:.85;transition:opacity .3s;
+}
+#qrcode:hover{opacity:1}
+#qrcode img{
+  width:120px;height:120px;border-radius:10px;background:#fff;
+  padding:6px;box-shadow:0 4px 20px rgba(0,0,0,.5);
+}
+#qrcode .label{margin-top:4px;color:rgba(255,255,255,.4);font-size:11px}
+
+#status{
+  position:fixed;top:12px;right:16px;z-index:100;
+  color:rgba(255,255,255,.25);font-size:12px;
+}
+
+@media(max-width:768px){
+  #qrcode img{width:90px;height:90px}
+}
+</style>
+</head>
+<body>
+<div id="wall"></div>
+<div id="qrcode"><img src="/qrcode.png" alt="扫码发送"><div class="label">📱 扫码发送弹幕</div></div>
+<div id="status">连接中...</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+(function(){
+  const wall=document.getElementById('wall');
+  const statusEl=document.getElementById('status');
+  const LANES=10,SPEED=200;
+  const CYCLE_DELAY=4000,CYCLE_INTERVAL=3000;
+
+  let lanes=new Array(LANES).fill(false);
+  let history=[],historyIdx=0;
+
+  function laneCenter(i){return((i+.5)/LANES*100)}
+
+  function nextLane(){
+    for(let i=0;i<LANES;i++)if(!lanes[i])return i;
+    return Math.floor(Math.random()*LANES);
+  }
+
+  function addBullet(text){
+    const lane=nextLane();
+    lanes[lane]=true;
+    const el=document.createElement('div');
+    el.className='bullet';
+    el.textContent=text;
+    el.style.top=`calc(${laneCenter(lane)}vh - 16px)`;
+    wall.appendChild(el);
+
+    const w=el.offsetWidth;
+    const dist=window.innerWidth+w;
+    const dur=dist/SPEED;
+
+    const anim=el.animate([
+      {transform:'translateX('+window.innerWidth+'px)'},
+      {transform:'translateX('+(-w)+'px)'}
+    ],{duration:dur*1000,easing:'linear'});
+    anim.onfinish=()=>{el.remove();lanes[lane]=false};
+  }
+
+  // ── history cycling ──
+  let cycleTimer=null,cycleInterval=null;
+  function stopCycle(){
+    if(cycleTimer){clearTimeout(cycleTimer);cycleTimer=null}
+    if(cycleInterval){clearInterval(cycleInterval);cycleInterval=null}
+  }
+  function startCycle(){
+    stopCycle();
+    cycleInterval=setInterval(()=>{
+      if(!history.length)return;
+      const msg=history[historyIdx%history.length];
+      historyIdx++;
+      addBullet(msg.text);
+    },CYCLE_INTERVAL);
+  }
+  function resetCycle(){
+    stopCycle();
+    cycleTimer=setTimeout(startCycle,CYCLE_DELAY);
+  }
+
+  // ── Socket.IO ──
+  const socket=io();
+
+  socket.on('connect',()=>{statusEl.textContent='已连接'});
+  socket.on('disconnect',()=>{statusEl.textContent='已断开'});
+  socket.on('connect_error',()=>{statusEl.textContent='连接失败'});
+
+  socket.on('history',(msgs)=>{
+    history=msgs;historyIdx=0;
+    setTimeout(startCycle,CYCLE_DELAY);
+  });
+
+  socket.on('new_danmu',(msg)=>{
+    addBullet(msg.text);
+    history.push(msg);
+    if(history.length>200)history.shift();
+    resetCycle();
+  });
+})();
+</script>
+</body>
+</html>
