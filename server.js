@@ -73,6 +73,8 @@ app.get('/qrcode.png', (req, res) => {
   const proto = req.headers['x-forwarded-proto'] || req.protocol;
   const host = req.headers['x-forwarded-host'] || req.headers.host;
   const sendUrl = `${proto}://${host}/send/`;
+  console.log(`[QR] proto=${proto} host=${host} url=${sendUrl}`);
+  res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
   QRCode.toBuffer(sendUrl, { width: 320, margin: 1, color: { dark: '#000', light: '#fff' } })
     .then(buf => { res.type('png').send(buf); })
     .catch(() => { res.status(500).end(); });
