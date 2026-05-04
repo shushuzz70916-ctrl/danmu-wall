@@ -3,429 +3,733 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>量子计算 · 最新知识与进展 | 2025–2026</title>
+<title>量子计算 · 投资入门与行业分析 | 2025–2026</title>
 <style>
   :root {
-    --bg: #0a0a1a;
-    --card-bg: #111133;
-    --text: #e0e0f0;
-    --accent: #7c5cff;
-    --accent2: #00d4ff;
-    --gold: #ffb347;
-    --red: #ff6b6b;
-    --green: #4ecdc4;
+    --bg: #0b0e14;
+    --surface: #151922;
+    --text: #e4e6eb;
+    --muted: #8b8fa3;
+    --gold: #d4a644;
+    --blue: #4a90d9;
+    --green: #4caf7c;
+    --red: #e0556a;
+    --purple: #8b6cc7;
+    --border: rgba(255,255,255,0.07);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.7;
-    overflow-x: hidden;
+    background: var(--bg); color: var(--text); line-height: 1.75; overflow-x: hidden;
   }
 
-  /* === Hero === */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(11,14,20,0.88); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;
+    padding: 0.65rem 1rem; font-size: 0.82rem;
+  }
+  .nav a { color: var(--muted); text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+  .nav a:hover { color: var(--gold); }
+
   .hero {
-    position: relative;
-    min-height: 70vh;
+    position: relative; min-height: 60vh;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    text-align: center;
-    padding: 2rem;
-    overflow: hidden;
+    text-align: center; padding: 2rem; margin-top: 3rem; overflow: hidden;
   }
   .hero::before {
     content: ""; position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 30% 50%, rgba(124,92,255,0.15) 0%, transparent 60%),
-                radial-gradient(ellipse at 70% 30%, rgba(0,212,255,0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 80%, rgba(255,179,71,0.08) 0%, transparent 50%);
-    animation: heroPulse 8s ease-in-out infinite;
+    background: radial-gradient(ellipse at 30% 40%, rgba(74,144,217,0.10) 0%, transparent 55%),
+                radial-gradient(ellipse at 70% 50%, rgba(212,166,68,0.09) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 70%, rgba(76,175,124,0.07) 0%, transparent 50%);
+    animation: pulse 8s ease-in-out infinite;
   }
-  @keyframes heroPulse {
-    0%, 100% { opacity: 0.8; }
-    50% { opacity: 1; }
-  }
+  @keyframes pulse { 0%,100% { opacity: 0.7; } 50% { opacity: 1; } }
   .hero h1 {
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    font-weight: 800;
-    background: linear-gradient(135deg, var(--accent2), var(--accent), var(--gold));
+    font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 800;
+    background: linear-gradient(135deg, var(--gold), var(--blue));
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
-    position: relative; z-index: 1;
-    animation: titleGlow 3s ease-in-out infinite alternate;
+    background-clip: text; position: relative; z-index: 1;
   }
-  @keyframes titleGlow {
-    0% { filter: drop-shadow(0 0 8px rgba(0,212,255,0.4)); }
-    100% { filter: drop-shadow(0 0 20px rgba(124,92,255,0.6)); }
+  .hero .sub {
+    font-size: 1.05rem; color: var(--muted); position: relative; z-index: 1; margin-top: 0.5rem;
   }
-  .hero .subtitle {
-    margin-top: 1rem;
-    font-size: 1.2rem;
-    color: #8888bb;
-    position: relative; z-index: 1;
+  .hero .desc {
+    max-width: 580px; margin-top: 1.2rem; font-size: 0.93rem; color: #6b6f80;
+    position: relative; z-index: 1; line-height: 1.8;
   }
-  .hero .tagline {
-    margin-top: 2rem;
-    font-size: 1.05rem;
-    max-width: 640px;
-    color: #9999cc;
-    position: relative; z-index: 1;
+  .hero .disclaimer {
+    margin-top: 1.5rem; font-size: 0.76rem; color: #6b6060;
+    background: rgba(224,85,106,0.07); border: 1px solid rgba(224,85,106,0.18);
+    border-radius: 8px; padding: 0.55rem 1.2rem; position: relative; z-index: 1;
   }
 
-  /* === Section === */
-  .section {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 3rem 1.5rem;
-  }
+  .section { max-width: 1100px; margin: 0 auto; padding: 2.6rem 1.5rem; }
   .section-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
+    font-size: 1.6rem; font-weight: 700; margin-bottom: 1.6rem;
     display: flex; align-items: center; gap: 0.5rem;
   }
   .section-title::before {
-    content: ""; width: 4px; height: 1.5em;
-    background: linear-gradient(180deg, var(--accent), var(--accent2));
-    border-radius: 2px;
+    content: ""; width: 3px; height: 1.3em;
+    background: linear-gradient(180deg, var(--gold), var(--blue)); border-radius: 2px;
+  }
+  .subsection-title {
+    font-size: 1.12rem; color: var(--gold); font-weight: 700;
+    margin: 2rem 0 1rem; padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
   }
 
-  /* === Cards === */
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1.5rem;
-  }
-  .card {
-    background: var(--card-bg);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 12px;
-    padding: 1.5rem;
-    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-    border-color: rgba(255,255,255,0.15);
-  }
-  .card .tag {
-    display: inline-block;
-    font-size: 0.75rem; font-weight: 600;
-    padding: 2px 10px; border-radius: 20px;
-    margin-bottom: 0.75rem;
-  }
-  .tag-blue { background: rgba(0,212,255,0.15); color: var(--accent2); }
-  .tag-purple { background: rgba(124,92,255,0.15); color: var(--accent); }
-  .tag-gold { background: rgba(255,179,71,0.15); color: var(--gold); }
-  .tag-green { background: rgba(78,205,196,0.15); color: var(--green); }
-  .tag-red { background: rgba(255,107,107,0.15); color: var(--red); }
-
-  .card h3 {
-    font-size: 1.15rem; margin-bottom: 0.5rem;
-  }
-  .card .meta {
-    font-size: 0.85rem; color: #7777aa; margin-bottom: 0.75rem;
-  }
-  .card p { font-size: 0.95rem; color: #aaaadd; }
-  .card .highlight {
-    display: inline-block;
-    margin-top: 0.75rem;
-    font-size: 0.85rem; font-weight: 600;
-    color: var(--gold);
-  }
-
-  /* === Timeline === */
-  .timeline {
-    position: relative;
-    padding-left: 2rem;
-  }
-  .timeline::before {
-    content: ""; position: absolute; left: 8px; top: 0; bottom: 0;
-    width: 2px;
-    background: linear-gradient(180deg, var(--accent), var(--accent2), var(--gold));
-  }
-  .timeline-item {
-    position: relative;
-    margin-bottom: 2rem;
-    padding-left: 2rem;
-  }
-  .timeline-item::before {
-    content: ""; position: absolute; left: -1.55rem; top: 0.4rem;
-    width: 12px; height: 12px; border-radius: 50%;
-    background: var(--accent2);
-    box-shadow: 0 0 10px rgba(0,212,255,0.5);
-  }
-  .timeline-item:nth-child(odd)::before { background: var(--accent); box-shadow: 0 0 10px rgba(124,92,255,0.5); }
-  .timeline-date {
-    font-size: 0.8rem; font-weight: 700;
-    color: var(--accent2); letter-spacing: 0.05em;
-  }
-  .timeline-item h3 { margin: 0.25rem 0 0.5rem; }
-  .timeline-item p { color: #aaaadd; font-size: 0.95rem; }
-
-  /* === Stats === */
   .stats-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 3rem;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem; margin-bottom: 2rem;
   }
   .stat-card {
-    background: var(--card-bg);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 12px;
-    padding: 1.5rem; text-align: center;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.2rem; text-align: center;
   }
-  .stat-card .number {
-    font-size: 2.2rem; font-weight: 800;
-    background: linear-gradient(135deg, var(--accent2), var(--accent));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .stat-card .n {
+    font-size: 1.7rem; font-weight: 800;
+    background: linear-gradient(135deg, var(--gold), var(--blue));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   }
-  .stat-card .label { font-size: 0.9rem; color: #7777aa; margin-top: 0.25rem; }
+  .stat-card .l { font-size: 0.82rem; color: var(--muted); margin-top: 0.15rem; }
 
-  /* === Trends === */
-  .trend-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
+  .card-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.2rem;
   }
-  .trend-card {
-    background: var(--card-bg);
-    border-left: 3px solid var(--accent);
-    border-radius: 0 12px 12px 0;
-    padding: 1.2rem 1.5rem;
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.4rem;
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
   }
-  .trend-card h4 { margin-bottom: 0.5rem; }
-  .trend-card:nth-child(2) { border-left-color: var(--accent2); }
-  .trend-card:nth-child(3) { border-left-color: var(--gold); }
-  .trend-card:nth-child(4) { border-left-color: var(--green); }
-  .trend-card:nth-child(5) { border-left-color: var(--red); }
-  .trend-card p { color: #aaaadd; font-size: 0.93rem; }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    border-color: rgba(255,255,255,0.12);
+  }
+  .card h3 { font-size: 1.05rem; margin-bottom: 0.35rem; }
+  .card .tag {
+    display: inline-block; font-size: 0.7rem; font-weight: 700;
+    padding: 2px 9px; border-radius: 14px; margin-bottom: 0.6rem;
+    text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .tag-blue  { background: rgba(74,144,217,0.15); color: var(--blue); }
+  .tag-gold  { background: rgba(212,166,68,0.15); color: var(--gold); }
+  .tag-green { background: rgba(76,175,124,0.15); color: var(--green); }
+  .tag-red   { background: rgba(224,85,106,0.15); color: var(--red); }
+  .tag-purple{ background: rgba(139,108,199,0.15); color: var(--purple); }
+  .card p { font-size: 0.9rem; color: #a8acb8; }
+  .card ul { margin: 0.4rem 0 0 1.2rem; font-size: 0.88rem; color: #a8acb8; }
+  .card ul li { margin-bottom: 0.2rem; }
 
-  /* === Footer === */
+  .kb-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.4rem; margin-bottom: 1rem;
+  }
+  .kb-card h3 { font-size: 1.1rem; margin-bottom: 0.2rem; }
+  .kb-card .eng { font-size: 0.8rem; color: #5a5e6a; margin-bottom: 0.6rem; }
+  .kb-card .body { font-size: 0.92rem; color: #a8acb8; }
+  .kb-card .body ul { margin: 0.4rem 0 0 1.2rem; }
+  .kb-card .analogy {
+    margin-top: 0.8rem; padding: 0.6rem 1rem;
+    background: rgba(212,166,68,0.06); border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0; font-size: 0.87rem; color: #b8b4a0;
+  }
+
+  .stock-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.5rem; margin-bottom: 1.2rem;
+  }
+  .stock-card h3 { font-size: 1.2rem; margin-bottom: 0.15rem; }
+  .stock-card .ticker { font-size: 0.85rem; color: var(--blue); margin-bottom: 0.8rem; }
+  .stock-card .grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.6rem; margin: 0.8rem 0;
+  }
+  .stock-card .metric {
+    background: rgba(255,255,255,0.03); border-radius: 8px; padding: 0.65rem; text-align: center;
+  }
+  .stock-card .metric .val { font-size: 1.05rem; font-weight: 700; color: var(--gold); }
+  .stock-card .metric .lbl { font-size: 0.73rem; color: var(--muted); }
+  .stock-card .pos { font-size: 0.88rem; color: #a8acb8; margin-top: 0.6rem; }
+  .stock-card .risk { font-size: 0.88rem; color: #d09898; margin-top: 0.4rem; }
+
+  .table-wrap { overflow-x: auto; margin: 1rem 0; }
+  table {
+    width: 100%; border-collapse: collapse; font-size: 0.87rem; color: #a8acb8;
+  }
+  th {
+    text-align: left; padding: 10px 12px; background: var(--surface);
+    border-bottom: 2px solid var(--border); font-weight: 600; color: var(--text);
+  }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .risk-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid rgba(224,85,106,0.2);
+    border-left: 3px solid var(--red);
+    border-radius: 0 10px 10px 0; padding: 1.1rem 1.3rem;
+  }
+  .risk-card h4 { margin-bottom: 0.35rem; }
+  .risk-card p { font-size: 0.89rem; color: #d0a8a8; }
+
+  .strategy-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.2rem;
+  }
+  .strategy-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.4rem;
+  }
+  .strategy-card:nth-child(1) { border-top: 3px solid var(--green); }
+  .strategy-card:nth-child(2) { border-top: 3px solid var(--gold); }
+  .strategy-card:nth-child(3) { border-top: 3px solid var(--blue); }
+  .strategy-card h4 { margin-bottom: 0.5rem; }
+  .strategy-card p, .strategy-card ul { font-size: 0.89rem; color: #a8acb8; }
+  .strategy-card ul { margin-left: 1.2rem; }
+
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: ""; position: absolute; left: 8px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(180deg, var(--blue), var(--purple), var(--gold));
+  }
+  .t-item { position: relative; margin-bottom: 1.5rem; padding-left: 2rem; }
+  .t-item::before {
+    content: ""; position: absolute; left: -1.42rem; top: 0.35rem;
+    width: 10px; height: 10px; border-radius: 50%; background: var(--blue);
+    box-shadow: 0 0 8px rgba(74,144,217,0.5);
+  }
+  .t-date { font-size: 0.77rem; font-weight: 700; color: var(--blue); letter-spacing: 0.04em; }
+  .t-item h3 { margin: 0.1rem 0 0.3rem; }
+  .t-item p { font-size: 0.89rem; color: #a8acb8; }
+
   .footer {
-    text-align: center;
-    padding: 3rem 1.5rem;
-    color: #555577;
-    font-size: 0.85rem;
-    border-top: 1px solid rgba(255,255,255,0.05);
+    text-align: center; padding: 3rem 1.5rem; color: #555860; font-size: 0.8rem;
+    border-top: 1px solid var(--border);
   }
-  .footer a { color: var(--accent2); text-decoration: none; }
 
-  /* === Nav === */
-  .nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(10,10,26,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    display: flex; justify-content: center; gap: 2rem;
-    padding: 0.8rem;
-    font-size: 0.9rem;
-  }
-  .nav a {
-    color: #9999cc; text-decoration: none;
-    transition: color 0.2s;
-  }
-  .nav a:hover { color: var(--accent2); }
-
-  /* === responsive === */
   @media (max-width: 640px) {
     .section { padding: 2rem 1rem; }
-    .card-grid { grid-template-columns: 1fr; }
-    .nav { gap: 1rem; font-size: 0.8rem; }
+    .card-grid, .risk-grid, .strategy-grid { grid-template-columns: 1fr; }
+    .nav { gap: 0.5rem; font-size: 0.73rem; }
   }
 </style>
 </head>
 <body>
 
 <nav class="nav">
-  <a href="#overview">概览</a>
-  <a href="#breakthroughs">重大突破</a>
-  <a href="#timeline">时间线</a>
-  <a href="#trends">趋势</a>
+  <a href="#basics">量子入门</a>
+  <a href="#milestones">技术产业</a>
+  <a href="#market">市场格局</a>
+  <a href="#stocks">投资标的</a>
+  <a href="#risks">风险警示</a>
+  <a href="#strategy">投资策略</a>
 </nav>
 
-<!-- ====== Hero ====== -->
+<!-- ====== HERO ====== -->
 <header class="hero">
-  <h1>量子计算</h1>
-  <p class="subtitle">最新知识与进展 · 2025–2026</p>
-  <p class="tagline">
-    容错量子计算机的时间线正从「还需几十年」加速到「本十年末」。<br>
-    纠错效率、硬件平台和企业路线图在 2026 年出现多个里程碑式突破。
+  <h1>量子计算投资指南</h1>
+  <p class="sub">面向个人投资者的入门科普与行业分析 · 2025–2026</p>
+  <p class="desc">
+    从零理解量子计算原理与技术路线，<br>
+    系统评估这一新兴赛道的投资机会与风险。
   </p>
+  <div class="disclaimer">
+    ⚠️ 本文不构成投资建议。量子计算是高风险、长周期的前沿技术投资。
+  </div>
 </header>
 
-<!-- ====== 关键数据 ====== -->
-<section class="section" id="overview">
-  <h2 class="section-title">关键数据</h2>
-  <div class="stats-row">
-    <div class="stat-card">
-      <div class="number">10,000</div>
-      <div class="label">容错量子计算所需物理量子比特（此前预估：数百万）</div>
-    </div>
-    <div class="stat-card">
-      <div class="number">138×</div>
-      <div class="label">异构架构实现的量子比特需求缩减</div>
-    </div>
-    <div class="stat-card">
-      <div class="number">10⁻¹³</div>
-      <div class="label">QuEra 逻辑错误率，进入 Teraquop 时代</div>
-    </div>
-    <div class="stat-card">
-      <div class="number">13,000×</div>
-      <div class="label">Google Quantum Echoes 物理模拟加速比</div>
+<!-- ====== PART 1: 量子计算入门 ====== -->
+<section class="section" id="basics">
+  <h2 class="section-title">量子计算入门 —— 零基础也能看懂</h2>
+  <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1.6rem;">
+    不需要懂物理。下面用概念和类比解释量子计算的核心原理——只需要知道「为什么它比传统计算机强」就够了。
+  </p>
+
+  <div class="kb-card">
+    <h3>经典比特 vs 量子比特</h3>
+    <div class="eng">Bit vs Qubit</div>
+    <div class="body">
+      <p>
+        <strong style="color:var(--blue);">经典计算机</strong>的最小信息单位是<strong>比特</strong>——只能处于0或1两种状态之一，像一枚硬币要么正面要么反面。<br>
+        <strong style="color:var(--gold);">量子计算机</strong>的最小信息单位是<strong>量子比特（Qubit）</strong>——可以同时处于0和1的「叠加态」，像一枚旋转中的硬币，停下来之前既是正面也是反面。
+      </p>
+      <div class="analogy">
+        <strong>关键点：</strong>1个经典比特一次只能表示1个数字（0或1）。但n个量子比特的叠加态可以<strong>同时表示2ⁿ个数字</strong>。300个量子比特能同时表示的状态数，超过宇宙中所有原子的总数。这种「并行处理」能力是量子计算速度优势的根源。
+      </div>
     </div>
   </div>
-</section>
 
-<!-- ====== 重大突破 ====== -->
-<section class="section" id="breakthroughs">
-  <h2 class="section-title">七大突破</h2>
+  <div class="kb-card">
+    <h3>量子纠缠 —— 超距的天然协作</h3>
+    <div class="eng">Entanglement</div>
+    <div class="body">
+      <p>
+        两个量子比特可以处于「纠缠」状态——无论相隔多远，对其中一个的操作会<strong>瞬间影响</strong>另一个的状态。爱因斯坦称之为「鬼魅般的超距作用」。
+      </p>
+      <div class="analogy">
+        <strong>投资角度：</strong>纠缠是实现量子并行计算和纠错的基础机制。哪种物理平台（离子阱、超导、光子）能实现最高质量、最大规模的纠缠，是该赛道技术竞争的核心指标。
+      </div>
+    </div>
+  </div>
+
+  <div class="kb-card">
+    <h3>量子纠错 —— 最大的工程挑战</h3>
+    <div class="eng">Quantum Error Correction (QEC)</div>
+    <div class="body">
+      <p>
+        量子比特极其脆弱——任何微小干扰（温度、电磁噪声）都会导致量子态「退相干」而丢失信息。这是量子计算最难攻克的问题。<br><br>
+        解决方案是<strong>量子纠错（QEC）</strong>：用多个易出错的物理量子比特协同工作，形成一个几乎不出错的「逻辑量子比特」。
+      </p>
+      <div class="analogy">
+        <strong>为什么纠错是投资的「北极星指标」：</strong>2024年Google Willow芯片首次证明「量子比特越多，错误率反而降低」——这是纠错领域等待了30年的里程碑。纠错能力的进步速度，直接决定量子计算何时具备商业价值。2026年Caltech发现仅需~10,000物理量子比特（此前估计数百万）即可实现完整纠错——这是整个赛道时间线缩短的根本原因。
+      </div>
+    </div>
+  </div>
+
+  <div class="kb-card">
+    <h3>量子计算能做什么？</h3>
+    <div class="body">
+      <div class="table-wrap">
+        <table>
+          <tr><th>应用领域</th><th>经典方法的局限</th><th>量子计算的优势</th></tr>
+          <tr>
+            <td><strong style="color:var(--gold);">药物研发</strong></td>
+            <td>模拟分子量子相互作用需指数级计算资源</td>
+            <td>天然适合模拟量子系统，新药研发时间或从10年缩短到几年</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--gold);">材料科学</strong></td>
+            <td>寻找催化剂/电池材料需反复试错</td>
+            <td>在计算机中模拟材料量子特性。IBM已精确模拟KCuF₃磁晶体</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--gold);">金融优化</strong></td>
+            <td>投资组合与风险建模面临组合爆炸</td>
+            <td>量子退火算法有加速效应。HSBC已用量子计算改进债券交易</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--gold);">密码学</strong></td>
+            <td>RSA-2048经典破解需数十亿年</td>
+            <td>Shor算法理论上数小时可破。最新研究所需量子比特降至~190k–439k</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--gold);">物流与AI</strong></td>
+            <td>大规模组合优化和机器学习训练</td>
+            <td>量子近似优化、量子机器学习有望在供应链、AI训练中提供加速</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="subsection-title">五种主流硬件路线 —— 谁能最终胜出？</h3>
+  <p style="color:var(--muted);font-size:0.87rem;margin-bottom:1rem;">量子比特有多种物理实现——这也是投资风险之一：最终赢家尚未确定。</p>
   <div class="card-grid">
-
     <div class="card">
-      <span class="tag tag-blue">纠错架构</span>
-      <h3>仅需 10,000 量子比特即可实现容错计算</h3>
-      <div class="meta">Caltech / Oratomic · 2026 年 3 月</div>
-      <p>利用中性原子可动态重排的特性，每个逻辑量子比特仅需约 5 个物理量子比特（传统超导方案约需 1,000 个）。</p>
-      <span class="highlight">影响：实用量子计算机可能提前到 2020 年代末</span>
+      <span class="tag tag-gold">超导</span>
+      <h3>超导量子比特</h3>
+      <p>IBM、Google、Rigetti采用。需在接近绝对零度(-273°C)运行。门速度快，成熟度最高，但纠错开销大。代表：IBM Nighthawk(120-Q)、Google Willow(105-Q)。</p>
     </div>
-
     <div class="card">
-      <span class="tag tag-purple">并行加速</span>
-      <h3>3 倍并行化加速，无需额外量子比特</h3>
-      <div class="meta">Duke / UT Austin / Yale · 2026 年 4 月</div>
-      <p>基于量子门传送的方案，利用空闲逻辑模块并行执行非 Clifford 门注入。仅需约 11,500 个原子、15 小时即可展示量子优势。</p>
-      <span class="highlight">挑战了混合同构架构的主流设计假设</span>
+      <span class="tag tag-blue">离子阱</span>
+      <h3>离子阱量子比特</h3>
+      <p>IonQ、Quantinuum采用。用电磁场囚禁带电原子。业界最高门保真度(99.99%)，全连接性优于超导，但门速度较慢。</p>
     </div>
-
     <div class="card">
-      <span class="tag tag-gold">材料模拟</span>
-      <h3>IBM 首次精确模拟真实磁性材料</h3>
-      <div class="meta">IBM · 2026 年 3 月</div>
-      <p>Heron 处理器模拟 KCuF₃ 磁晶体，结果与国家实验室中子散射数据吻合——首次在真实材料上验证量子计算作为可靠科学工具。</p>
+      <span class="tag tag-purple">中性原子</span>
+      <h3>中性原子量子比特</h3>
+      <p>2026年最热门路线。光镊阵列动态排列原子，支持长程连接。Caltech发现仅需~10,000原子即可容错——颠覆性降低。Google 2026年3月加入此路线。</p>
     </div>
-
     <div class="card">
-      <span class="tag tag-green">纠错记录</span>
-      <h3>QuEra 实现每万亿步仅一个错误</h3>
-      <div class="meta">QuEra / Harvard / MIT · 2026 年</div>
-      <p>基于 qLDPC 码实现编码率超 0.503，逻辑错误率 10⁻¹³ 级别。验证了 [[1152,580]] 和 [[2304,1156]] 纠错码，正式进入 Teraquop 时代。</p>
+      <span class="tag tag-green">光子</span>
+      <h3>光子量子计算</h3>
+      <p>PsiQuantum、Xanadu采用。量子比特由光子携带，可室温运行。PsiQuantum已获$10亿融资，与GlobalFoundries合作晶圆厂。</p>
     </div>
-
     <div class="card">
-      <span class="tag tag-blue">离子阱芯片</span>
-      <h3>MIT 实现芯片级离子冷却，温度降至多普勒极限 1/10</h3>
-      <div class="meta">MIT / Lincoln Lab · 2026 年 1 月</div>
-      <p>在光子芯片上实现偏振梯度冷却，用时仅约 100 微秒。为可扩展的芯片基离子阱量子计算机扫除关键障碍。</p>
+      <span class="tag tag-red">拓扑</span>
+      <h3>拓扑量子比特</h3>
+      <p>微软Majorana 1。利用准粒子的拓扑性质天然免疫外界噪声。理论最优雅，但实验验证在早期。目标百万量子比特单芯片。</p>
     </div>
-
-    <div class="card">
-      <span class="tag tag-red">中国突破</span>
-      <h3>中科大首次实验展示实用量子优势</h3>
-      <div class="meta">中国科学技术大学 · 2026 年 4 月</div>
-      <p>基于 9 耦合自旋核磁共振平台构建量子储层计算系统，在多步天气预测等真实任务上精度超越 10,000 节点经典网络。</p>
-      <span class="highlight">首次在现实任务上证明量子机器学习可超越经典方案</span>
-    </div>
-
-    <div class="card">
-      <span class="tag tag-purple">异构架构</span>
-      <h3>异构架构实现 138× 量子比特缩减</h3>
-      <div class="meta">多机构合作 · 2026 年 4 月</div>
-      <p>结合异构 QPU 与 QLDPC 码，RSA-2048 因子分解预计仅需 190k–439k 物理量子比特且 10 天内完成。推动量子安全加密迁移的紧迫性。</p>
-    </div>
-
   </div>
 </section>
 
-<!-- ====== 时间线 ====== -->
-<section class="section" id="timeline">
-  <h2 class="section-title">2025–2026 关键事件时间线</h2>
+<!-- ====== PART 2: 技术里程碑与产业现状 ====== -->
+<section class="section" id="milestones">
+  <h2 class="section-title">技术里程碑与产业现状</h2>
+
+  <h3 class="subsection-title">2024–2026 关键技术事件</h3>
   <div class="timeline">
-
-    <div class="timeline-item">
-      <div class="timeline-date">2025 年 11 月</div>
-      <h3>IBM 发布 Nighthawk 处理器与新路线图</h3>
-      <p>120 量子比特，5,000 双量子比特门，电路复杂度提升 30%。目标 2026 年量子优势，2029 年容错量子计算机。</p>
+    <div class="t-item">
+      <div class="t-date">2024年12月</div>
+      <h3>Google Willow芯片实现「低于阈值」纠错</h3>
+      <p>105量子比特，首次证明量子比特增加时错误率反而指数级降低——量子纠错领域等待30年的里程碑。</p>
     </div>
-
-    <div class="timeline-item">
-      <div class="timeline-date">2026 年 1 月</div>
-      <h3>马里兰大学：448 原子通用容错量子架构</h3>
-      <p>在 Nature 发表，展示基于可重构中性原子阵列的通用容错量子处理架构关键要素。</p>
+    <div class="t-item">
+      <div class="t-date">2025年2月</div>
+      <h3>微软发布Majorana 1拓扑量子处理器</h3>
+      <p>全球首款拓扑量子比特芯片，路线图瞄准百万量子比特单芯片。</p>
     </div>
-
-    <div class="timeline-item">
-      <div class="timeline-date">2026 年 1 月</div>
-      <h3>MIT 芯片级离子冷却突破</h3>
-      <p>光子芯片上实现偏振梯度冷却，温度降至多普勒极限 1/10，为可扩展离子阱量子计算机铺路。</p>
+    <div class="t-item">
+      <div class="t-date">2025年10月</div>
+      <h3>Google量子计算机对超算实现13,000倍加速</h3>
+      <p>65量子比特物理模拟速度是Frontier超算的13,000倍——量子在特定任务上对经典计算的最新压制。</p>
     </div>
-
-    <div class="timeline-item">
-      <div class="timeline-date">2026 年 3 月</div>
-      <h3>Caltech / Oratomic：10K 量子比特即可容错</h3>
-      <p>证明仅需 10,000–20,000 物理量子比特即可构建完全容错的量子计算机，推翻此前百万比特的预估。</p>
+    <div class="t-item">
+      <div class="t-date">2025年11月</div>
+      <h3>IBM发布Nighthawk处理器与2029路线图</h3>
+      <p>120量子比特、5,000双量子比特门。纠错解码速度提升10倍。目标2026年底量子优势，2029年容错计算机。</p>
     </div>
-
-    <div class="timeline-item">
-      <div class="timeline-date">2026 年 3 月</div>
-      <h3>IBM 精确模拟 KCuF₃ 磁性材料</h3>
-      <p>Heron 处理器模拟结果首次与中子散射实验数据吻合，验证量子计算在材料科学中的实用价值。</p>
+    <div class="t-item">
+      <div class="t-date">2026年1月</div>
+      <h3>马里兰大学：448原子通用容错架构（Nature）</h3>
+      <p>可重构中性原子阵列实现通用逻辑门和低于阈值纠错。中性原子成为学界和产业界的共同热点。</p>
     </div>
-
-    <div class="timeline-item">
-      <div class="timeline-date">2026 年 4 月</div>
-      <h3>Duke / UT Austin / Yale：3× 并行加速</h3>
-      <p>提出基于门传送的并行化方案，挑战主流架构设计假设，量子优势所需资源大幅降低。</p>
+    <div class="t-item">
+      <div class="t-date">2026年3月</div>
+      <h3>Caltech：仅需10,000量子比特即可容错</h3>
+      <p>颠覆性发现——容错所需物理量子比特从「数百万」降至「一万」。实用量子计算机可能提前到本十年末。</p>
     </div>
-
-    <div class="timeline-item">
-      <div class="timeline-date">2026 年 4 月</div>
-      <h3>中科大首次实现实用量子机器学习优势</h3>
-      <p>在天气预测等真实任务上，9 自旋量子系统超越 10,000 节点经典网络。</p>
+    <div class="t-item">
+      <div class="t-date">2026年3月</div>
+      <h3>IBM首次精确模拟真实磁性材料</h3>
+      <p>Heron处理器模拟结果与国家实验室中子散射数据吻合——量子计算首次在真实材料科学中被验证为可靠工具。</p>
     </div>
+    <div class="t-item">
+      <div class="t-date">2026年4月</div>
+      <h3>异构架构实现138×量子比特需求缩减</h3>
+      <p>RSA-2048因子分解预计降至190k–439k量子比特、10天内完成。量子安全加密迁移的紧迫性大幅提高。</p>
+    </div>
+  </div>
 
+  <h3 class="subsection-title">「容错量子计算」何时到来？</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>阶段</th><th>特征</th><th>预计时间</th><th>投资含义</th></tr>
+      <tr>
+        <td>NISQ（嘈杂中等规模量子）</td>
+        <td>当前阶段：50–1000物理量子比特，无完整纠错</td>
+        <td>现在–2028</td>
+        <td>技术验证期。收入以政府合同和研发服务为主。纯量子公司靠股权融资维持。</td>
+      </tr>
+      <tr>
+        <td>早期容错</td>
+        <td>用纠错码实现逻辑比特，开始超越经典</td>
+        <td>2028–2032</td>
+        <td>首批商业应用出现。硬件销售和QaaS收入开始起量。</td>
+      </tr>
+      <tr>
+        <td>规模化容错</td>
+        <td>在有用问题上持续超越经典——「量子优势」</td>
+        <td>2032–2038</td>
+        <td>市场进入快速增长。行业格局初步确立。</td>
+      </tr>
+      <tr>
+        <td>通用量子计算</td>
+        <td>大规模、完全容错、可编程的通用量子计算机</td>
+        <td>2038–2045</td>
+        <td>市场规模预测$700亿–$2500亿。赢家通吃效应明显。</td>
+      </tr>
+    </table>
+  </div>
+
+  <h3 class="subsection-title">产业规模</h3>
+  <div class="stats-row">
+    <div class="stat-card"><div class="n">$42亿</div><div class="l">2025年全球VC融资额</div></div>
+    <div class="stat-card"><div class="n">$111亿</div><div class="l">累计总融资额（492轮）</div></div>
+    <div class="stat-card"><div class="n">$567亿</div><div class="l">全球政府累计承诺资金</div></div>
+    <div class="stat-card"><div class="n">~$20亿</div><div class="l">2026年量子市场规模</div></div>
+    <div class="stat-card"><div class="n">31%</div><div class="l">量子专利年增长率</div></div>
+    <div class="stat-card"><div class="n">7,400+</div><div class="l">全球量子技术参与组织数</div></div>
+  </div>
+  <p style="color:var(--muted);font-size:0.87rem;">
+    资本分布——硬件技术72%($79亿)，应用18%，软件9%，量子即服务(QaaS)~1%。
+    美国主导（Palo Alto一市即获$33亿），欧洲和亚洲通过主权政策加码追赶。
+  </p>
+</section>
+
+<!-- ====== PART 3: 市场格局 ====== -->
+<section class="section" id="market">
+  <h2 class="section-title">投资市场格局</h2>
+
+  <h3 class="subsection-title">量子计算投资生态</h3>
+  <div class="card-grid">
+    <div class="card">
+      <span class="tag tag-gold">纯量子计算股</span>
+      <h3>纯正赛道标的</h3>
+      <ul>
+        <li><strong>IonQ (IONQ)</strong> — 离子阱，营收最大（2025年$1.3亿）</li>
+        <li><strong>Rigetti (RGTI)</strong> — 超导，高波动（P/S ~642×）</li>
+        <li><strong>D-Wave (QBTS)</strong> — 退火，最多商业客户（135+）</li>
+        <li><strong>QCI (QUBT)</strong> — 光子，营收极低，被做空~21%</li>
+        <li><strong>Xanadu (XNDU)</strong> — 2026年3月IPO</li>
+      </ul>
+      <p style="margin-top:0.5rem;font-size:0.82rem;color:var(--red);">特征：极高波动（日振幅20–30%）、全部亏损、依赖增发融资、P/S从45×到975×不等</p>
+    </div>
+    <div class="card">
+      <span class="tag tag-blue">科技巨头</span>
+      <h3>分散化量子敞口</h3>
+      <ul>
+        <li><strong>Alphabet/Google (GOOGL)</strong> — Willow芯片+中性原子</li>
+        <li><strong>IBM (IBM)</strong> — 超导领导者，已盈利</li>
+        <li><strong>Microsoft (MSFT)</strong> — Majorana 1拓扑+Azure量子云</li>
+        <li><strong>Amazon (AMZN)</strong> — AWS Braket量子云</li>
+        <li><strong>NVIDIA (NVDA)</strong> — CUDA-Q混合量子-经典平台</li>
+      </ul>
+      <p style="margin-top:0.5rem;font-size:0.82rem;color:var(--green);">特征：量子在总体业务占比极小、无稀释风险、现金流充沛，属于「免费期权」</p>
+    </div>
+    <div class="card">
+      <span class="tag tag-purple">ETF与工具</span>
+      <h3>分散化投资工具</h3>
+      <ul>
+        <li><strong>QTUM ETF</strong> — 83–85只持仓，含量子+AI+芯片，费率0.40%</li>
+        <li><strong>QTUM回报：</strong>2024年+50.5%，2025年+36.7%</li>
+        <li><strong>反向ETF：</strong>IONZ, QBTZ, RGTZ — 做空量子股</li>
+      </ul>
+      <p style="margin-top:0.5rem;font-size:0.82rem;color:var(--muted);">注意：QTUM含大量非纯量子公司（NVIDIA、台积电等），是量子+AI+半导体的混合敞口</p>
+    </div>
+    <div class="card">
+      <span class="tag tag-green">IPO预备</span>
+      <h3>待上市重磅标的</h3>
+      <ul>
+        <li><strong>Quantinuum</strong> — 全栈路线，估值$100亿，最受期待IPO</li>
+        <li><strong>PsiQuantum</strong> — 光子路线，估值$70亿</li>
+        <li><strong>SandboxAQ</strong> — AI+量子传感，估值$57.5亿</li>
+      </ul>
+      <p style="margin-top:0.5rem;font-size:0.82rem;color:var(--muted);">这些IPO上市时的估值和定价将是板块走势的重要催化剂。</p>
+    </div>
+  </div>
+
+  <h3 class="subsection-title">2025年VC大额融资</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>公司</th><th>金额</th><th>轮次</th><th>估值</th><th>技术路线</th></tr>
+      <tr><td>PsiQuantum</td><td>$10亿</td><td>E轮</td><td>$70亿</td><td>光子</td></tr>
+      <tr><td>Quantinuum</td><td>$8亿</td><td>E轮</td><td>$100亿</td><td>离子阱（全栈）</td></tr>
+      <tr><td>SandboxAQ</td><td>$4.5亿</td><td>E轮</td><td>$57.5亿</td><td>AI+量子传感</td></tr>
+      <tr><td>IonQ</td><td>$20亿</td><td>机构股权融资</td><td>已上市（~$109亿）</td><td>离子阱</td></tr>
+      <tr><td>Quantum Machines</td><td>$1.7亿</td><td>VC</td><td>未公开</td><td>量子控制</td></tr>
+    </table>
   </div>
 </section>
 
-<!-- ====== 趋势 ====== -->
-<section class="section" id="trends">
-  <h2 class="section-title">五大趋势</h2>
-  <div class="trend-grid">
+<!-- ====== PART 4: 投资标的分析 ====== -->
+<section class="section" id="stocks">
+  <h2 class="section-title">主要标的深度分析</h2>
 
-    <div class="trend-card">
-      <h4>纠错效率飞跃</h4>
-      <p>编码率从 1/1000 提升到 1/2。QuEra 的 qLDPC 码和 Caltech 的中性原子方案分别从软件和硬件两侧将容错门槛大幅拉低。</p>
+  <!-- IONQ -->
+  <div class="stock-card">
+    <h3>IonQ</h3>
+    <div class="ticker">NYSE: IONQ · 离子阱技术 · 市值~$109亿</div>
+    <div class="grid">
+      <div class="metric"><div class="val">$1.3亿</div><div class="lbl">2025年营收(+202%)</div></div>
+      <div class="metric"><div class="val">$2.25–2.45亿</div><div class="lbl">2026年营收指引</div></div>
+      <div class="metric"><div class="val">~45×</div><div class="lbl">Forward P/S</div></div>
+      <div class="metric"><div class="val">~$33亿</div><div class="lbl">现金储备</div></div>
+      <div class="metric"><div class="val">15位</div><div class="lbl">分析师：Strong Buy</div></div>
+      <div class="metric"><div class="val">$67.67</div><div class="lbl">平均目标价($35–$100)</div></div>
     </div>
+    <div class="pos"><strong style="color:var(--green);">优势：</strong>营收规模远超其他纯量子股；99.99%门保真度业界最高；AWS/Azure/Google Cloud三大云平台均可访问；$3.7亿未完成合同义务；收购Oxford Ionics($10.8亿)和SkyWater($18亿)实现垂直整合。2026年4月单月涨56%。</div>
+    <div class="risk"><strong style="color:var(--red);">风险：</strong>2025年GAAP亏损$5.1亿；被Wolfpack Research做空；持续增发稀释股权（2025年融资$20亿）；52周区间$17.88–$84.64，振幅380%。即便涨了56%仍比历史高点低~24%。</div>
+  </div>
 
-    <div class="trend-card">
-      <h4>中性原子成为最热平台</h4>
-      <p>相比超导量子比特，中性原子阵列可动态重排、长程连接，2026 年多个重大突破均建立在此平台之上。</p>
+  <!-- RGTI -->
+  <div class="stock-card">
+    <h3>Rigetti Computing</h3>
+    <div class="ticker">NASDAQ: RGTI · 超导量子比特 · 市值~$53亿</div>
+    <div class="grid">
+      <div class="metric"><div class="val">~$710万</div><div class="lbl">2025年营收(-34%)</div></div>
+      <div class="metric"><div class="val">~642×</div><div class="lbl">Forward P/S（板块最高）</div></div>
+      <div class="metric"><div class="val">~$5.9亿</div><div class="lbl">现金</div></div>
+      <div class="metric"><div class="val">7位</div><div class="lbl">分析师：Buy</div></div>
+      <div class="metric"><div class="val">$32.38</div><div class="lbl">平均目标价</div></div>
+      <div class="metric"><div class="val">-62%</div><div class="lbl">从历史最高点跌幅</div></div>
     </div>
+    <div class="pos"><strong style="color:var(--green);">优势：</strong>模块化超导芯片架构(Cepheus-1-108Q已GA)，99.1%门保真度；印度C-DAC合同标志首次大型海外硬件销售；英国$1亿投资计划；分析师预计2026年营收增长243%。向上弹性最大。</div>
+    <div class="risk"><strong style="color:var(--red);">风险：</strong>营收不增反降；P/S比642×为全板块最高；反向ETF(RGTZ)单周涨31%；Jefferies评级"Hold"；从峰值已跌62%，但仍比历史均值贵得多。</div>
+  </div>
 
-    <div class="trend-card">
-      <h4>企业路线图加速</h4>
-      <p>IBM 将纠错解码速度提升 10 倍（提前一年完成），Google Willow 实现指数级误差降低，Microsoft Majorana 1 目标百万量子比特单芯片。</p>
+  <!-- QBTS -->
+  <div class="stock-card">
+    <h3>D-Wave Quantum</h3>
+    <div class="ticker">NYSE: QBTS · 量子退火 · 市值~$67亿</div>
+    <div class="grid">
+      <div class="metric"><div class="val">~$2,460万</div><div class="lbl">2025年营收(+179%)</div></div>
+      <div class="metric"><div class="val">~276×</div><div class="lbl">Forward P/S</div></div>
+      <div class="metric"><div class="val">~$8.8亿</div><div class="lbl">现金</div></div>
+      <div class="metric"><div class="val">14位</div><div class="lbl">分析师：Strong Buy</div></div>
+      <div class="metric"><div class="val">$20.27</div><div class="lbl">平均目标价($9–$33)</div></div>
+      <div class="metric"><div class="val">135+</div><div class="lbl">付费客户（板块最高）</div></div>
     </div>
+    <div class="pos"><strong style="color:var(--green);">优势：</strong>135+付费客户、70+商业企业——商业化程度最高；Advantage2系统超5,000量子比特；$5,500万收购QCI增添门模型能力；CES 2026展示促进客户采用。</div>
+    <div class="risk"><strong style="color:var(--red);">风险：</strong>量子退火只能解决优化问题（非通用计算）；长期竞争力受门模型威胁；Q4 2025营收miss($275万 vs $374万预期)；年初至今跌~23%。</div>
+  </div>
 
-    <div class="trend-card">
-      <h4>量子安全加密刻不容缓</h4>
-      <p>异构架构将 RSA-2048 因子分解降至 190k 量子比特以内，容错时间线提前意味着后量子密码迁移窗口正在缩短。</p>
+  <h3 class="subsection-title">科技巨头的量子布局</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>公司</th><th>量子路线</th><th>关键进展</th><th>对投资者的意义</th></tr>
+      <tr>
+        <td><strong style="color:var(--blue);">Google (GOOGL)</strong></td>
+        <td>超导 + 中性原子</td>
+        <td>Willow纠错突破；13,000×加速；2026年3月增加中性原子路线</td>
+        <td>量子是几乎零成本的「免费期权」。核心业务（搜索、YouTube、云）提供安全边际。</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--blue);">IBM</strong></td>
+        <td>超导</td>
+        <td>Nighthawk 120-Q处理器；纠错解码×10；目标2029年容错</td>
+        <td>唯一既盈利又有领先量子技术的公司。P/E ~36×，P/S ~4×，估值合理。</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--purple);">Microsoft (MSFT)</strong></td>
+        <td>拓扑 (Majorana 1)</td>
+        <td>全球首款拓扑量子处理器；目标百万量子比特单芯片</td>
+        <td>Azure量子云锁定生态。拓扑路线如果成功是颠覆性的。</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--green);">NVIDIA (NVDA)</strong></td>
+        <td>混合量子-经典</td>
+        <td>CUDA-Q平台；Ising开源量子校准AI（2.5×更快、3×更准）</td>
+        <td>不造量子计算机，但量子+AI基础设施「卖铲人」同样受益。</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- ====== PART 5: 风险警示 ====== -->
+<section class="section" id="risks">
+  <h2 class="section-title">风险警示</h2>
+
+  <div class="stats-row" style="margin-bottom:1.8rem;">
+    <div class="stat-card">
+      <div class="n" style="background:linear-gradient(135deg,var(--red),#f08050);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">50%+</div>
+      <div class="l">2025年量子板块多次单月回撤</div>
     </div>
-
-    <div class="trend-card">
-      <h4>量子 + AI 融合加速</h4>
-      <p>Nvidia Ising 开源 AI 模型助力量子处理器校准（2.5× 更快、3× 更准），量子机器学习在真实任务首现实用优势。</p>
+    <div class="stat-card">
+      <div class="n" style="background:linear-gradient(135deg,var(--red),#f08050);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">370%</div>
+      <div class="l">IONQ 52周振幅</div>
     </div>
+    <div class="stat-card">
+      <div class="n" style="background:linear-gradient(135deg,var(--red),#f08050);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">$41.5亿</div>
+      <div class="l">2025年纯量子股增发融资</div>
+    </div>
+    <div class="stat-card">
+      <div class="n" style="background:linear-gradient(135deg,var(--red),#f08050);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">5条</div>
+      <div class="l">相互竞争的技术路线</div>
+    </div>
+  </div>
 
+  <div class="risk-grid">
+    <div class="risk-card">
+      <h4>估值极端泡沫化</h4>
+      <p>RGTI P/S 642×，QBTS ~276×。历史上P/S超30×的「下一代技术」公司在盈利前几乎都经历了70%+的回撤。对标2000年互联网泡沫。</p>
+    </div>
+    <div class="risk-card">
+      <h4>暴雷级别的波动性</h4>
+      <p>纯量子股日振幅20–30%为常态。2026年3月一周内IONQ、RGTI、QBTS分别跌13–15%。反向ETF单周涨30–34%。不适合无法承受大幅波动的投资者。</p>
+    </div>
+    <div class="risk-card">
+      <h4>持续亏损与股权稀释</h4>
+      <p>所有纯量子股无一盈利。IONQ 2025年净亏$5.1亿。靠持续增发维持运营——持仓比例在持续被稀释。</p>
+    </div>
+    <div class="risk-card">
+      <h4>科技巨头的碾压效应</h4>
+      <p>Google、IBM、Microsoft可将量子能力捆绑进云服务。纯量子公司面对的竞争对手R&D预算是自身营收的数十倍。</p>
+    </div>
+    <div class="risk-card">
+      <h4>技术路线不确定性</h4>
+      <p>超导、离子阱、中性原子、光子、拓扑——谁能最终胜出？押注单一公司的风险类似于1990年代末押注单一操作系统或CPU架构。</p>
+    </div>
+    <div class="risk-card">
+      <h4>商业化时间线漫长</h4>
+      <p>大规模商业回报预计要到2030年代中期。纯量子股需靠融资「生存」到商业化拐点——这是以年计算的马拉松。</p>
+    </div>
+    <div class="risk-card">
+      <h4>SEC监管风险</h4>
+      <p>SEC已开始打击「量子洗白」（Quantum-washing）。夸大量子能力的公司面临调查和处罚。历史教材：2018年区块链概念股的监管清算。</p>
+    </div>
+    <div class="risk-card">
+      <h4>散户流动性风险</h4>
+      <p>纯量子股机构持仓低、散户持仓高。行情逆转时缺乏机构「接盘」，下行可能加速和放大。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PART 6: 投资策略 ====== -->
+<section class="section" id="strategy">
+  <h2 class="section-title">个人投资者策略建议</h2>
+
+  <div class="strategy-grid">
+    <div class="strategy-card">
+      <h4>保守型 · 科技巨头为主</h4>
+      <p style="margin-bottom:0.4rem;">适合：不想承受极端波动，但希望参与量子计算主题</p>
+      <ul>
+        <li><strong>核心持仓：</strong>GOOGL、IBM — 有盈利能力、量子技术领先</li>
+        <li><strong>辅助敞口：</strong>QTUM ETF — 一键配置量子+AI+芯片生态</li>
+        <li><strong>仓位上限：</strong>总量子相关不超过可投资资产的5%</li>
+        <li><strong>优点：</strong>无稀释风险，无归零风险，核心业务提供安全垫</li>
+      </ul>
+    </div>
+    <div class="strategy-card">
+      <h4>均衡型 · 杠铃策略（Barbell）</h4>
+      <p style="margin-bottom:0.4rem;">适合：愿意承担一定波动，但不过度集中</p>
+      <ul>
+        <li><strong>80–90%：</strong>GOOGL / IBM / MSFT — 稳定敞口</li>
+        <li><strong>10–20%：</strong>IONQ（营收领先）+ QBTS（商业化最成熟）</li>
+        <li><strong>仓位上限：</strong>不超过可投资资产的10–15%</li>
+        <li><strong>纪律：</strong>纯量子部分设置20%硬止损，不抱侥幸心理</li>
+      </ul>
+    </div>
+    <div class="strategy-card">
+      <h4>投机型 · 纯量子股</h4>
+      <p style="margin-bottom:0.4rem;">适合：充分了解风险、能承受50%+回撤</p>
+      <ul>
+        <li><strong>关注：</strong>IONQ(营收规模)、QBTS(客户基础)、RGTI(弹性最大)</li>
+        <li><strong>仓位铁律：</strong>任何单一标的归零不会伤害整体财务安全。总量子敞口&lt;可投资资产的5%</li>
+        <li><strong>催化剂关注：</strong>IBM量子优势演示、Quantinuum IPO、DARPA基准结果</li>
+        <li><strong>📛 纯量子股归零是真实存在的风险</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="subsection-title">投资前自检清单</h3>
+  <p style="color:var(--muted);font-size:0.88rem;margin-bottom:1rem;">买入任何量子计算股票之前，诚实回答这七个问题：</p>
+  <div class="table-wrap">
+    <table>
+      <tr><th style="width:5%;">#</th><th style="width:50%;">问题</th><th>通过标准</th></tr>
+      <tr><td>1</td><td>如果这笔投资清零，我的生活品质会受影响吗？</td><td>不会——它只占我可投资资产的一小部分</td></tr>
+      <tr><td>2</td><td>我能否向朋友解释这家公司的技术路线和竞争位置？</td><td>能讲清楚它在五条路线中的位置</td></tr>
+      <tr><td>3</td><td>我的持仓时间预期是多久？</td><td>至少3–5年——这是一场马拉松</td></tr>
+      <tr><td>4</td><td>商业化的催化剂是什么？我能说出至少两个吗？</td><td>例如：IBM量子优势演示、容错量子计算机原型</td></tr>
+      <tr><td>5</td><td>我查过公司的现金流和融资历史吗？</td><td>知道它过去两年融了多少、烧了多少</td></tr>
+      <tr><td>6</td><td>我是否考虑过用ETF或巨头间接配置？</td><td>至少比较过QTUM ETF与个股的风险收益特征</td></tr>
+      <tr><td>7</td><td>如果今天跌30%，我会怎么做？</td><td>有书面预案——不是凭情绪临场决定</td></tr>
+    </table>
+  </div>
+
+  <div class="kb-card" style="margin-top:1.5rem;">
+    <h3 style="color:var(--gold);">核心理念：不对称下注</h3>
+    <div class="body">
+      <p>
+        量子计算投资的最佳框架是<strong style="color:var(--gold);">「不对称下注」</strong>——寻找「下行有底、上行有天」的配置方式。<br><br>
+        下行有底：通过杠铃策略，用科技巨头的现金流和ETF的分散化锁定安全边际。<br>
+        上行有天：如果量子商业化成功，即使只占你仓位10%的纯量子敞口也能贡献巨大回报。<br><br>
+        这<strong>不是</strong>一个「all-in赌一把」的机会。如果量子商业化需要到2035年，纯量子股需要在此期间持续融资——仓位太重意味着你可能被迫在低谷割肉。
+      </p>
+    </div>
   </div>
 </section>
 
 <footer class="footer">
-  数据来源：Caltech, IBM Research, Nature, PRX Quantum, MIT, APS, arXiv 等公开论文与新闻稿<br>
-  生成于 2026 年 5 月 · 内容截至 2026 年 4 月底
+  技术信息来源：Nature, Cell, PRX Quantum, IBM Research, Google Quantum AI, Caltech, MIT 等公开论文<br>
+  市场数据来源：Tracxn, McKinsey, Nasdaq, Yahoo Finance, CNBC, Motley Fool, B. Riley, Needham 等公开资料<br>
+  生成于 2026 年 5 月 · 内容截至 2026 年 4 月底<br><br>
+  <strong style="color:var(--red);">⚠️ 本文仅供参考，不构成投资建议。投资有风险，入市需谨慎。过往业绩不代表未来表现。</strong>
 </footer>
 
 </body>
