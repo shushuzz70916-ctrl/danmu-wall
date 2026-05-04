@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>量子计算 · 最新知识与进展 | 2025–2026</title>
+<style>
+  :root {
+    --bg: #0a0a1a;
+    --card-bg: #111133;
+    --text: #e0e0f0;
+    --accent: #7c5cff;
+    --accent2: #00d4ff;
+    --gold: #ffb347;
+    --red: #ff6b6b;
+    --green: #4ecdc4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* === Hero === */
+  .hero {
+    position: relative;
+    min-height: 70vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(124,92,255,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(0,212,255,0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(255,179,71,0.08) 0%, transparent 50%);
+    animation: heroPulse 8s ease-in-out infinite;
+  }
+  @keyframes heroPulse {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+  }
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent2), var(--accent), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative; z-index: 1;
+    animation: titleGlow 3s ease-in-out infinite alternate;
+  }
+  @keyframes titleGlow {
+    0% { filter: drop-shadow(0 0 8px rgba(0,212,255,0.4)); }
+    100% { filter: drop-shadow(0 0 20px rgba(124,92,255,0.6)); }
+  }
+  .hero .subtitle {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: #8888bb;
+    position: relative; z-index: 1;
+  }
+  .hero .tagline {
+    margin-top: 2rem;
+    font-size: 1.05rem;
+    max-width: 640px;
+    color: #9999cc;
+    position: relative; z-index: 1;
+  }
+
+  /* === Section === */
+  .section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+  }
+  .section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .section-title::before {
+    content: ""; width: 4px; height: 1.5em;
+    background: linear-gradient(180deg, var(--accent), var(--accent2));
+    border-radius: 2px;
+  }
+
+  /* === Cards === */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    border-color: rgba(255,255,255,0.15);
+  }
+  .card .tag {
+    display: inline-block;
+    font-size: 0.75rem; font-weight: 600;
+    padding: 2px 10px; border-radius: 20px;
+    margin-bottom: 0.75rem;
+  }
+  .tag-blue { background: rgba(0,212,255,0.15); color: var(--accent2); }
+  .tag-purple { background: rgba(124,92,255,0.15); color: var(--accent); }
+  .tag-gold { background: rgba(255,179,71,0.15); color: var(--gold); }
+  .tag-green { background: rgba(78,205,196,0.15); color: var(--green); }
+  .tag-red { background: rgba(255,107,107,0.15); color: var(--red); }
+
+  .card h3 {
+    font-size: 1.15rem; margin-bottom: 0.5rem;
+  }
+  .card .meta {
+    font-size: 0.85rem; color: #7777aa; margin-bottom: 0.75rem;
+  }
+  .card p { font-size: 0.95rem; color: #aaaadd; }
+  .card .highlight {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-size: 0.85rem; font-weight: 600;
+    color: var(--gold);
+  }
+
+  /* === Timeline === */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+  .timeline::before {
+    content: ""; position: absolute; left: 8px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent), var(--accent2), var(--gold));
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+    padding-left: 2rem;
+  }
+  .timeline-item::before {
+    content: ""; position: absolute; left: -1.55rem; top: 0.4rem;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--accent2);
+    box-shadow: 0 0 10px rgba(0,212,255,0.5);
+  }
+  .timeline-item:nth-child(odd)::before { background: var(--accent); box-shadow: 0 0 10px rgba(124,92,255,0.5); }
+  .timeline-date {
+    font-size: 0.8rem; font-weight: 700;
+    color: var(--accent2); letter-spacing: 0.05em;
+  }
+  .timeline-item h3 { margin: 0.25rem 0 0.5rem; }
+  .timeline-item p { color: #aaaadd; font-size: 0.95rem; }
+
+  /* === Stats === */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 1.5rem; text-align: center;
+  }
+  .stat-card .number {
+    font-size: 2.2rem; font-weight: 800;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .stat-card .label { font-size: 0.9rem; color: #7777aa; margin-top: 0.25rem; }
+
+  /* === Trends === */
+  .trend-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .trend-card {
+    background: var(--card-bg);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 12px 12px 0;
+    padding: 1.2rem 1.5rem;
+  }
+  .trend-card h4 { margin-bottom: 0.5rem; }
+  .trend-card:nth-child(2) { border-left-color: var(--accent2); }
+  .trend-card:nth-child(3) { border-left-color: var(--gold); }
+  .trend-card:nth-child(4) { border-left-color: var(--green); }
+  .trend-card:nth-child(5) { border-left-color: var(--red); }
+  .trend-card p { color: #aaaadd; font-size: 0.93rem; }
+
+  /* === Footer === */
+  .footer {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    color: #555577;
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .footer a { color: var(--accent2); text-decoration: none; }
+
+  /* === Nav === */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(10,10,26,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; justify-content: center; gap: 2rem;
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+  .nav a {
+    color: #9999cc; text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav a:hover { color: var(--accent2); }
+
+  /* === responsive === */
+  @media (max-width: 640px) {
+    .section { padding: 2rem 1rem; }
+    .card-grid { grid-template-columns: 1fr; }
+    .nav { gap: 1rem; font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="#overview">概览</a>
+  <a href="#breakthroughs">重大突破</a>
+  <a href="#timeline">时间线</a>
+  <a href="#trends">趋势</a>
+</nav>
+
+<!-- ====== Hero ====== -->
+<header class="hero">
+  <h1>量子计算</h1>
+  <p class="subtitle">最新知识与进展 · 2025–2026</p>
+  <p class="tagline">
+    容错量子计算机的时间线正从「还需几十年」加速到「本十年末」。<br>
+    纠错效率、硬件平台和企业路线图在 2026 年出现多个里程碑式突破。
+  </p>
+</header>
+
+<!-- ====== 关键数据 ====== -->
+<section class="section" id="overview">
+  <h2 class="section-title">关键数据</h2>
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="number">10,000</div>
+      <div class="label">容错量子计算所需物理量子比特（此前预估：数百万）</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">138×</div>
+      <div class="label">异构架构实现的量子比特需求缩减</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">10⁻¹³</div>
+      <div class="label">QuEra 逻辑错误率，进入 Teraquop 时代</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">13,000×</div>
+      <div class="label">Google Quantum Echoes 物理模拟加速比</div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 重大突破 ====== -->
+<section class="section" id="breakthroughs">
+  <h2 class="section-title">七大突破</h2>
+  <div class="card-grid">
+
+    <div class="card">
+      <span class="tag tag-blue">纠错架构</span>
+      <h3>仅需 10,000 量子比特即可实现容错计算</h3>
+      <div class="meta">Caltech / Oratomic · 2026 年 3 月</div>
+      <p>利用中性原子可动态重排的特性，每个逻辑量子比特仅需约 5 个物理量子比特（传统超导方案约需 1,000 个）。</p>
+      <span class="highlight">影响：实用量子计算机可能提前到 2020 年代末</span>
+    </div>
+
+    <div class="card">
+      <span class="tag tag-purple">并行加速</span>
+      <h3>3 倍并行化加速，无需额外量子比特</h3>
+      <div class="meta">Duke / UT Austin / Yale · 2026 年 4 月</div>
+      <p>基于量子门传送的方案，利用空闲逻辑模块并行执行非 Clifford 门注入。仅需约 11,500 个原子、15 小时即可展示量子优势。</p>
+      <span class="highlight">挑战了混合同构架构的主流设计假设</span>
+    </div>
+
+    <div class="card">
+      <span class="tag tag-gold">材料模拟</span>
+      <h3>IBM 首次精确模拟真实磁性材料</h3>
+      <div class="meta">IBM · 2026 年 3 月</div>
+      <p>Heron 处理器模拟 KCuF₃ 磁晶体，结果与国家实验室中子散射数据吻合——首次在真实材料上验证量子计算作为可靠科学工具。</p>
+    </div>
+
+    <div class="card">
+      <span class="tag tag-green">纠错记录</span>
+      <h3>QuEra 实现每万亿步仅一个错误</h3>
+      <div class="meta">QuEra / Harvard / MIT · 2026 年</div>
+      <p>基于 qLDPC 码实现编码率超 0.503，逻辑错误率 10⁻¹³ 级别。验证了 [[1152,580]] 和 [[2304,1156]] 纠错码，正式进入 Teraquop 时代。</p>
+    </div>
+
+    <div class="card">
+      <span class="tag tag-blue">离子阱芯片</span>
+      <h3>MIT 实现芯片级离子冷却，温度降至多普勒极限 1/10</h3>
+      <div class="meta">MIT / Lincoln Lab · 2026 年 1 月</div>
+      <p>在光子芯片上实现偏振梯度冷却，用时仅约 100 微秒。为可扩展的芯片基离子阱量子计算机扫除关键障碍。</p>
+    </div>
+
+    <div class="card">
+      <span class="tag tag-red">中国突破</span>
+      <h3>中科大首次实验展示实用量子优势</h3>
+      <div class="meta">中国科学技术大学 · 2026 年 4 月</div>
+      <p>基于 9 耦合自旋核磁共振平台构建量子储层计算系统，在多步天气预测等真实任务上精度超越 10,000 节点经典网络。</p>
+      <span class="highlight">首次在现实任务上证明量子机器学习可超越经典方案</span>
+    </div>
+
+    <div class="card">
+      <span class="tag tag-purple">异构架构</span>
+      <h3>异构架构实现 138× 量子比特缩减</h3>
+      <div class="meta">多机构合作 · 2026 年 4 月</div>
+      <p>结合异构 QPU 与 QLDPC 码，RSA-2048 因子分解预计仅需 190k–439k 物理量子比特且 10 天内完成。推动量子安全加密迁移的紧迫性。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ====== 时间线 ====== -->
+<section class="section" id="timeline">
+  <h2 class="section-title">2025–2026 关键事件时间线</h2>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-date">2025 年 11 月</div>
+      <h3>IBM 发布 Nighthawk 处理器与新路线图</h3>
+      <p>120 量子比特，5,000 双量子比特门，电路复杂度提升 30%。目标 2026 年量子优势，2029 年容错量子计算机。</p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">2026 年 1 月</div>
+      <h3>马里兰大学：448 原子通用容错量子架构</h3>
+      <p>在 Nature 发表，展示基于可重构中性原子阵列的通用容错量子处理架构关键要素。</p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">2026 年 1 月</div>
+      <h3>MIT 芯片级离子冷却突破</h3>
+      <p>光子芯片上实现偏振梯度冷却，温度降至多普勒极限 1/10，为可扩展离子阱量子计算机铺路。</p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">2026 年 3 月</div>
+      <h3>Caltech / Oratomic：10K 量子比特即可容错</h3>
+      <p>证明仅需 10,000–20,000 物理量子比特即可构建完全容错的量子计算机，推翻此前百万比特的预估。</p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">2026 年 3 月</div>
+      <h3>IBM 精确模拟 KCuF₃ 磁性材料</h3>
+      <p>Heron 处理器模拟结果首次与中子散射实验数据吻合，验证量子计算在材料科学中的实用价值。</p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">2026 年 4 月</div>
+      <h3>Duke / UT Austin / Yale：3× 并行加速</h3>
+      <p>提出基于门传送的并行化方案，挑战主流架构设计假设，量子优势所需资源大幅降低。</p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">2026 年 4 月</div>
+      <h3>中科大首次实现实用量子机器学习优势</h3>
+      <p>在天气预测等真实任务上，9 自旋量子系统超越 10,000 节点经典网络。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ====== 趋势 ====== -->
+<section class="section" id="trends">
+  <h2 class="section-title">五大趋势</h2>
+  <div class="trend-grid">
+
+    <div class="trend-card">
+      <h4>纠错效率飞跃</h4>
+      <p>编码率从 1/1000 提升到 1/2。QuEra 的 qLDPC 码和 Caltech 的中性原子方案分别从软件和硬件两侧将容错门槛大幅拉低。</p>
+    </div>
+
+    <div class="trend-card">
+      <h4>中性原子成为最热平台</h4>
+      <p>相比超导量子比特，中性原子阵列可动态重排、长程连接，2026 年多个重大突破均建立在此平台之上。</p>
+    </div>
+
+    <div class="trend-card">
+      <h4>企业路线图加速</h4>
+      <p>IBM 将纠错解码速度提升 10 倍（提前一年完成），Google Willow 实现指数级误差降低，Microsoft Majorana 1 目标百万量子比特单芯片。</p>
+    </div>
+
+    <div class="trend-card">
+      <h4>量子安全加密刻不容缓</h4>
+      <p>异构架构将 RSA-2048 因子分解降至 190k 量子比特以内，容错时间线提前意味着后量子密码迁移窗口正在缩短。</p>
+    </div>
+
+    <div class="trend-card">
+      <h4>量子 + AI 融合加速</h4>
+      <p>Nvidia Ising 开源 AI 模型助力量子处理器校准（2.5× 更快、3× 更准），量子机器学习在真实任务首现实用优势。</p>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  数据来源：Caltech, IBM Research, Nature, PRX Quantum, MIT, APS, arXiv 等公开论文与新闻稿<br>
+  生成于 2026 年 5 月 · 内容截至 2026 年 4 月底
+</footer>
+
+</body>
+</html>
