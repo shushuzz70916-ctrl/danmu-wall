@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>量子计算 · 投资入门与行业分析 | 2025–2026</title>
+<title>量子计算投资指南 · 面向个人投资者的深度分析 | 2026</title>
 <style>
   :root {
     --bg: #0b0e14;
@@ -28,14 +28,14 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     background: rgba(11,14,20,0.88); backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
-    display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 1.2rem;
     padding: 0.65rem 1rem; font-size: 0.82rem;
   }
   .nav a { color: var(--muted); text-decoration: none; transition: color 0.2s; white-space: nowrap; }
   .nav a:hover { color: var(--gold); }
 
   .hero {
-    position: relative; min-height: 60vh;
+    position: relative; min-height: 55vh;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     text-align: center; padding: 2rem; margin-top: 3rem; overflow: hidden;
   }
@@ -61,7 +61,7 @@
     position: relative; z-index: 1; line-height: 1.8;
   }
   .hero .disclaimer {
-    margin-top: 1.5rem; font-size: 0.76rem; color: #6b6060;
+    margin-top: 1.5rem; font-size: 0.76rem; color: #a09090;
     background: rgba(224,85,106,0.07); border: 1px solid rgba(224,85,106,0.18);
     border-radius: 8px; padding: 0.55rem 1.2rem; position: relative; z-index: 1;
   }
@@ -138,6 +138,15 @@
     border-radius: 0 6px 6px 0; font-size: 0.87rem; color: #b8b4a0;
   }
 
+  /* Layer indicator for knowledge framework */
+  .layer-badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--blue));
+    color: #fff; font-weight: 800; font-size: 0.82rem;
+    margin-right: 0.5rem; flex-shrink: 0;
+  }
+
   .stock-card {
     background: var(--surface); border: 1px solid var(--border);
     border-radius: 12px; padding: 1.5rem; margin-bottom: 1.2rem;
@@ -207,6 +216,27 @@
   .t-item h3 { margin: 0.1rem 0 0.3rem; }
   .t-item p { font-size: 0.89rem; color: #a8acb8; }
 
+  /* Scenario boxes */
+  .scenario-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;
+  }
+  .scenario-card {
+    border-radius: 10px; padding: 1.4rem;
+  }
+  .scenario-card.bull { background: rgba(76,175,124,0.06); border: 1px solid rgba(76,175,124,0.2); }
+  .scenario-card.base { background: rgba(74,144,217,0.06); border: 1px solid rgba(74,144,217,0.2); }
+  .scenario-card.bear { background: rgba(224,85,106,0.06); border: 1px solid rgba(224,85,106,0.2); }
+  .scenario-card h4 { margin-bottom: 0.5rem; }
+  .scenario-card p, .scenario-card ul { font-size: 0.88rem; color: #a8acb8; }
+  .scenario-card ul { margin-left: 1.2rem; }
+
+  /* Comparison highlight */
+  .highlight-box {
+    background: rgba(74,144,217,0.05); border: 1px solid rgba(74,144,217,0.15);
+    border-radius: 10px; padding: 1.3rem; margin: 1.2rem 0;
+  }
+  .highlight-box h4 { color: var(--blue); margin-bottom: 0.5rem; }
+
   .footer {
     text-align: center; padding: 3rem 1.5rem; color: #555860; font-size: 0.8rem;
     border-top: 1px solid var(--border);
@@ -214,7 +244,7 @@
 
   @media (max-width: 640px) {
     .section { padding: 2rem 1rem; }
-    .card-grid, .risk-grid, .strategy-grid { grid-template-columns: 1fr; }
+    .card-grid, .risk-grid, .strategy-grid, .scenario-grid { grid-template-columns: 1fr; }
     .nav { gap: 0.5rem; font-size: 0.73rem; }
   }
 </style>
@@ -222,393 +252,615 @@
 <body>
 
 <nav class="nav">
-  <a href="#basics">量子入门</a>
+  <a href="#knowledge">量子入门</a>
   <a href="#milestones">技术产业</a>
-  <a href="#market">市场格局</a>
+  <a href="#investment">投资格局</a>
   <a href="#stocks">投资标的</a>
-  <a href="#risks">风险警示</a>
+  <a href="#risks">风险评估</a>
   <a href="#strategy">投资策略</a>
 </nav>
 
 <!-- ====== HERO ====== -->
 <header class="hero">
   <h1>量子计算投资指南</h1>
-  <p class="sub">面向个人投资者的入门科普与行业分析 · 2025–2026</p>
+  <p class="sub">面向个人投资者的入门科普与深度行业分析 · 2026</p>
   <p class="desc">
     从零理解量子计算原理与技术路线，<br>
     系统评估这一新兴赛道的投资机会与风险。
   </p>
   <div class="disclaimer">
-    ⚠️ 本文不构成投资建议。量子计算是高风险、长周期的前沿技术投资。
+    本文不构成投资建议。量子计算是高风险、长周期的前沿技术投资，纯量子股归零是真实存在的风险。
   </div>
 </header>
 
-<!-- ====== PART 1: 量子计算入门 ====== -->
-<section class="section" id="basics">
-  <h2 class="section-title">量子计算入门 —— 零基础也能看懂</h2>
-  <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1.6rem;">
-    不需要懂物理。下面用概念和类比解释量子计算的核心原理——只需要知道「为什么它比传统计算机强」就够了。
+<!-- ====== SECTION 1: 量子计算知识框架（五层递进） ====== -->
+<section class="section" id="knowledge">
+  <h2 class="section-title">量子计算知识框架 —— 零基础五层递进</h2>
+  <p style="color:var(--muted);font-size:0.9rem;margin-bottom:2rem;">
+    不需要物理背景。下面用五层递进结构，从最直观的类比开始，逐步建立完整的认知框架。
+    每层回答一个问题，五层读完就能理解这个行业为什么值得关注。
   </p>
 
+  <!-- 第一层 -->
   <div class="kb-card">
-    <h3>经典比特 vs 量子比特</h3>
-    <div class="eng">Bit vs Qubit</div>
+    <h3><span class="layer-badge">1</span>这是什么？—— 同时走所有路的迷宫</h3>
     <div class="body">
       <p>
-        <strong style="color:var(--blue);">经典计算机</strong>的最小信息单位是<strong>比特</strong>——只能处于0或1两种状态之一，像一枚硬币要么正面要么反面。<br>
-        <strong style="color:var(--gold);">量子计算机</strong>的最小信息单位是<strong>量子比特（Qubit）</strong>——可以同时处于0和1的「叠加态」，像一枚旋转中的硬币，停下来之前既是正面也是反面。
+        想象你在一个巨大迷宫里找出口。<strong style="color:var(--blue);">经典计算机</strong>的做法是：一次试一条路，走不通就回头换一条——速度再快，也是一条接一条。<br><br>
+        <strong style="color:var(--gold);">量子计算机</strong>的做法是：让一个人<strong>同时走所有路径</strong>，瞬间找到出口。
       </p>
       <div class="analogy">
-        <strong>关键点：</strong>1个经典比特一次只能表示1个数字（0或1）。但n个量子比特的叠加态可以<strong>同时表示2ⁿ个数字</strong>。300个量子比特能同时表示的状态数，超过宇宙中所有原子的总数。这种「并行处理」能力是量子计算速度优势的根源。
+        <strong>一句话理解：</strong>不是「更快地计算」，而是「用一种完全不同的方式计算」——利用自然界的量子规律，让信息处理从「串行」变成「并行」。这个差异不是量变，是质变。
       </div>
     </div>
   </div>
 
+  <!-- 第二层 -->
   <div class="kb-card">
-    <h3>量子纠缠 —— 超距的天然协作</h3>
-    <div class="eng">Entanglement</div>
+    <h3><span class="layer-badge">2</span>三个核心概念 —— 叠加、纠缠、干涉</h3>
     <div class="body">
-      <p>
-        两个量子比特可以处于「纠缠」状态——无论相隔多远，对其中一个的操作会<strong>瞬间影响</strong>另一个的状态。爱因斯坦称之为「鬼魅般的超距作用」。
-      </p>
-      <div class="analogy">
-        <strong>投资角度：</strong>纠缠是实现量子并行计算和纠错的基础机制。哪种物理平台（离子阱、超导、光子）能实现最高质量、最大规模的纠缠，是该赛道技术竞争的核心指标。
-      </div>
+      <p>量子计算的威力来自三个量子力学现象。不需要懂公式，用类比理解即可：</p>
     </div>
   </div>
 
-  <div class="kb-card">
-    <h3>量子纠错 —— 最大的工程挑战</h3>
-    <div class="eng">Quantum Error Correction (QEC)</div>
-    <div class="body">
-      <p>
-        量子比特极其脆弱——任何微小干扰（温度、电磁噪声）都会导致量子态「退相干」而丢失信息。这是量子计算最难攻克的问题。<br><br>
-        解决方案是<strong>量子纠错（QEC）</strong>：用多个易出错的物理量子比特协同工作，形成一个几乎不出错的「逻辑量子比特」。
-      </p>
-      <div class="analogy">
-        <strong>为什么纠错是投资的「北极星指标」：</strong>2024年Google Willow芯片首次证明「量子比特越多，错误率反而降低」——这是纠错领域等待了30年的里程碑。纠错能力的进步速度，直接决定量子计算何时具备商业价值。2026年Caltech发现仅需~10,000物理量子比特（此前估计数百万）即可实现完整纠错——这是整个赛道时间线缩短的根本原因。
-      </div>
+  <div class="card-grid" style="margin-top:-0.5rem;">
+    <div class="card">
+      <span class="tag tag-gold">叠加 Superposition</span>
+      <h3>旋转的硬币</h3>
+      <p>经典比特像一枚<strong>已经落地的硬币</strong>——要么正面要么反面。量子比特像一枚<strong>正在旋转的硬币</strong>——在停下来之前，同时蕴含正面和反面的可能性。<br><br>n个旋转硬币可以同时表示2ⁿ种状态。300个量子比特能表示的状态数，超过宇宙中所有原子的总数。</p>
+    </div>
+    <div class="card">
+      <span class="tag tag-blue">纠缠 Entanglement</span>
+      <h3>同步的骰子</h3>
+      <p>两个纠缠的量子比特就像<strong>一对魔法骰子</strong>——无论相隔多远，一个掷出6，另一个瞬间也显示6。爱因斯坦称之为「鬼魅般的超距作用」。<br><br>这种超强关联让量子比特可以协同工作，是量子计算加速的关键机制。</p>
+    </div>
+    <div class="card">
+      <span class="tag tag-purple">干涉 Interference</span>
+      <h3>波浪的叠加</h3>
+      <p>量子态像波浪一样可以相互叠加。设计算法时，让<strong>正确答案的波峰相互加强</strong>，错误答案的波峰相互抵消。<br><br>这就是量子算法设计的本质——不是暴力穷举，而是通过干涉引导系统趋向正确答案。</p>
     </div>
   </div>
 
-  <div class="kb-card">
-    <h3>量子计算能做什么？</h3>
+  <!-- 第三层 -->
+  <div class="kb-card" style="margin-top:1rem;">
+    <h3><span class="layer-badge">3</span>为什么比经典计算机强？—— 指数级并行</h3>
     <div class="body">
       <div class="table-wrap">
         <table>
-          <tr><th>应用领域</th><th>经典方法的局限</th><th>量子计算的优势</th></tr>
+          <tr><th>维度</th><th>经典计算机</th><th>量子计算机</th></tr>
+          <tr><td>基本信息单位</td><td>比特（0或1）</td><td>量子比特（0和1的叠加）</td></tr>
+          <tr><td>N个单元能表示的状态数</td><td>N个（线性增长）</td><td>2ᴺ个（指数增长）</td></tr>
+          <tr><td>100个单元</td><td>100种状态</td><td>2¹⁰⁰ ≈ 1.27×10³⁰ 种状态</td></tr>
+          <tr><td>计算方式</td><td>逐条处理（串行）</td><td>同时处理所有可能（并行）</td></tr>
+          <tr><td>适合什么问题</td><td>日常计算、精确运算</td><td>模拟自然系统、组合优化、破解加密</td></tr>
+          <tr><td>当前状态</td><td>高度成熟、无处不在</td><td>早期阶段，尚未实现通用量子优势</td></tr>
+        </table>
+      </div>
+      <div class="analogy">
+        <strong>关键认知：</strong>量子计算机不是经典计算机的「升级版」，而是「另一种工具」。就像飞机不是汽车的升级版——它们解决不同的问题。量子计算不会取代你的手机或笔记本，它专攻经典计算机搞不定的特定难题。
+      </div>
+    </div>
+  </div>
+
+  <!-- 第四层 -->
+  <div class="kb-card">
+    <h3><span class="layer-badge">4</span>能解决什么问题？—— 五大应用领域</h3>
+    <div class="body">
+      <p style="margin-bottom:1rem;">量子计算机天然适合<strong>模拟自然界的量子行为</strong>——因为自然本身就是量子的。以下五大领域是公认的「量子优势」方向：</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>应用领域</th><th>为什么经典方法不够用</th><th>量子能带来什么</th><th>实际进展</th></tr>
           <tr>
             <td><strong style="color:var(--gold);">药物研发</strong></td>
-            <td>模拟分子量子相互作用需指数级计算资源</td>
-            <td>天然适合模拟量子系统，新药研发时间或从10年缩短到几年</td>
+            <td>模拟分子间量子相互作用需要指数级计算资源</td>
+            <td>精确模拟药物分子与靶点蛋白的量子相互作用。新药研发周期或从10年缩短至几年</td>
+            <td>2026年IBM用Heron处理器精确模拟KCuF₃磁性材料，结果与中子散射实验数据吻合</td>
           </tr>
           <tr>
             <td><strong style="color:var(--gold);">材料科学</strong></td>
-            <td>寻找催化剂/电池材料需反复试错</td>
-            <td>在计算机中模拟材料量子特性。IBM已精确模拟KCuF₃磁晶体</td>
+            <td>寻找新型催化剂、电池材料主要靠反复实验试错</td>
+            <td>在计算机中直接模拟材料的量子特性，筛选用候选材料</td>
+            <td>Google 2025年量子模拟速度是超算的13,000倍</td>
           </tr>
           <tr>
             <td><strong style="color:var(--gold);">金融优化</strong></td>
-            <td>投资组合与风险建模面临组合爆炸</td>
-            <td>量子退火算法有加速效应。HSBC已用量子计算改进债券交易</td>
+            <td>投资组合优化、风险建模面临组合爆炸</td>
+            <td>量子算法在蒙特卡洛模拟、投资组合优化中有理论加速优势</td>
+            <td>HSBC已试点用量子计算改进债券交易定价</td>
           </tr>
           <tr>
             <td><strong style="color:var(--gold);">密码学</strong></td>
             <td>RSA-2048经典破解需数十亿年</td>
-            <td>Shor算法理论上数小时可破。最新研究所需量子比特降至~190k–439k</td>
+            <td>Shor算法理论上可在数小时至数天内破解。2026年最新研究表明仅需~190k-439k量子比特、10天内完成</td>
+            <td>NIST已于2024年发布后量子密码标准，全球启动加密迁移</td>
           </tr>
           <tr>
-            <td><strong style="color:var(--gold);">物流与AI</strong></td>
-            <td>大规模组合优化和机器学习训练</td>
-            <td>量子近似优化、量子机器学习有望在供应链、AI训练中提供加速</td>
+            <td><strong style="color:var(--gold);">AI与物流</strong></td>
+            <td>大规模组合优化和机器学习训练成本极高</td>
+            <td>量子机器学习有望在特征映射、采样效率上提供指数级加速</td>
+            <td>NVIDIA CUDA-Q平台已实现量子-经典混合AI训练框架</td>
           </tr>
         </table>
       </div>
     </div>
   </div>
 
-  <h3 class="subsection-title">五种主流硬件路线 —— 谁能最终胜出？</h3>
-  <p style="color:var(--muted);font-size:0.87rem;margin-bottom:1rem;">量子比特有多种物理实现——这也是投资风险之一：最终赢家尚未确定。</p>
+  <!-- 第五层 -->
+  <h3 class="subsection-title"><span class="layer-badge" style="display:inline-flex;">5</span>五种硬件路线 —— 谁最可能胜出？</h3>
+  <p style="color:var(--muted);font-size:0.87rem;margin-bottom:1rem;">
+    量子比特可以用不同物理系统实现——这是量子投资的核心技术风险：最终赢家尚未确定。
+    以下按技术成熟度和市场关注度排列。
+  </p>
   <div class="card-grid">
     <div class="card">
-      <span class="tag tag-gold">超导</span>
+      <span class="tag tag-gold">路线一 · 最成熟</span>
       <h3>超导量子比特</h3>
-      <p>IBM、Google、Rigetti采用。需在接近绝对零度(-273°C)运行。门速度快，成熟度最高，但纠错开销大。代表：IBM Nighthawk(120-Q)、Google Willow(105-Q)。</p>
+      <p><strong>代表公司：</strong>IBM、Google、Rigetti<br>
+      <strong>原理：</strong>用超导电路在接近绝对零度(-273°C)产生量子效应<br>
+      <strong>优势：</strong>门速度快、制造借鉴半导体工艺、生态最成熟<br>
+      <strong>劣势：</strong>需极低温、量子比特间连接受限、纠错开销大<br>
+      <strong>最新进展：</strong>IBM Nighthawk 120-Q、Google Willow 105-Q纠错突破</p>
     </div>
     <div class="card">
-      <span class="tag tag-blue">离子阱</span>
+      <span class="tag tag-blue">路线二 · 最高精度</span>
       <h3>离子阱量子比特</h3>
-      <p>IonQ、Quantinuum采用。用电磁场囚禁带电原子。业界最高门保真度(99.99%)，全连接性优于超导，但门速度较慢。</p>
+      <p><strong>代表公司：</strong>IonQ、Quantinuum<br>
+      <strong>原理：</strong>用电磁场囚禁带电原子，激光操控其量子态<br>
+      <strong>优势：</strong>门保真度业界最高(99.99%)、量子比特全连接<br>
+      <strong>劣势：</strong>门速度比超导慢、规模化有挑战<br>
+      <strong>最新进展：</strong>Quantinuum估值$100亿，被视为最受期待的量子IPO</p>
     </div>
     <div class="card">
-      <span class="tag tag-purple">中性原子</span>
+      <span class="tag tag-purple">路线三 · 最热门</span>
       <h3>中性原子量子比特</h3>
-      <p>2026年最热门路线。光镊阵列动态排列原子，支持长程连接。Caltech发现仅需~10,000原子即可容错——颠覆性降低。Google 2026年3月加入此路线。</p>
+      <p><strong>代表公司：</strong>Google(2026加入)、QuEra、Atom Computing<br>
+      <strong>原理：</strong>用光镊阵列动态排列中性原子<br>
+      <strong>优势：</strong>可室温附近运行、长程连接、可扩展性强<br>
+      <strong>劣势：</strong>门速度较慢、技术相对新<br>
+      <strong>最新进展：</strong>2026年1月Nature论文：448原子通用容错架构。Caltech发现仅需~10,000原子即可容错</p>
     </div>
     <div class="card">
-      <span class="tag tag-green">光子</span>
+      <span class="tag tag-green">路线四 · 可室温</span>
       <h3>光子量子计算</h3>
-      <p>PsiQuantum、Xanadu采用。量子比特由光子携带，可室温运行。PsiQuantum已获$10亿融资，与GlobalFoundries合作晶圆厂。</p>
+      <p><strong>代表公司：</strong>PsiQuantum、Xanadu<br>
+      <strong>原理：</strong>量子信息编码在光子中，用光学器件处理<br>
+      <strong>优势：</strong>可室温运行、可利用现有半导体制造<br>
+      <strong>劣势：</strong>光子损耗、错误率较高<br>
+      <strong>最新进展：</strong>PsiQuantum获$10亿融资，与GlobalFoundries合作建晶圆厂</p>
     </div>
     <div class="card">
-      <span class="tag tag-red">拓扑</span>
+      <span class="tag tag-red">路线五 · 最优雅</span>
       <h3>拓扑量子比特</h3>
-      <p>微软Majorana 1。利用准粒子的拓扑性质天然免疫外界噪声。理论最优雅，但实验验证在早期。目标百万量子比特单芯片。</p>
+      <p><strong>代表公司：</strong>Microsoft<br>
+      <strong>原理：</strong>利用准粒子的拓扑性质天然免疫噪声<br>
+      <strong>优势：</strong>理论上错误率极低、不需要大规模纠错<br>
+      <strong>劣势：</strong>实验验证仍在早期、Majorana粒子存在性有争议<br>
+      <strong>最新进展：</strong>2025年2月微软发布Majorana 1芯片，目标百万量子比特单芯片</p>
     </div>
+  </div>
+
+  <div class="highlight-box" style="margin-top:1.5rem;">
+    <h4>投资角度：怎么看待这五条路线？</h4>
+    <p style="font-size:0.9rem;color:#a8acb8;">
+      <strong>不要押注单一路线。</strong>这五条路线可能长期共存，各自适配不同应用场景——就像今天CPU、GPU、FPGA各有所长。
+      更务实的视角是：关注<strong>纠错能力的进步速度</strong>（哪个路线纠错效率最高），以及<strong>生态规模</strong>（哪个路线吸引了最多的开发者和企业用户）。
+      目前超导和离子阱领先，但中性原子正在快速追赶。
+    </p>
   </div>
 </section>
 
-<!-- ====== PART 2: 技术里程碑与产业现状 ====== -->
+<!-- ====== SECTION 2: 技术进展与产业现状 ====== -->
 <section class="section" id="milestones">
-  <h2 class="section-title">技术里程碑与产业现状</h2>
+  <h2 class="section-title">技术进展与产业现状</h2>
 
   <h3 class="subsection-title">2024–2026 关键技术事件</h3>
   <div class="timeline">
     <div class="t-item">
       <div class="t-date">2024年12月</div>
       <h3>Google Willow芯片实现「低于阈值」纠错</h3>
-      <p>105量子比特，首次证明量子比特增加时错误率反而指数级降低——量子纠错领域等待30年的里程碑。</p>
+      <p>105量子比特，首次证明量子比特增加时错误率反而指数级降低——量子纠错领域等待了30年的里程碑。这证明「规模化纠错」在物理上可行。</p>
     </div>
     <div class="t-item">
       <div class="t-date">2025年2月</div>
       <h3>微软发布Majorana 1拓扑量子处理器</h3>
-      <p>全球首款拓扑量子比特芯片，路线图瞄准百万量子比特单芯片。</p>
+      <p>全球首款拓扑量子比特芯片。路线图瞄准百万量子比特单芯片。如果成功，将跳过其他路线所需的「巨大量子比特换逻辑比特」的纠错瓶颈。</p>
     </div>
     <div class="t-item">
       <div class="t-date">2025年10月</div>
       <h3>Google量子计算机对超算实现13,000倍加速</h3>
-      <p>65量子比特物理模拟速度是Frontier超算的13,000倍——量子在特定任务上对经典计算的最新压制。</p>
+      <p>65量子比特物理模拟速度是Frontier超算（全球TOP1）的13,000倍——量子在特定科学计算任务上对经典计算的明确压制。</p>
     </div>
     <div class="t-item">
       <div class="t-date">2025年11月</div>
       <h3>IBM发布Nighthawk处理器与2029路线图</h3>
-      <p>120量子比特、5,000双量子比特门。纠错解码速度提升10倍。目标2026年底量子优势，2029年容错计算机。</p>
+      <p>120量子比特、5,000双量子比特门，纠错解码速度提升10倍。路线图：2026年底目标量子优势演示，2029年实现容错量子计算机。</p>
     </div>
     <div class="t-item">
       <div class="t-date">2026年1月</div>
       <h3>马里兰大学：448原子通用容错架构（Nature）</h3>
-      <p>可重构中性原子阵列实现通用逻辑门和低于阈值纠错。中性原子成为学界和产业界的共同热点。</p>
+      <p>可重构中性原子阵列实现通用逻辑门和低于阈值纠错。中性原子路线从学界热点变为产业热点。</p>
     </div>
     <div class="t-item">
       <div class="t-date">2026年3月</div>
       <h3>Caltech：仅需10,000量子比特即可容错</h3>
-      <p>颠覆性发现——容错所需物理量子比特从「数百万」降至「一万」。实用量子计算机可能提前到本十年末。</p>
+      <p>颠覆性理论突破——容错所需物理量子比特从之前估计的「数百万」降至「约一万」。实用量子计算机的时间线可能从2040年代提前到2030年代。</p>
     </div>
     <div class="t-item">
       <div class="t-date">2026年3月</div>
       <h3>IBM首次精确模拟真实磁性材料</h3>
-      <p>Heron处理器模拟结果与国家实验室中子散射数据吻合——量子计算首次在真实材料科学中被验证为可靠工具。</p>
+      <p>Heron处理器对KCuF₃磁晶体的模拟结果与国家实验室中子散射数据吻合——量子计算首次在真实材料科学问题中被验证为可靠工具。</p>
     </div>
     <div class="t-item">
       <div class="t-date">2026年4月</div>
       <h3>异构架构实现138×量子比特需求缩减</h3>
-      <p>RSA-2048因子分解预计降至190k–439k量子比特、10天内完成。量子安全加密迁移的紧迫性大幅提高。</p>
+      <p>RSA-2048因子分解所需量子比特从数百万降至190k-439k，10天内可完成。量子安全加密迁移的紧迫性大幅提高。</p>
     </div>
   </div>
 
-  <h3 class="subsection-title">「容错量子计算」何时到来？</h3>
+  <h3 class="subsection-title">从实验室到商业化的四阶段路线图</h3>
   <div class="table-wrap">
     <table>
       <tr><th>阶段</th><th>特征</th><th>预计时间</th><th>投资含义</th></tr>
       <tr>
-        <td>NISQ（嘈杂中等规模量子）</td>
-        <td>当前阶段：50–1000物理量子比特，无完整纠错</td>
-        <td>现在–2028</td>
-        <td>技术验证期。收入以政府合同和研发服务为主。纯量子公司靠股权融资维持。</td>
+        <td><strong style="color:var(--blue);">NISQ</strong><br>嘈杂中等规模量子</td>
+        <td>当前阶段：50-1000物理量子比特，无完整纠错。能做特定演示但尚无商业价值</td>
+        <td>现在 – 2028</td>
+        <td>技术验证期。收入以政府合同和研发服务为主。纯量子公司靠股权融资维持运营。</td>
       </tr>
       <tr>
-        <td>早期容错</td>
-        <td>用纠错码实现逻辑比特，开始超越经典</td>
-        <td>2028–2032</td>
-        <td>首批商业应用出现。硬件销售和QaaS收入开始起量。</td>
+        <td><strong style="color:var(--purple);">早期容错</strong></td>
+        <td>用纠错码实现逻辑量子比特，在特定问题上开始超越经典</td>
+        <td>2028 – 2032</td>
+        <td>首批商业应用出现。硬件销售和QaaS收入开始起量。行业竞争格局初步形成。</td>
       </tr>
       <tr>
-        <td>规模化容错</td>
-        <td>在有用问题上持续超越经典——「量子优势」</td>
-        <td>2032–2038</td>
-        <td>市场进入快速增长。行业格局初步确立。</td>
+        <td><strong style="color:var(--gold);">规模化容错</strong><br>「量子优势」</td>
+        <td>在有商业价值的问题上持续超越经典计算机</td>
+        <td>2032 – 2038</td>
+        <td>市场进入快速增长期。赢家开始显现。先发优势至关重要。</td>
       </tr>
       <tr>
-        <td>通用量子计算</td>
+        <td><strong style="color:var(--green);">通用量子计算</strong></td>
         <td>大规模、完全容错、可编程的通用量子计算机</td>
-        <td>2038–2045</td>
-        <td>市场规模预测$700亿–$2500亿。赢家通吃效应明显。</td>
+        <td>2038 – 2045</td>
+        <td>市场规模预测$700亿-$2500亿。可能催生新的产业生态。</td>
       </tr>
     </table>
   </div>
+  <p style="color:var(--muted);font-size:0.82rem;margin-top:0.3rem;">
+    Caltech 2026年的发现可能将上述时间线整体提前3-5年。
+  </p>
 
-  <h3 class="subsection-title">产业规模</h3>
+  <h3 class="subsection-title">产业规模速览</h3>
   <div class="stats-row">
     <div class="stat-card"><div class="n">$42亿</div><div class="l">2025年全球VC融资额</div></div>
     <div class="stat-card"><div class="n">$111亿</div><div class="l">累计总融资额（492轮）</div></div>
     <div class="stat-card"><div class="n">$567亿</div><div class="l">全球政府累计承诺资金</div></div>
     <div class="stat-card"><div class="n">~$20亿</div><div class="l">2026年量子市场规模</div></div>
     <div class="stat-card"><div class="n">31%</div><div class="l">量子专利年增长率</div></div>
-    <div class="stat-card"><div class="n">7,400+</div><div class="l">全球量子技术参与组织数</div></div>
+    <div class="stat-card"><div class="n">7,400+</div><div class="l">全球量子技术参与组织</div></div>
   </div>
   <p style="color:var(--muted);font-size:0.87rem;">
-    资本分布——硬件技术72%($79亿)，应用18%，软件9%，量子即服务(QaaS)~1%。
-    美国主导（Palo Alto一市即获$33亿），欧洲和亚洲通过主权政策加码追赶。
+    资本分布：硬件技术72%（$79亿），应用18%，软件9%，量子即服务(QaaS)约1%。美国主导（Palo Alto一市即获$33亿），欧洲和亚洲通过主权政策加码追赶。
   </p>
 </section>
 
-<!-- ====== PART 3: 市场格局 ====== -->
-<section class="section" id="market">
-  <h2 class="section-title">投资市场格局</h2>
+<!-- ====== SECTION 3: 全球投资格局深度分析 ====== -->
+<section class="section" id="investment">
+  <h2 class="section-title">全球投资格局深度分析</h2>
 
-  <h3 class="subsection-title">量子计算投资生态</h3>
-  <div class="card-grid">
-    <div class="card">
-      <span class="tag tag-gold">纯量子计算股</span>
-      <h3>纯正赛道标的</h3>
-      <ul>
-        <li><strong>IonQ (IONQ)</strong> — 离子阱，营收最大（2025年$1.3亿）</li>
-        <li><strong>Rigetti (RGTI)</strong> — 超导，高波动（P/S ~642×）</li>
-        <li><strong>D-Wave (QBTS)</strong> — 退火，最多商业客户（135+）</li>
-        <li><strong>QCI (QUBT)</strong> — 光子，营收极低，被做空~21%</li>
-        <li><strong>Xanadu (XNDU)</strong> — 2026年3月IPO</li>
-      </ul>
-      <p style="margin-top:0.5rem;font-size:0.82rem;color:var(--red);">特征：极高波动（日振幅20–30%）、全部亏损、依赖增发融资、P/S从45×到975×不等</p>
-    </div>
-    <div class="card">
-      <span class="tag tag-blue">科技巨头</span>
-      <h3>分散化量子敞口</h3>
-      <ul>
-        <li><strong>Alphabet/Google (GOOGL)</strong> — Willow芯片+中性原子</li>
-        <li><strong>IBM (IBM)</strong> — 超导领导者，已盈利</li>
-        <li><strong>Microsoft (MSFT)</strong> — Majorana 1拓扑+Azure量子云</li>
-        <li><strong>Amazon (AMZN)</strong> — AWS Braket量子云</li>
-        <li><strong>NVIDIA (NVDA)</strong> — CUDA-Q混合量子-经典平台</li>
-      </ul>
-      <p style="margin-top:0.5rem;font-size:0.82rem;color:var(--green);">特征：量子在总体业务占比极小、无稀释风险、现金流充沛，属于「免费期权」</p>
-    </div>
-    <div class="card">
-      <span class="tag tag-purple">ETF与工具</span>
-      <h3>分散化投资工具</h3>
-      <ul>
-        <li><strong>QTUM ETF</strong> — 83–85只持仓，含量子+AI+芯片，费率0.40%</li>
-        <li><strong>QTUM回报：</strong>2024年+50.5%，2025年+36.7%</li>
-        <li><strong>反向ETF：</strong>IONZ, QBTZ, RGTZ — 做空量子股</li>
-      </ul>
-      <p style="margin-top:0.5rem;font-size:0.82rem;color:var(--muted);">注意：QTUM含大量非纯量子公司（NVIDIA、台积电等），是量子+AI+半导体的混合敞口</p>
-    </div>
-    <div class="card">
-      <span class="tag tag-green">IPO预备</span>
-      <h3>待上市重磅标的</h3>
-      <ul>
-        <li><strong>Quantinuum</strong> — 全栈路线，估值$100亿，最受期待IPO</li>
-        <li><strong>PsiQuantum</strong> — 光子路线，估值$70亿</li>
-        <li><strong>SandboxAQ</strong> — AI+量子传感，估值$57.5亿</li>
-      </ul>
-      <p style="margin-top:0.5rem;font-size:0.82rem;color:var(--muted);">这些IPO上市时的估值和定价将是板块走势的重要催化剂。</p>
-    </div>
-  </div>
-
-  <h3 class="subsection-title">2025年VC大额融资</h3>
+  <h3 class="subsection-title">年度VC融资趋势（2020–2026）</h3>
+  <p style="color:var(--muted);font-size:0.87rem;margin-bottom:1rem;">
+    量子计算的VC投资在过去五年经历了爆发式增长，2025年单年融资额超过2020年全年的10倍。
+  </p>
   <div class="table-wrap">
     <table>
-      <tr><th>公司</th><th>金额</th><th>轮次</th><th>估值</th><th>技术路线</th></tr>
-      <tr><td>PsiQuantum</td><td>$10亿</td><td>E轮</td><td>$70亿</td><td>光子</td></tr>
-      <tr><td>Quantinuum</td><td>$8亿</td><td>E轮</td><td>$100亿</td><td>离子阱（全栈）</td></tr>
-      <tr><td>SandboxAQ</td><td>$4.5亿</td><td>E轮</td><td>$57.5亿</td><td>AI+量子传感</td></tr>
-      <tr><td>IonQ</td><td>$20亿</td><td>机构股权融资</td><td>已上市（~$109亿）</td><td>离子阱</td></tr>
-      <tr><td>Quantum Machines</td><td>$1.7亿</td><td>VC</td><td>未公开</td><td>量子控制</td></tr>
+      <tr><th>年份</th><th>融资总额</th><th>轮次数</th><th>平均单笔</th><th>年度最大单笔</th><th>阶段特征</th></tr>
+      <tr>
+        <td>2020</td><td>~$3.8亿</td><td>~45</td><td>$840万</td><td>PsiQuantum $1.5亿</td><td>早期探索期，光子路线率先吸金</td>
+      </tr>
+      <tr>
+        <td>2021</td><td>~$12亿</td><td>~68</td><td>$1,760万</td><td>IonQ SPAC上市 $6.5亿</td><td>SPAC热潮，IonQ/Rigetti/D-Wave集中上市</td>
+      </tr>
+      <tr>
+        <td>2022</td><td>~$17亿</td><td>~82</td><td>$2,070万</td><td>Quantinuum $3亿</td><td>上市后回调，但私募市场活跃度不减</td>
+      </tr>
+      <tr>
+        <td>2023</td><td>~$16亿</td><td>~95</td><td>$1,680万</td><td>SandboxAQ $5亿</td><td>AI+量子融合成为新主题</td>
+      </tr>
+      <tr>
+        <td>2024</td><td>~$21亿</td><td>~110</td><td>$1,910万</td><td>Quantinuum $3亿</td><td>Willow芯片带动板块情绪回暖</td>
+      </tr>
+      <tr>
+        <td><strong>2025</strong></td>
+        <td><strong>$42亿</strong></td>
+        <td><strong>~130</strong></td>
+        <td><strong>$3,230万</strong></td>
+        <td>PsiQuantum $10亿</td>
+        <td><strong>爆发年：融资额翻倍，大额交易集中</strong></td>
+      </tr>
     </table>
+  </div>
+  <p style="color:var(--muted);font-size:0.82rem;margin-top:0.3rem;">
+    数据来源：Tracxn, PitchBook, Crunchbase，截至2026年4月。含股权融资和可转债，不含政府拨款。
+  </p>
+
+  <h3 class="subsection-title">2025–2026 重大融资事件</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>公司</th><th>金额</th><th>轮次</th><th>估值</th><th>技术路线</th><th>领投方</th></tr>
+      <tr><td>PsiQuantum</td><td>$10亿</td><td>E轮</td><td>$70亿</td><td>光子</td><td>BlackRock等</td></tr>
+      <tr><td>Quantinuum</td><td>$8亿</td><td>E轮</td><td>$100亿</td><td>离子阱（全栈）</td><td>摩根大通等</td></tr>
+      <tr><td>SandboxAQ</td><td>$4.5亿</td><td>E轮</td><td>$57.5亿</td><td>AI+量子传感</td><td>多方联合</td></tr>
+      <tr><td>IonQ</td><td>$20亿</td><td>ATM增发</td><td>已上市（~$109亿）</td><td>离子阱</td><td>公开市场</td></tr>
+      <tr><td>Quantum Machines</td><td>$1.7亿</td><td>C轮</td><td>未公开</td><td>量子控制</td><td>PSG Equity</td></tr>
+      <tr><td>QuEra</td><td>$2.3亿</td><td>D轮</td><td>未公开</td><td>中性原子</td><td>软银愿景基金</td></tr>
+    </table>
+  </div>
+
+  <h3 class="subsection-title">全球政府量子资金对比</h3>
+  <p style="color:var(--muted);font-size:0.87rem;margin-bottom:1rem;">
+    量子计算是少数得到全球主要国家一致战略性投入的技术领域。以下是主要经济体的公开承诺：
+  </p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>国家/地区</th><th>公开承诺资金</th><th>时间范围</th><th>重点方向</th><th>核心举措</th></tr>
+      <tr>
+        <td><strong style="color:var(--blue);">美国</strong></td>
+        <td>$200亿+</td><td>2018–2030</td>
+        <td>全栈（硬+软+应用）</td>
+        <td>国家量子计划法案(NQI)、DARPA量子基准、CHIPS法案含量子</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--red);">中国</strong></td>
+        <td>$150亿+</td><td>2016–2030</td>
+        <td>量子通信领先、计算追赶</td>
+        <td>量子信息科学国家实验室（合肥）、量子号卫星、「十四五」专项</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--purple);">欧盟</strong></td>
+        <td>$90亿+</td><td>2018–2030</td>
+        <td>量子通信网络、传感</td>
+        <td>量子旗舰计划(Quantum Flagship)、EuroQCI量子通信基础设施</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--gold);">英国</strong></td>
+        <td>$50亿+</td><td>2014–2033</td>
+        <td>全栈，侧重商业化</td>
+        <td>国家量子战略(£25亿)、UKRI量子技术中心网络</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--green);">日本</strong></td>
+        <td>$20亿+</td><td>2018–2030</td>
+        <td>超导、量子通信</td>
+        <td>Q-LEAP计划、理研量子计算研究中心</td>
+      </tr>
+      <tr>
+        <td>韩国</td>
+        <td>$15亿+</td><td>2019–2030</td>
+        <td>超导、量子传感</td>
+        <td>量子计算技术开发计划、KIST量子计算中心</td>
+      </tr>
+    </table>
+  </div>
+  <p style="color:var(--muted);font-size:0.82rem;margin-top:0.3rem;">
+    政府资金以拨款和研发合同形式为主，不稀释股权。对纯量子公司而言，政府合同是现阶段最稳定的收入来源之一。
+  </p>
+
+  <h3 class="subsection-title">公开市场表现回顾</h3>
+  <p style="color:var(--muted);font-size:0.87rem;margin-bottom:1rem;">
+    纯量子股自上市以来经历了极端的涨跌周期。以下数据揭示了这一板块的波动特征：
+  </p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>标的</th><th>上市方式</th><th>上市后最高涨幅</th><th>最大回撤</th><th>2025年回报</th><th>2026 YTD</th><th>当前市值</th></tr>
+      <tr>
+        <td>IONQ</td><td>2021 SPAC</td><td>+380%(2024.12)</td><td>-79%(2022)</td><td>+142%</td><td>+56%(4月)</td><td>~$109亿</td>
+      </tr>
+      <tr>
+        <td>RGTI</td><td>2021 SPAC</td><td>+900%(2024.12)</td><td>-95%(2022)</td><td>+560%</td><td>-23%</td><td>~$53亿</td>
+      </tr>
+      <tr>
+        <td>QBTS</td><td>2021 SPAC</td><td>+350%(2024.12)</td><td>-90%(2022)</td><td>+350%</td><td>-23%</td><td>~$67亿</td>
+      </tr>
+      <tr>
+        <td>QUBT</td><td>2021 SPAC</td><td>+700%(2024.12)</td><td>-98%(2022)</td><td>+200%</td><td>-50%</td><td>~$3亿</td>
+      </tr>
+      <tr>
+        <td style="color:var(--muted);">纳斯达克（对照）</td>
+        <td>—</td><td>—</td><td>-33%(2022)</td><td>+28%</td><td>-2%</td><td>—</td>
+      </tr>
+    </table>
+  </div>
+  <p style="color:var(--red);font-size:0.82rem;margin-top:0.3rem;">
+    注意：2024年12月的集体暴涨由Google Willow芯片消息驱动——整个板块在单一事件刺激下同步飙升。这类「事件驱动型暴涨」随后往往伴随大幅回撤。
+  </p>
+
+  <h3 class="subsection-title">IPO 预备军 —— 三家最值得关注的未上市公司</h3>
+  <div class="card-grid">
+    <div class="card">
+      <span class="tag tag-gold">估值$100亿</span>
+      <h3>Quantinuum</h3>
+      <p><strong>技术路线：</strong>离子阱，全栈（硬件+软件+云）<br>
+      <strong>核心优势：</strong>业界公认技术领导力最强。H2处理器门保真度领先。同时拥有剑桥量子软件部门，是唯一「硬件+软件」双强的量子公司。<br>
+      <strong>关键数据：</strong>2025年E轮融资$8亿，JPMorgan Chase为投资方和客户。估值$100亿为未上市量子公司之最。<br>
+      <strong>IPO预期：</strong>2026-2027年，被视为量子板块最受期待的IPO。</p>
+    </div>
+    <div class="card">
+      <span class="tag tag-blue">估值$70亿</span>
+      <h3>PsiQuantum</h3>
+      <p><strong>技术路线：</strong>光子量子计算<br>
+      <strong>核心优势：</strong>可室温运行、可用现有半导体工艺制造。与GlobalFoundries合作建设专用晶圆厂。<br>
+      <strong>关键数据：</strong>2025年融资$10亿（量子行业史上最大单笔VC），累计融资$13亿+。澳大利亚政府$10亿合同。<br>
+      <strong>IPO预期：</strong>时间未明确，巨额融资后短期内IPO压力降低。</p>
+    </div>
+    <div class="card">
+      <span class="tag tag-purple">估值$57.5亿</span>
+      <h3>SandboxAQ</h3>
+      <p><strong>技术路线：</strong>AI + 量子传感（非量子计算）<br>
+      <strong>核心优势：</strong>源自Google母公司Alphabet。用AI和量子传感技术解决药物研发、材料、金融等实际问题——商业化路径更短。<br>
+      <strong>关键数据：</strong>2025年E轮$4.5亿。2026年收入预计过亿——在量子相关公司中极为罕见。<br>
+      <strong>IPO预期：</strong>可能早于Quantinuum上市，因为已有实质性营收。</p>
+    </div>
   </div>
 </section>
 
-<!-- ====== PART 4: 投资标的分析 ====== -->
+<!-- ====== SECTION 4: 投资标的深度分析 ====== -->
 <section class="section" id="stocks">
   <h2 class="section-title">主要标的深度分析</h2>
 
   <!-- IONQ -->
   <div class="stock-card">
     <h3>IonQ</h3>
-    <div class="ticker">NYSE: IONQ · 离子阱技术 · 市值~$109亿</div>
+    <div class="ticker">NYSE: IONQ · 离子阱技术 · 市值 ~$109亿</div>
     <div class="grid">
-      <div class="metric"><div class="val">$1.3亿</div><div class="lbl">2025年营收(+202%)</div></div>
+      <div class="metric"><div class="val">$1.3亿</div><div class="lbl">2025年营收 (+202%)</div></div>
       <div class="metric"><div class="val">$2.25–2.45亿</div><div class="lbl">2026年营收指引</div></div>
       <div class="metric"><div class="val">~45×</div><div class="lbl">Forward P/S</div></div>
       <div class="metric"><div class="val">~$33亿</div><div class="lbl">现金储备</div></div>
+      <div class="metric"><div class="val">$3.7亿</div><div class="lbl">未完成合同义务</div></div>
+      <div class="metric"><div class="val">$5.1亿</div><div class="lbl">2025年净亏损</div></div>
       <div class="metric"><div class="val">15位</div><div class="lbl">分析师：Strong Buy</div></div>
-      <div class="metric"><div class="val">$67.67</div><div class="lbl">平均目标价($35–$100)</div></div>
+      <div class="metric"><div class="val">$67.67</div><div class="lbl">平均目标价 ($35-$100)</div></div>
     </div>
-    <div class="pos"><strong style="color:var(--green);">优势：</strong>营收规模远超其他纯量子股；99.99%门保真度业界最高；AWS/Azure/Google Cloud三大云平台均可访问；$3.7亿未完成合同义务；收购Oxford Ionics($10.8亿)和SkyWater($18亿)实现垂直整合。2026年4月单月涨56%。</div>
-    <div class="risk"><strong style="color:var(--red);">风险：</strong>2025年GAAP亏损$5.1亿；被Wolfpack Research做空；持续增发稀释股权（2025年融资$20亿）；52周区间$17.88–$84.64，振幅380%。即便涨了56%仍比历史高点低~24%。</div>
+    <div class="pos"><strong style="color:var(--green);">优势：</strong>营收规模远超其他纯量子股（$1.3亿）；99.99%门保真度业界最高；AWS/Azure/Google Cloud三大云平台均可访问；收购Oxford Ionics（$10.8亿）和SkyWater（$18亿）实现芯片制造垂直整合；2026年4月单月涨56%。</div>
+    <div class="risk"><strong style="color:var(--red);">风险：</strong>GAAP亏损$5.1亿（是营收的3.9倍）；被Wolfpack Research做空；持续增发稀释（2025年融资$20亿）；52周区间$17.88-$84.64，振幅380%；即使4月涨了56%仍比历史高点低24%；做空比例约8%。</div>
   </div>
 
   <!-- RGTI -->
   <div class="stock-card">
     <h3>Rigetti Computing</h3>
-    <div class="ticker">NASDAQ: RGTI · 超导量子比特 · 市值~$53亿</div>
+    <div class="ticker">NASDAQ: RGTI · 超导量子比特 · 市值 ~$53亿</div>
     <div class="grid">
-      <div class="metric"><div class="val">~$710万</div><div class="lbl">2025年营收(-34%)</div></div>
+      <div class="metric"><div class="val">~$710万</div><div class="lbl">2025年营收 (-34%)</div></div>
       <div class="metric"><div class="val">~642×</div><div class="lbl">Forward P/S（板块最高）</div></div>
-      <div class="metric"><div class="val">~$5.9亿</div><div class="lbl">现金</div></div>
+      <div class="metric"><div class="val">~$5.9亿</div><div class="lbl">现金储备</div></div>
+      <div class="metric"><div class="val">-62%</div><div class="lbl">从历史最高点跌幅</div></div>
+      <div class="metric"><div class="val">+243%</div><div class="lbl">分析师预计2026营收增速</div></div>
       <div class="metric"><div class="val">7位</div><div class="lbl">分析师：Buy</div></div>
       <div class="metric"><div class="val">$32.38</div><div class="lbl">平均目标价</div></div>
-      <div class="metric"><div class="val">-62%</div><div class="lbl">从历史最高点跌幅</div></div>
+      <div class="metric"><div class="val">~15%</div><div class="lbl">做空比例</div></div>
     </div>
-    <div class="pos"><strong style="color:var(--green);">优势：</strong>模块化超导芯片架构(Cepheus-1-108Q已GA)，99.1%门保真度；印度C-DAC合同标志首次大型海外硬件销售；英国$1亿投资计划；分析师预计2026年营收增长243%。向上弹性最大。</div>
-    <div class="risk"><strong style="color:var(--red);">风险：</strong>营收不增反降；P/S比642×为全板块最高；反向ETF(RGTZ)单周涨31%；Jefferies评级"Hold"；从峰值已跌62%，但仍比历史均值贵得多。</div>
+    <div class="pos"><strong style="color:var(--green);">优势：</strong>模块化超导芯片架构（Cepheus-1-108Q已GA），99.1%门保真度；印度C-DAC合同标志首次大型海外硬件销售；英国$1亿投资计划；与IBM/Google共享超导生态，技术人才丰富。向上弹性最大。</div>
+    <div class="risk"><strong style="color:var(--red);">风险：</strong>营收不增反降（-34%），为板块最差；P/S比642×为全板块最高；反向ETF（RGTZ）单周涨31%表明看空情绪浓厚；Jefferies评级Hold；从峰值已跌62%，但P/S仍极度昂贵；营收基数极小（$710万）。</div>
   </div>
 
   <!-- QBTS -->
   <div class="stock-card">
     <h3>D-Wave Quantum</h3>
-    <div class="ticker">NYSE: QBTS · 量子退火 · 市值~$67亿</div>
+    <div class="ticker">NYSE: QBTS · 量子退火 · 市值 ~$67亿</div>
     <div class="grid">
-      <div class="metric"><div class="val">~$2,460万</div><div class="lbl">2025年营收(+179%)</div></div>
+      <div class="metric"><div class="val">~$2,460万</div><div class="lbl">2025年营收 (+179%)</div></div>
       <div class="metric"><div class="val">~276×</div><div class="lbl">Forward P/S</div></div>
-      <div class="metric"><div class="val">~$8.8亿</div><div class="lbl">现金</div></div>
-      <div class="metric"><div class="val">14位</div><div class="lbl">分析师：Strong Buy</div></div>
-      <div class="metric"><div class="val">$20.27</div><div class="lbl">平均目标价($9–$33)</div></div>
+      <div class="metric"><div class="val">~$8.8亿</div><div class="lbl">现金储备</div></div>
       <div class="metric"><div class="val">135+</div><div class="lbl">付费客户（板块最高）</div></div>
+      <div class="metric"><div class="val">5,000+</div><div class="lbl">Advantage2量子比特数</div></div>
+      <div class="metric"><div class="val">14位</div><div class="lbl">分析师：Strong Buy</div></div>
+      <div class="metric"><div class="val">$20.27</div><div class="lbl">平均目标价 ($9-$33)</div></div>
+      <div class="metric"><div class="val">~12%</div><div class="lbl">做空比例</div></div>
     </div>
-    <div class="pos"><strong style="color:var(--green);">优势：</strong>135+付费客户、70+商业企业——商业化程度最高；Advantage2系统超5,000量子比特；$5,500万收购QCI增添门模型能力；CES 2026展示促进客户采用。</div>
-    <div class="risk"><strong style="color:var(--red);">风险：</strong>量子退火只能解决优化问题（非通用计算）；长期竞争力受门模型威胁；Q4 2025营收miss($275万 vs $374万预期)；年初至今跌~23%。</div>
+    <div class="pos"><strong style="color:var(--green);">优势：</strong>135+付费客户、70+商业企业——商业化程度最高，有真正的商业应用落地；Advantage2系统超5,000量子比特；$5,500万收购QCI增添门模型能力；退火技术虽然路线窄但已有实际商业应用。</div>
+    <div class="risk"><strong style="color:var(--red);">风险：</strong>量子退火只能解决优化问题（非通用计算），长期竞争力受门模型威胁；Q4 2025营收miss（$275万 vs $374万预期）；年初至今跌约23%；「只能做优化」的天花板可能限制估值上行空间。</div>
   </div>
 
-  <h3 class="subsection-title">科技巨头的量子布局</h3>
+  <!-- QUBT -->
+  <div class="stock-card">
+    <h3>Quantum Computing Inc. (QUBT)</h3>
+    <div class="ticker">NASDAQ: QUBT · 光子+量子软件 · 市值 ~$3亿</div>
+    <div class="grid">
+      <div class="metric"><div class="val">~$40万</div><div class="lbl">2025年营收（极低）</div></div>
+      <div class="metric"><div class="val">~975×</div><div class="lbl">Forward P/S（离谱）</div></div>
+      <div class="metric"><div class="val">~$1.2亿</div><div class="lbl">现金储备</div></div>
+      <div class="metric"><div class="val">~21%</div><div class="lbl">做空比例（板块最高）</div></div>
+      <div class="metric"><div class="val">-50%</div><div class="lbl">2026 YTD回报</div></div>
+      <div class="metric"><div class="val">-98%</div><div class="lbl">从历史最高点跌幅</div></div>
+    </div>
+    <div class="pos"><strong style="color:var(--green);">微弱亮点：</strong>通过收购QPhoton获得光子量子技术；试图构建量子软件平台。但需注意——营收几乎为零，技术路径模糊。</div>
+    <div class="risk"><strong style="color:var(--red);">严重风险：</strong>营收$40万支撑$3亿市值——P/S 975×为全板块最极端；做空比例21%为板块最高，做空者大量押注其下跌；曾被多家做空机构质疑其量子技术真实性；年营收不够支付高管薪酬。这是纯量子股中风险最高的标的。</div>
+  </div>
+
+  <h3 class="subsection-title">四只纯量子股核心指标对比</h3>
   <div class="table-wrap">
     <table>
-      <tr><th>公司</th><th>量子路线</th><th>关键进展</th><th>对投资者的意义</th></tr>
+      <tr><th>指标</th><th>IONQ</th><th>RGTI</th><th>QBTS</th><th>QUBT</th></tr>
+      <tr><td>市值</td><td>$109亿</td><td>$53亿</td><td>$67亿</td><td>$3亿</td></tr>
+      <tr><td>2025营收</td><td style="color:var(--green);">$1.3亿 ✓</td><td style="color:var(--red);">$710万 ✗</td><td>$2,460万</td><td style="color:var(--red);">$40万 ✗</td></tr>
+      <tr><td>营收增速</td><td style="color:var(--green);">+202%</td><td style="color:var(--red);">-34%</td><td style="color:var(--green);">+179%</td><td>N/A</td></tr>
+      <tr><td>Forward P/S</td><td>~45×</td><td style="color:var(--red);">~642×</td><td>~276×</td><td style="color:var(--red);">~975×</td></tr>
+      <tr><td>现金储备</td><td style="color:var(--green);">$33亿</td><td>$5.9亿</td><td>$8.8亿</td><td>$1.2亿</td></tr>
+      <tr><td>做空比例</td><td>~8%</td><td>~15%</td><td>~12%</td><td style="color:var(--red);">~21%</td></tr>
+      <tr><td>分析师共识</td><td>Strong Buy</td><td>Buy</td><td>Strong Buy</td><td>Hold/Sell</td></tr>
+      <tr><td>综合风险评级</td><td style="color:var(--gold);">中等</td><td style="color:var(--red);">高</td><td style="color:var(--gold);">中高</td><td style="color:var(--red);">极高</td></tr>
+    </table>
+  </div>
+  <p style="color:var(--muted);font-size:0.82rem;margin-top:0.3rem;">
+    注：以上数据基于公开信息，截至2026年4月底。Forward P/S基于分析师共识营收预估。做空比例为近似值。
+  </p>
+
+  <h3 class="subsection-title">科技巨头的量子布局</h3>
+  <p style="color:var(--muted);font-size:0.87rem;margin-bottom:1rem;">
+    对于不想承受纯量子股极端波动的投资者，通过科技巨头间接配置是更稳健的选择。量子在这些公司总营收中的占比极小，但技术实力往往领先纯量子公司。
+  </p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>公司</th><th>量子路线</th><th>关键进展</th><th>其他业务安全垫</th><th>综合吸引力</th></tr>
       <tr>
         <td><strong style="color:var(--blue);">Google (GOOGL)</strong></td>
         <td>超导 + 中性原子</td>
-        <td>Willow纠错突破；13,000×加速；2026年3月增加中性原子路线</td>
-        <td>量子是几乎零成本的「免费期权」。核心业务（搜索、YouTube、云）提供安全边际。</td>
+        <td>Willow纠错突破；13,000×超算加速；2026年3月增加中性原子路线</td>
+        <td>搜索、YouTube、云 — 年营收$3,500亿+</td>
+        <td style="color:var(--green);">★★★★★ 量子是几乎零成本的「免费期权」</td>
       </tr>
       <tr>
         <td><strong style="color:var(--blue);">IBM</strong></td>
         <td>超导</td>
-        <td>Nighthawk 120-Q处理器；纠错解码×10；目标2029年容错</td>
-        <td>唯一既盈利又有领先量子技术的公司。P/E ~36×，P/S ~4×，估值合理。</td>
+        <td>Nighthawk 120-Q；纠错解码×10；2026年首次精确模拟磁性材料；目标2029容错</td>
+        <td>企业IT服务 — 年营收$650亿+，盈利</td>
+        <td style="color:var(--green);">★★★★★ 唯一既盈利又有领先量子技术的公司</td>
       </tr>
       <tr>
         <td><strong style="color:var(--purple);">Microsoft (MSFT)</strong></td>
-        <td>拓扑 (Majorana 1)</td>
-        <td>全球首款拓扑量子处理器；目标百万量子比特单芯片</td>
-        <td>Azure量子云锁定生态。拓扑路线如果成功是颠覆性的。</td>
+        <td>拓扑 Majorana 1</td>
+        <td>首款拓扑量子处理器；目标百万量子比特单芯片；Azure量子云生态</td>
+        <td>Azure、Office、Windows — 年营收$2,600亿+</td>
+        <td style="color:var(--green);">★★★★ 拓扑路线如果成功是颠覆性的</td>
       </tr>
       <tr>
         <td><strong style="color:var(--green);">NVIDIA (NVDA)</strong></td>
         <td>混合量子-经典</td>
         <td>CUDA-Q平台；Ising开源量子校准AI（2.5×更快、3×更准）</td>
-        <td>不造量子计算机，但量子+AI基础设施「卖铲人」同样受益。</td>
+        <td>AI芯片 — 年营收$1,500亿+</td>
+        <td style="color:var(--gold);">★★★ 「卖铲人」逻辑，不赌路线</td>
       </tr>
     </table>
   </div>
+
+  <h3 class="subsection-title">ETF工具 —— QTUM深度分析</h3>
+  <div class="kb-card">
+    <h3>Defiance Quantum ETF (QTUM)</h3>
+    <div class="body">
+      <p>
+        <strong>持仓数量：</strong>83-85只股票<br>
+        <strong>费率：</strong>0.40%<br>
+        <strong>业绩：</strong>2024年 +50.5% | 2025年 +36.7% | 3年年化 +27.2%<br>
+        <strong>前五大持仓：</strong>NVIDIA、台积电、博通、ASML、IBM（合计约25%）<br>
+        <strong>量子纯度：</strong>较低——大量持仓是AI芯片、半导体设备公司。纯量子股(IONQ+RGTI+QBTS+QUBT)合计占比<5%。
+      </p>
+      <div class="analogy">
+        <strong>实际买的是什么：</strong>QTUM更像是「AI+芯片+量子」混合ETF，而不是纯量子ETF。它的波动主要来自芯片和AI板块，纯量子股的涨跌对其影响很小。适合想「沾边量子但不承受纯量子波动」的投资者。如果追求纯量子敞口，QTUM不够纯；如果追求分散化科技投资中有量子元素，QTUM合适。
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- ====== PART 5: 风险警示 ====== -->
+<!-- ====== SECTION 5: 风险全面评估 ====== -->
 <section class="section" id="risks">
-  <h2 class="section-title">风险警示</h2>
+  <h2 class="section-title">风险全面评估</h2>
 
   <div class="stats-row" style="margin-bottom:1.8rem;">
     <div class="stat-card">
       <div class="n" style="background:linear-gradient(135deg,var(--red),#f08050);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">50%+</div>
-      <div class="l">2025年量子板块多次单月回撤</div>
+      <div class="l">2025年量子板块多次单月回撤超50%</div>
     </div>
     <div class="stat-card">
       <div class="n" style="background:linear-gradient(135deg,var(--red),#f08050);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">370%</div>
@@ -616,54 +868,140 @@
     </div>
     <div class="stat-card">
       <div class="n" style="background:linear-gradient(135deg,var(--red),#f08050);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">$41.5亿</div>
-      <div class="l">2025年纯量子股增发融资</div>
+      <div class="l">2025年纯量子股增发融资（稀释）</div>
     </div>
     <div class="stat-card">
-      <div class="n" style="background:linear-gradient(135deg,var(--red),#f08050);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">5条</div>
-      <div class="l">相互竞争的技术路线</div>
+      <div class="n" style="background:linear-gradient(135deg,var(--red),#f08050);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">~$28亿</div>
+      <div class="l">四只纯量子股2025年合计净亏损</div>
     </div>
   </div>
 
+  <h3 class="subsection-title">历史镜鉴 —— 2000年互联网泡沫中的「下一代技术」</h3>
+  <p style="color:var(--muted);font-size:0.87rem;margin-bottom:1rem;">
+    今天的纯量子股与1999-2000年的互联网基础设施股（如JDS Uniphase、Nortel、Ciena）有结构性相似之处：
+  </p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>维度</th><th>1999年互联网基础设施</th><th>2024-2026年量子计算</th></tr>
+      <tr><td>叙事</td><td>「互联网流量每3个月翻倍，必须提前建光纤」</td><td>「量子优势即将到来，必须提前布局」</td></tr>
+      <tr><td>P/S估值</td><td>50-300×</td><td>45-975×</td></tr>
+      <tr><td>盈利状态</td><td>少数盈利，多数巨亏</td><td>全部巨亏</td></tr>
+      <tr><td>最终结果</td><td>互联网确实赢了——但90%的基础设施公司破产或被收购</td><td>量子计算确实会成功——但不代表现在的纯量子股能活到那一天</td></tr>
+      <tr><td>幸存者特征</td><td>现金流充沛、客户多元、技术壁垒高</td><td>现金储备多、政府合同稳定、技术路线有壁垒？</td></tr>
+    </table>
+  </div>
+  <p style="color:var(--muted);font-size:0.82rem;margin-top:0.3rem;">
+    核心教训：技术方向正确 ≠ 当前估值合理 ≠ 现在的玩家是最终赢家。
+  </p>
+
+  <h3 class="subsection-title">做空论点汇总</h3>
+  <p style="color:var(--muted);font-size:0.87rem;margin-bottom:1rem;">
+    以下是主要做空机构对纯量子股的核心论点。了解对立面有助于做出更理性的判断：
+  </p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>做空机构</th><th>针对标的</th><th>核心论点</th><th>后续发展</th></tr>
+      <tr>
+        <td>Wolfpack Research</td>
+        <td>IONQ</td>
+        <td>营收过度依赖少数政府合同；技术路线在Caltech发现后可能被中性原子超越</td>
+        <td>IONQ股价做空报告后一度下跌，但2026年4月强劲反弹</td>
+      </tr>
+      <tr>
+        <td>Scorpion Capital</td>
+        <td>QUBT</td>
+        <td>指控量子技术声明夸大；营收几乎为零；关联交易</td>
+        <td>QUBT股价大幅下跌，SEC开始关注「量子洗白」问题</td>
+      </tr>
+      <tr>
+        <td>Iceberg Research</td>
+        <td>RGTI</td>
+        <td>营收下滑+极高P/S的组合不可持续；超导路线竞争激烈（IBM/Google碾压）</td>
+        <td>RGTI反向ETF RGTZ上市，提供做空工具</td>
+      </tr>
+      <tr>
+        <td>Kerrisdale Capital</td>
+        <td>板块整体</td>
+        <td>「量子计算是真实的技术，但商业化时间线被系统性夸大。当前估值隐含2035年营收，而非2028年」</td>
+        <td>2025年多次在板块大幅反弹后发表看空报告</td>
+      </tr>
+    </table>
+  </div>
+
+  <h3 class="subsection-title">八大核心风险</h3>
   <div class="risk-grid">
     <div class="risk-card">
       <h4>估值极端泡沫化</h4>
-      <p>RGTI P/S 642×，QBTS ~276×。历史上P/S超30×的「下一代技术」公司在盈利前几乎都经历了70%+的回撤。对标2000年互联网泡沫。</p>
+      <p>RGTI P/S 642×，QBTS ~276×。历史上P/S超30×的「下一代技术」公司在盈利前几乎都经历了70%+的回撤。目前纯量子股没有任何估值锚。</p>
     </div>
     <div class="risk-card">
       <h4>暴雷级别的波动性</h4>
-      <p>纯量子股日振幅20–30%为常态。2026年3月一周内IONQ、RGTI、QBTS分别跌13–15%。反向ETF单周涨30–34%。不适合无法承受大幅波动的投资者。</p>
+      <p>纯量子股日振幅20-30%为常态。2026年3月一周内IONQ、RGTI、QBTS分别跌13-15%。反向ETF单周涨30-34%。不适合无法承受大幅波动的投资者。</p>
     </div>
     <div class="risk-card">
       <h4>持续亏损与股权稀释</h4>
-      <p>所有纯量子股无一盈利。IONQ 2025年净亏$5.1亿。靠持续增发维持运营——持仓比例在持续被稀释。</p>
+      <p>所有纯量子股无一盈利。IONQ 2025年净亏$5.1亿。四家合计净亏约$28亿。靠持续增发维持运营——2025年合计增发$41.5亿，持仓比例在持续被稀释。</p>
     </div>
     <div class="risk-card">
       <h4>科技巨头的碾压效应</h4>
-      <p>Google、IBM、Microsoft可将量子能力捆绑进云服务。纯量子公司面对的竞争对手R&D预算是自身营收的数十倍。</p>
+      <p>Google、IBM、Microsoft可将量子能力捆绑进云服务，以零边际成本提供给客户。纯量子公司面对的竞争对手R&D预算是自身营收的数十倍。</p>
     </div>
     <div class="risk-card">
       <h4>技术路线不确定性</h4>
-      <p>超导、离子阱、中性原子、光子、拓扑——谁能最终胜出？押注单一公司的风险类似于1990年代末押注单一操作系统或CPU架构。</p>
+      <p>超导、离子阱、中性原子、光子、拓扑——五条路线中只有1-2条可能最终主导市场。押注单一公司的风险类似于1990年代末押注单一操作系统。</p>
     </div>
     <div class="risk-card">
       <h4>商业化时间线漫长</h4>
-      <p>大规模商业回报预计要到2030年代中期。纯量子股需靠融资「生存」到商业化拐点——这是以年计算的马拉松。</p>
+      <p>即使Caltech发现将时间线提前，大规模商业回报预计也要到2030年代中期。纯量子股需靠融资「生存」到商业化拐点——这是以年计算的马拉松。</p>
     </div>
     <div class="risk-card">
-      <h4>SEC监管风险</h4>
-      <p>SEC已开始打击「量子洗白」（Quantum-washing）。夸大量子能力的公司面临调查和处罚。历史教材：2018年区块链概念股的监管清算。</p>
+      <h4>SEC监管与「量子洗白」</h4>
+      <p>SEC已开始打击「量子洗白」（Quantum-washing）。夸大量子能力的公司面临调查和处罚。参考2018年区块链概念股的监管清算——当时多家公司改名蹭热点后被SEC处罚。</p>
     </div>
     <div class="risk-card">
-      <h4>散户流动性风险</h4>
-      <p>纯量子股机构持仓低、散户持仓高。行情逆转时缺乏机构「接盘」，下行可能加速和放大。</p>
+      <h4>散户踩踏风险</h4>
+      <p>纯量子股机构持仓低、散户持仓高。行情逆转时缺乏机构「接盘」，下行可能加速和放大。反向ETF（IONZ/QBTZ/RGTZ）的存在使做空更容易。</p>
+    </div>
+  </div>
+
+  <h3 class="subsection-title">三种情景分析</h3>
+  <div class="scenario-grid">
+    <div class="scenario-card bull">
+      <h4 style="color:var(--green);">乐观情景（概率 ~15%）</h4>
+      <p><strong>触发条件：</strong><br>
+      • 2027年前IBM或Google实现量子优势演示<br>
+      • 纠错技术取得连续突破，容错时间线提前至2029<br>
+      • Quantinuum/PSiQuantum IPO获得超高估值<br>
+      • 大型药企或金融机构签署实质性量子计算合同<br><br>
+      <strong>潜在结果：</strong>纯量子股可能再涨100-300%。IONQ或成为板块龙头，市值达$300-500亿。QTUM ETF年化回报>40%。</p>
+    </div>
+    <div class="scenario-card base">
+      <h4 style="color:var(--blue);">基准情景（概率 ~55%）</h4>
+      <p><strong>触发条件：</strong><br>
+      • 技术按现有轨迹渐进进步，无跳跃式突破<br>
+      • 容错按2030-2032时间线推进<br>
+      • 纯量子股继续融资稀释，但头部公司(IONQ/Quantinuum)存活<br>
+      • 科技巨头稳步推进量子云服务<br><br>
+      <strong>潜在结果：</strong>纯量子股波动率下降，估值逐步向基本面回归（P/S压缩）。通过巨头和ETF配置的投资者获得温和回报。部分尾部纯量子股可能破产。</p>
+    </div>
+    <div class="scenario-card bear">
+      <h4 style="color:var(--red);">悲观情景（概率 ~30%）</h4>
+      <p><strong>触发条件：</strong><br>
+      • 纠错进展停滞——Willow突破被证明难以复制<br>
+      • 容错时间线推至2035年以后<br>
+      • SEC打击「量子洗白」引发板块信任危机<br>
+      • 利率持续高位，亏损科技股全面杀估值<br>
+      • 科技巨头量子投资收缩<br><br>
+      <strong>潜在结果：</strong>纯量子股普遍跌70-90%。至少1-2家破产。板块可能重演2022年的惨烈。但通过巨头(Etf)配置的投资者损失可控。</p>
     </div>
   </div>
 </section>
 
-<!-- ====== PART 6: 投资策略 ====== -->
+<!-- ====== SECTION 6: 投资策略与行动框架 ====== -->
 <section class="section" id="strategy">
-  <h2 class="section-title">个人投资者策略建议</h2>
+  <h2 class="section-title">个人投资者策略与行动框架</h2>
 
+  <h3 class="subsection-title">三种配置策略</h3>
   <div class="strategy-grid">
     <div class="strategy-card">
       <h4>保守型 · 科技巨头为主</h4>
@@ -673,28 +1011,109 @@
         <li><strong>辅助敞口：</strong>QTUM ETF — 一键配置量子+AI+芯片生态</li>
         <li><strong>仓位上限：</strong>总量子相关不超过可投资资产的5%</li>
         <li><strong>优点：</strong>无稀释风险，无归零风险，核心业务提供安全垫</li>
+        <li><strong>缺点：</strong>量子弹性较低——如果板块暴涨，受益幅度有限</li>
       </ul>
     </div>
     <div class="strategy-card">
       <h4>均衡型 · 杠铃策略（Barbell）</h4>
       <p style="margin-bottom:0.4rem;">适合：愿意承担一定波动，但不过度集中</p>
       <ul>
-        <li><strong>80–90%：</strong>GOOGL / IBM / MSFT — 稳定敞口</li>
-        <li><strong>10–20%：</strong>IONQ（营收领先）+ QBTS（商业化最成熟）</li>
-        <li><strong>仓位上限：</strong>不超过可投资资产的10–15%</li>
+        <li><strong>80-90%：</strong>GOOGL / IBM / MSFT — 稳定敞口</li>
+        <li><strong>10-20%：</strong>IONQ（营收领先）+ QBTS（商业化最成熟）</li>
+        <li><strong>仓位上限：</strong>不超过可投资资产的10-15%</li>
         <li><strong>纪律：</strong>纯量子部分设置20%硬止损，不抱侥幸心理</li>
+        <li><strong>再平衡：</strong>如果纯量子部分因暴涨占比超过25%，减仓回归至20%</li>
       </ul>
     </div>
     <div class="strategy-card">
       <h4>投机型 · 纯量子股</h4>
-      <p style="margin-bottom:0.4rem;">适合：充分了解风险、能承受50%+回撤</p>
+      <p style="margin-bottom:0.4rem;">适合：充分了解风险、能承受50%+回撤、愿意持有3-5年</p>
       <ul>
         <li><strong>关注：</strong>IONQ(营收规模)、QBTS(客户基础)、RGTI(弹性最大)</li>
-        <li><strong>仓位铁律：</strong>任何单一标的归零不会伤害整体财务安全。总量子敞口&lt;可投资资产的5%</li>
-        <li><strong>催化剂关注：</strong>IBM量子优势演示、Quantinuum IPO、DARPA基准结果</li>
+        <li><strong>远离：</strong>QUBT——营收$40万、做空21%、被质疑造假</li>
+        <li><strong>仓位铁律：</strong>任何单一标的归零不会伤害整体财务安全。总量子敞口 < 可投资资产的5%</li>
         <li><strong>📛 纯量子股归零是真实存在的风险</strong></li>
       </ul>
     </div>
+  </div>
+
+  <h3 class="subsection-title">催化剂日历（2026–2027）</h3>
+  <p style="color:var(--muted);font-size:0.87rem;margin-bottom:1rem;">
+    以下是已知可能影响量子板块走势的关键事件。注意：这些时间点是近似的，具体日期可能变化。
+  </p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>时间</th><th>事件</th><th>可能影响</th><th>关注标的</th></tr>
+      <tr>
+        <td>2026 Q2</td>
+        <td>IBM量子优势演示（目标时间）</td>
+        <td>如果成功，板块可能暴涨。如果推迟，板块可能承压</td>
+        <td>IBM、RGTI、IONQ</td>
+      </tr>
+      <tr>
+        <td>2026 H2</td>
+        <td>Quantinuum IPO预期升温</td>
+        <td>高估值IPO将利好IONQ（同行对标）；如果IPO推迟则利空</td>
+        <td>IONQ、RGTI</td>
+      </tr>
+      <tr>
+        <td>2026 Q3-Q4</td>
+        <td>DARPA量子计算基准测试结果</td>
+        <td>独立第三方评估各路线实际进展，可能改变技术路线共识</td>
+        <td>板块全体</td>
+      </tr>
+      <tr>
+        <td>2026 H2</td>
+        <td>SandboxAQ 可能IPO</td>
+        <td>AI+量子传感主题热度的风向标</td>
+        <td>QTUM ETF</td>
+      </tr>
+      <tr>
+        <td>2027</td>
+        <td>Google下一代量子处理器（Willow后续）</td>
+        <td>纠错能力能否持续超越阈值，是技术信心的关键</td>
+        <td>GOOGL、IONQ</td>
+      </tr>
+      <tr>
+        <td>2027</td>
+        <td>微软Majorana 2路线图更新</td>
+        <td>拓扑路线可扩展性验证——如果成功影响巨大</td>
+        <td>MSFT</td>
+      </tr>
+      <tr>
+        <td>持续</td>
+        <td>各纯量子股季度财报</td>
+        <td>营收增速、烧钱率、客户数量——基本面最直接的窗口</td>
+        <td>IONQ、RGTI、QBTS</td>
+      </tr>
+    </table>
+  </div>
+
+  <h3 class="subsection-title">仓位管理建议</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>阶段</th><th>建议操作</th><th>触发条件</th></tr>
+      <tr>
+        <td><strong style="color:var(--green);">初始建仓</strong></td>
+        <td>总目标仓位的30-40%。优先买巨头/ETF，纯量子部分先以小仓位试探</td>
+        <td>现在 — 任何时候都可以逐步建仓，关键是控制仓位比例</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--blue);">加仓</strong></td>
+        <td>每次加仓不超过总目标仓位的20%。在板块大幅回调（-30%以上）时加仓</td>
+        <td>板块因非基本面原因暴跌（如宏观利率恐慌、整体市场回调）</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--gold);">减仓</strong></td>
+        <td>纯量子部分在短期内（1-2个月）暴涨100%+时，考虑减仓1/3锁定利润</td>
+        <td>事件驱动型暴涨（如Willow式芯片突破消息），而非基本面改善</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--red);">止损</strong></td>
+        <td>纯量子单一标的从买入价下跌30%，无条件止损。不补仓、不摊平</td>
+        <td>止损后冷静期至少3个月，重新评估后再决定是否再次入场</td>
+      </tr>
+    </table>
   </div>
 
   <h3 class="subsection-title">投资前自检清单</h3>
@@ -702,34 +1121,67 @@
   <div class="table-wrap">
     <table>
       <tr><th style="width:5%;">#</th><th style="width:50%;">问题</th><th>通过标准</th></tr>
-      <tr><td>1</td><td>如果这笔投资清零，我的生活品质会受影响吗？</td><td>不会——它只占我可投资资产的一小部分</td></tr>
-      <tr><td>2</td><td>我能否向朋友解释这家公司的技术路线和竞争位置？</td><td>能讲清楚它在五条路线中的位置</td></tr>
-      <tr><td>3</td><td>我的持仓时间预期是多久？</td><td>至少3–5年——这是一场马拉松</td></tr>
-      <tr><td>4</td><td>商业化的催化剂是什么？我能说出至少两个吗？</td><td>例如：IBM量子优势演示、容错量子计算机原型</td></tr>
-      <tr><td>5</td><td>我查过公司的现金流和融资历史吗？</td><td>知道它过去两年融了多少、烧了多少</td></tr>
-      <tr><td>6</td><td>我是否考虑过用ETF或巨头间接配置？</td><td>至少比较过QTUM ETF与个股的风险收益特征</td></tr>
-      <tr><td>7</td><td>如果今天跌30%，我会怎么做？</td><td>有书面预案——不是凭情绪临场决定</td></tr>
+      <tr><td>1</td><td>如果这笔投资清零，我的生活品质会受影响吗？</td><td>不会——它只占我可投资资产的一小部分（<5%）</td></tr>
+      <tr><td>2</td><td>我能否向朋友解释这家公司的技术路线和竞争位置？</td><td>能讲清楚它在五条路线中的位置，以及相比直接对手的优劣</td></tr>
+      <tr><td>3</td><td>我的持仓时间预期是多久？</td><td>至少3-5年——这是一场马拉松，不是短线交易</td></tr>
+      <tr><td>4</td><td>商业化的催化剂是什么？我能说出至少两个吗？</td><td>例如：IBM量子优势演示、容错量子计算机原型、Quantinuum IPO</td></tr>
+      <tr><td>5</td><td>我查过公司的现金流和融资历史吗？</td><td>知道它过去两年融了多少、烧了多少、还能撑多久</td></tr>
+      <tr><td>6</td><td>我是否考虑过用ETF或巨头间接配置？</td><td>至少比较过QTUM ETF与个股的风险收益特征，做过清醒的选择</td></tr>
+      <tr><td>7</td><td>如果今天跌30%，我会怎么做？</td><td>有书面预案——不是凭情绪临场决定。是止损、持有还是加仓？</td></tr>
     </table>
   </div>
 
-  <div class="kb-card" style="margin-top:1.5rem;">
-    <h3 style="color:var(--gold);">核心理念：不对称下注</h3>
-    <div class="body">
-      <p>
-        量子计算投资的最佳框架是<strong style="color:var(--gold);">「不对称下注」</strong>——寻找「下行有底、上行有天」的配置方式。<br><br>
-        下行有底：通过杠铃策略，用科技巨头的现金流和ETF的分散化锁定安全边际。<br>
-        上行有天：如果量子商业化成功，即使只占你仓位10%的纯量子敞口也能贡献巨大回报。<br><br>
-        这<strong>不是</strong>一个「all-in赌一把」的机会。如果量子商业化需要到2035年，纯量子股需要在此期间持续融资——仓位太重意味着你可能被迫在低谷割肉。
-      </p>
+  <h3 class="subsection-title">信息源建议</h3>
+  <p style="color:var(--muted);font-size:0.87rem;margin-bottom:1rem;">
+    保持跟进量子计算行业需要几个高质量信息源：
+  </p>
+  <div class="card-grid">
+    <div class="card">
+      <span class="tag tag-blue">学术前沿</span>
+      <h3>学术期刊与预印本</h3>
+      <ul>
+        <li><strong>Nature / Science：</strong>重大突破首选发表平台</li>
+        <li><strong>PRX Quantum：</strong>量子信息领域顶级期刊</li>
+        <li><strong>arXiv quant-ph：</strong>量子物理预印本，最快获取最新成果</li>
+      </ul>
     </div>
+    <div class="card">
+      <span class="tag tag-gold">行业分析</span>
+      <h3>行业报告与分析师</h3>
+      <ul>
+        <li><strong>McKinsey Quantum Technology Monitor：</strong>年度行业全景报告</li>
+        <li><strong>B. Riley、Needham：</strong>对纯量子股的覆盖最细致</li>
+        <li><strong>Tracxn / PitchBook：</strong>VC融资数据</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag tag-green">日常资讯</span>
+      <h3>新闻与社区</h3>
+      <ul>
+        <li><strong>The Quantum Insider：</strong>量子行业专业媒体</li>
+        <li><strong>IBM Research Blog / Google Quantum AI Blog：</strong>一手技术更新</li>
+        <li><strong>公司财报电话会：</strong>基本面投资者最重要的直接信息源</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="highlight-box" style="margin-top:1.5rem;">
+    <h4>核心理念：不对称下注</h4>
+    <p style="font-size:0.92rem;color:#a8acb8;">
+      量子计算投资的最佳框架是<strong style="color:var(--gold);">「不对称下注」</strong>——寻找「下行有底、上行有天」的配置方式。<br><br>
+      <strong>下行有底：</strong>通过杠铃策略，用科技巨头的现金流和ETF的分散化锁定安全边际。如果量子商业化失败，巨头和ETF的核心业务不受影响。<br><br>
+      <strong>上行有天：</strong>如果量子商业化成功，即使只占你仓位10%的纯量子敞口也能贡献巨大回报。哪怕纯量子部分归零，总损失可控。<br><br>
+      这<strong>不是</strong>一个「all-in赌一把」的机会。如果量子商业化需要到2035年，纯量子股需要在此期间持续融资——仓位太重意味着你可能被迫在低谷割肉。<br><br>
+      <strong style="color:var(--red);">记住：技术方向正确 ≠ 当前估值合理 ≠ 现在的玩家是最终赢家。</strong>
+    </p>
   </div>
 </section>
 
 <footer class="footer">
-  技术信息来源：Nature, Cell, PRX Quantum, IBM Research, Google Quantum AI, Caltech, MIT 等公开论文<br>
-  市场数据来源：Tracxn, McKinsey, Nasdaq, Yahoo Finance, CNBC, Motley Fool, B. Riley, Needham 等公开资料<br>
-  生成于 2026 年 5 月 · 内容截至 2026 年 4 月底<br><br>
-  <strong style="color:var(--red);">⚠️ 本文仅供参考，不构成投资建议。投资有风险，入市需谨慎。过往业绩不代表未来表现。</strong>
+  <p><strong>技术信息来源：</strong>Nature, Science, PRX Quantum, Physical Review Letters, arXiv, IBM Research, Google Quantum AI, Microsoft Quantum, Caltech, MIT 等公开论文</p>
+  <p><strong>市场数据来源：</strong>Tracxn, PitchBook, Crunchbase, McKinsey, Nasdaq, Yahoo Finance, SEC Filings, CNBC, Motley Fool, B. Riley, Needham, Kerrisdale Capital 等公开资料</p>
+  <p><strong>生成时间：</strong>2026年5月 · 内容截至2026年4月底</p>
+  <p style="margin-top:1rem;"><strong style="color:var(--red);">本文仅供参考，不构成投资建议。投资有风险，入市需谨慎。过往业绩不代表未来表现。任何投资决策应基于个人财务状况和独立研究。</strong></p>
 </footer>
 
 </body>
