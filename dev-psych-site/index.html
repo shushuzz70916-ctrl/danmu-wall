@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>发展心理学 · 完整知识体系与最新研究 | 2025–2026</title>
+<style>
+  :root {
+    --bg: #0f0f12;
+    --card-bg: #1a1a22;
+    --text: #e8e4dd;
+    --muted: #8a8680;
+    --warm: #e8945a;
+    --green: #6bae85;
+    --amber: #d4a844;
+    --rose: #d4786e;
+    --sky: #6b9ec4;
+    --purple: #9b7ec4;
+    --teal: #5ea8a0;
+    --border: rgba(255,255,255,0.06);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* Nav */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(15,15,18,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 1.2rem;
+    padding: 0.7rem 1rem;
+    font-size: 0.85rem;
+  }
+  .nav a { color: var(--muted); text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+  .nav a:hover { color: var(--warm); }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    min-height: 65vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 2rem;
+    margin-top: 3rem;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 35% 40%, rgba(232,148,90,0.12) 0%, transparent 55%),
+                radial-gradient(ellipse at 65% 60%, rgba(107,174,133,0.10) 0%, transparent 55%),
+                radial-gradient(ellipse at 50% 80%, rgba(155,126,196,0.08) 0%, transparent 50%);
+    animation: heroPulse 10s ease-in-out infinite;
+  }
+  @keyframes heroPulse {
+    0%,100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+  .hero h1 {
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--warm), var(--amber), var(--green));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative; z-index: 1;
+    animation: titleGlow 4s ease-in-out infinite alternate;
+  }
+  @keyframes titleGlow {
+    0% { filter: drop-shadow(0 0 6px rgba(232,148,90,0.3)); }
+    100% { filter: drop-shadow(0 0 18px rgba(107,174,133,0.5)); }
+  }
+  .hero .subtitle {
+    font-size: 1.15rem; color: var(--muted);
+    position: relative; z-index: 1; margin-top: 0.75rem;
+  }
+  .hero .desc {
+    max-width: 640px; margin-top: 1.5rem;
+    font-size: 1rem; color: #9a9690;
+    position: relative; z-index: 1;
+  }
+
+  /* Sections */
+  .section {
+    max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem;
+  }
+  .section-title {
+    font-size: 1.7rem; font-weight: 700; margin-bottom: 2rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .section-title::before {
+    content: ""; width: 3px; height: 1.4em;
+    background: linear-gradient(180deg, var(--warm), var(--amber));
+    border-radius: 2px;
+  }
+
+  /* Stats */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1.2rem; margin-bottom: 2rem;
+  }
+  .stat-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.3rem; text-align: center;
+  }
+  .stat-card .n {
+    font-size: 2rem; font-weight: 800;
+    background: linear-gradient(135deg, var(--warm), var(--amber));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .stat-card .l { font-size: 0.85rem; color: var(--muted); margin-top: 0.2rem; }
+
+  /* Cards */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: 1.3rem;
+  }
+  .card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.4rem;
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 32px rgba(0,0,0,0.35);
+    border-color: rgba(255,255,255,0.12);
+  }
+  .card .tag {
+    display: inline-block; font-size: 0.7rem; font-weight: 700;
+    padding: 2px 9px; border-radius: 14px; margin-bottom: 0.7rem;
+    text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .tag-warm  { background: rgba(232,148,90,0.15);  color: var(--warm); }
+  .tag-green { background: rgba(107,174,133,0.15); color: var(--green); }
+  .tag-amber { background: rgba(212,168,68,0.15);  color: var(--amber); }
+  .tag-rose  { background: rgba(212,120,110,0.15);  color: var(--rose); }
+  .tag-sky   { background: rgba(107,158,196,0.15); color: var(--sky); }
+  .tag-purple{ background: rgba(155,126,196,0.15); color: var(--purple); }
+  .tag-teal  { background: rgba(94,168,160,0.15);  color: var(--teal); }
+
+  .card h3 { font-size: 1.1rem; margin-bottom: 0.35rem; }
+  .card .eng { font-size: 0.8rem; color: #5a5660; margin-bottom: 0.6rem; }
+  .card p { font-size: 0.92rem; color: #b0aca6; }
+  .card ul { margin: 0.5rem 0 0 1.2rem; font-size: 0.9rem; color: #b0aca6; }
+  .card ul li { margin-bottom: 0.25rem; }
+
+  /* Theory detail cards */
+  .theory-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.5rem; margin-bottom: 1.2rem;
+  }
+  .theory-card h3 { font-size: 1.2rem; margin-bottom: 0.2rem; }
+  .theory-card .meta { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.8rem; }
+  .theory-card .body { font-size: 0.94rem; color: #b0aca6; }
+  .theory-card .body ul { margin: 0.5rem 0 0 1.2rem; }
+
+  /* Stage timeline */
+  .stages {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .stage {
+    background: var(--card-bg); border-left: 3px solid var(--warm);
+    border-radius: 0 10px 10px 0; padding: 1.1rem 1.3rem;
+  }
+  .stage:nth-child(2) { border-left-color: var(--amber); }
+  .stage:nth-child(3) { border-left-color: var(--green); }
+  .stage:nth-child(4) { border-left-color: var(--sky); }
+  .stage:nth-child(5) { border-left-color: var(--purple); }
+  .stage:nth-child(6) { border-left-color: var(--rose); }
+  .stage:nth-child(7) { border-left-color: var(--teal); }
+  .stage:nth-child(8) { border-left-color: var(--amber); }
+  .stage:nth-child(9) { border-left-color: var(--green); }
+  .stage .age { font-size: 0.78rem; font-weight: 700; color: var(--warm); letter-spacing: 0.04em; }
+  .stage h4 { margin: 0.2rem 0 0.4rem; }
+  .stage p { font-size: 0.9rem; color: #b0aca6; }
+
+  /* Research cards */
+  .research-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.4rem; margin-bottom: 1rem;
+  }
+  .research-card h4 { margin-bottom: 0.25rem; }
+  .research-card .src { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.5rem; }
+  .research-card .find { font-size: 0.93rem; color: #b0aca6; }
+  .research-card .hl {
+    display: inline-block; margin-top: 0.5rem; font-size: 0.82rem; font-weight: 600;
+    color: var(--warm);
+  }
+
+  /* Debate cards */
+  .debate-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+  }
+  .debate-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.3rem;
+  }
+  .debate-card h4 { margin-bottom: 0.5rem; }
+  .debate-card p { font-size: 0.92rem; color: #b0aca6; }
+
+  /* Trends */
+  .trend-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem;
+  }
+  .trend-card {
+    background: var(--card-bg); border-left: 3px solid var(--green);
+    border-radius: 0 10px 10px 0; padding: 1.2rem 1.4rem;
+  }
+  .trend-card:nth-child(2) { border-left-color: var(--warm); }
+  .trend-card:nth-child(3) { border-left-color: var(--amber); }
+  .trend-card:nth-child(4) { border-left-color: var(--sky); }
+  .trend-card:nth-child(5) { border-left-color: var(--purple); }
+  .trend-card:nth-child(6) { border-left-color: var(--rose); }
+  .trend-card h4 { margin-bottom: 0.5rem; }
+  .trend-card p { font-size: 0.91rem; color: #b0aca6; }
+
+  .footer {
+    text-align: center; padding: 3rem 1.5rem;
+    color: #555560; font-size: 0.82rem;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 640px) {
+    .section { padding: 2rem 1rem; }
+    .card-grid { grid-template-columns: 1fr; }
+    .nav { gap: 0.7rem; font-size: 0.78rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="#overview">学科概览</a>
+  <a href="#theories">核心理论</a>
+  <a href="#stages">发展阶段</a>
+  <a href="#research">最新研究</a>
+  <a href="#methods">研究方法</a>
+  <a href="#debates">核心争议</a>
+  <a href="#trends">趋势</a>
+</nav>
+
+<!-- ====== Hero ====== -->
+<header class="hero">
+  <h1>发展心理学</h1>
+  <p class="subtitle">完整知识体系与最新研究进展 · 2025–2026</p>
+  <p class="desc">
+    发展心理学研究人类从受孕到死亡的毕生心理变化——认知、情感、社会和生物层面的系统性发展。
+    从皮亚杰的认知阶段论到最新的脑成像研究，理解「我们如何成为现在的自己」。
+  </p>
+</header>
+
+<!-- ====== 学科概览 ====== -->
+<section class="section" id="overview">
+  <h2 class="section-title">学科概览</h2>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="n">9+</div><div class="l">主要理论体系</div></div>
+    <div class="stat-card"><div class="n">9</div><div class="l">毕生发展阶段</div></div>
+    <div class="stat-card"><div class="n">3</div><div class="l">核心发展领域</div></div>
+    <div class="stat-card"><div class="n">~32岁</div><div class="l">大脑发育稳定临界点</div></div>
+    <div class="stat-card"><div class="n">130+年</div><div class="l">学科发展历史</div></div>
+  </div>
+
+  <p style="color:#b0aca6;margin-bottom:1.5rem;font-size:0.95rem;">
+    发展心理学是心理学的最大分支之一，研究人类在整个生命周期中的<b style="color:var(--warm)">系统性变化与连续性</b>。
+    从最初的婴儿日记到现代的fMRI脑成像，经历了从描述到解释、从单因素到多系统交互的范式转型。
+  </p>
+
+  <h3 style="margin-bottom:1rem;font-size:1.1rem;color:var(--warm);">三大核心发展领域</h3>
+  <div class="card-grid" style="margin-bottom:2rem;">
+    <div class="card">
+      <span class="tag tag-green">Physical</span>
+      <h3>生理/生物发展</h3>
+      <p>大脑与神经系统发育、运动技能、感官能力、青春期内分泌变化、更年期生理变化、衰老过程中的身体机能退化。</p>
+    </div>
+    <div class="card">
+      <span class="tag tag-sky">Cognitive</span>
+      <h3>认知发展</h3>
+      <p>感知、注意、记忆、语言习得、问题解决、推理、元认知、执行功能、智力发展。从皮亚杰的建构主义到信息加工模型。</p>
+    </div>
+    <div class="card">
+      <span class="tag tag-warm">Psychosocial</span>
+      <h3>社会心理发展</h3>
+      <p>情绪调节、人格形成、自我认同、依恋关系、道德推理、同伴关系、亲密关系、职业认同、毕生社会适应。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 核心理论 ====== -->
+<section class="section" id="theories">
+  <h2 class="section-title">九大核心理论</h2>
+
+  <div class="theory-card">
+    <h3>1. 皮亚杰认知发展理论</h3>
+    <div class="meta">Jean Piaget (1896–1980) · 瑞士心理学家 · 建构主义奠基人</div>
+    <div class="body">
+      <p><strong style="color:var(--warm);">核心主张：</strong>儿童是主动的知识建构者（而非被动接收者）。智力本质是「适应」——通过<strong>同化</strong>（纳入现有图式）和<strong>顺应</strong>（调整图式适应新信息）追求<strong>平衡</strong>。</p>
+      <ul>
+        <li><strong>感知运动阶段 (0–2岁)：</strong>通过感官和动作探索世界，获得客体永久性</li>
+        <li><strong>前运算阶段 (2–7岁)：</strong>符号思维出现，但自我中心、不可逆、缺乏守恒</li>
+        <li><strong>具体运算阶段 (7–11岁)：</strong>去自我中心化，获得守恒，可进行具体逻辑推理</li>
+        <li><strong>形式运算阶段 (11岁+)：</strong>抽象思维、假设-演绎推理、系统性问题解决</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="theory-card">
+    <h3>2. 维果茨基社会文化理论</h3>
+    <div class="meta">Lev Vygotsky (1896–1934) · 苏联心理学家 · 社会建构主义</div>
+    <div class="body">
+      <p><strong style="color:var(--warm);">核心主张：</strong>高级心理机能是社会文化历史发展的产物，认知发展本质上是社会交往的内化过程。与皮亚杰的核心分歧在于——<strong>学习引领发展</strong>（而非发展先于学习）。</p>
+      <ul>
+        <li><strong>最近发展区 (ZPD)：</strong>独立解决问题水平与在指导下可达水平之间的差距——教学的「最佳窗口」</li>
+        <li><strong>支架式教学：</strong>在ZPD内提供及时、适当、渐退的支持</li>
+        <li><strong>内化：</strong>外部社会活动→内部心理过程，语言是关键中介工具</li>
+        <li><strong>心理工具：</strong>语言、计数系统、文字等文化符号媒介，将低级心理机能转化为高级</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="theory-card">
+    <h3>3. 埃里克森心理社会八阶段理论</h3>
+    <div class="meta">Erik Erikson (1902–1994) · 德裔美籍心理学家 · 毕生发展观</div>
+    <div class="body">
+      <p><strong style="color:var(--warm);">核心主张：</strong>人格发展贯穿一生，每个阶段都有一个核心心理社会「危机」，危机的积极解决产生相应的<strong>自我品质（virtue）</strong>。</p>
+      <div style="overflow-x:auto;margin-top:0.5rem;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.88rem;color:#b0aca6;">
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 8px;">1. 婴儿期 (0–1.5岁)</td><td>信任 vs 不信任</td><td style="color:var(--warm);">希望</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 8px;">2. 儿童早期 (1.5–3岁)</td><td>自主 vs 羞愧/怀疑</td><td style="color:var(--warm);">意志</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 8px;">3. 学龄初期 (3–6岁)</td><td>主动 vs 内疚</td><td style="color:var(--warm);">目的</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 8px;">4. 学龄期 (6–12岁)</td><td>勤奋 vs 自卑</td><td style="color:var(--warm);">能力</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 8px;">5. 青春期 (12–18岁)</td><td>自我同一性 vs 角色混乱</td><td style="color:var(--warm);">忠诚</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 8px;">6. 成年早期 (18–30岁)</td><td>亲密 vs 孤独</td><td style="color:var(--warm);">爱</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 8px;">7. 成年中期 (30–60岁)</td><td>繁衍 vs 停滞</td><td style="color:var(--warm);">关怀</td></tr>
+          <tr><td style="padding:6px 8px;">8. 成年晚期 (60岁+)</td><td>完善 vs 悲观失望</td><td style="color:var(--warm);">智慧</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="theory-card">
+    <h3>4. 鲍尔比-安斯沃斯依恋理论</h3>
+    <div class="meta">John Bowlby (1907–1990) &amp; Mary Ainsworth (1913–1999) · 英国/美国</div>
+    <div class="body">
+      <p><strong style="color:var(--warm);">核心主张：</strong>婴儿-照看者之间的情感纽带具有深刻的进化根源和生存价值。早期依恋关系形成<strong>内部工作模型（IWM）</strong>，持续影响终生的关系模式。</p>
+      <ul>
+        <li><strong>安全型 (Secure)：</strong>照看者是安全基地，孩子自信探索 (约65%)</li>
+        <li><strong>不安全-矛盾型 (Ambivalent)：</strong>焦虑、黏人、不确定照看者可获得性 (约10%)</li>
+        <li><strong>不安全-回避型 (Avoidant)：</strong>回避照看者、情感疏离 (约20%)</li>
+        <li><strong>紊乱型 (Disorganized)：</strong>混乱矛盾行为，常与虐待/忽视相关 (约5%)</li>
+        <li><strong>评估工具：</strong>安斯沃斯「陌生情境法」——8阶段实验室观察范式</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="theory-card">
+    <h3>5. 班杜拉社会认知理论</h3>
+    <div class="meta">Albert Bandura (1925–2021) · 加拿大/美国心理学家</div>
+    <div class="body">
+      <p><strong style="color:var(--warm);">核心主张：</strong>学习不依赖直接强化——<strong>观察、模仿和示范</strong>是社会学习的核心机制。行为、个人因素和环境构成<strong>三元交互决定论</strong>。</p>
+      <ul>
+        <li><strong>波波娃娃实验 (1961)：</strong>经典实验证明儿童可通过观察习得攻击行为</li>
+        <li><strong>自我效能感：</strong>「我相信我能做到」——信念直接影响行为选择、努力程度和坚持性</li>
+        <li><strong>替代强化：</strong>观察他人行为后果即可学习，无需亲自体验</li>
+        <li><strong>自我调节：</strong>个体通过自我观察、判断和自我反应调节行为</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="theory-card">
+    <h3>6. 布朗芬布伦纳生态系统理论</h3>
+    <div class="meta">Urie Bronfenbrenner (1917–2005) · 美籍俄裔心理学家</div>
+    <div class="body">
+      <p><strong style="color:var(--warm);">核心主张：</strong>发展是人与多重环境系统持续交互的产物——这些系统如同俄罗斯套娃般层层嵌套。</p>
+      <ul>
+        <li><strong>微系统：</strong>直接环境（家庭、学校、同伴）</li>
+        <li><strong>中系统：</strong>微系统之间的联系（家校关系）</li>
+        <li><strong>外系统：</strong>间接影响（父母工作场所、社区资源）</li>
+        <li><strong>宏系统：</strong>文化价值、法律、意识形态、社会规范</li>
+        <li><strong>时间系统：</strong>历史事件与个人生命过渡的时间维度</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="theory-card">
+    <h3>7. 科尔伯格道德发展理论</h3>
+    <div class="meta">Lawrence Kohlberg (1927–1987) · 美国心理学家</div>
+    <div class="body">
+      <p><strong style="color:var(--warm);">核心主张：</strong>道德推理能力按三个水平六个阶段发展，顺序固定但速度因人而异（部分人终身停留于前两个水平）。</p>
+      <ul>
+        <li><strong>前习俗水平：</strong>阶段1（服从/惩罚）→ 阶段2（工具性相对主义/自利）</li>
+        <li><strong>习俗水平：</strong>阶段3（人际和谐/好孩子）→ 阶段4（法律与秩序）</li>
+        <li><strong>后习俗水平：</strong>阶段5（社会契约/功利）→ 阶段6（普遍伦理原则）</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="theory-card">
+    <h3>8. 信息加工理论</h3>
+    <div class="meta">认知传统 · 1960s至今</div>
+    <div class="body">
+      <p><strong style="color:var(--warm);">核心主张：</strong>人脑类似计算机——信息通过感觉登记→工作记忆→长时记忆进行加工。发展表现为加工速度提升、策略使用更有效、知识库扩展和元认知能力的增强。</p>
+    </div>
+  </div>
+
+  <div class="theory-card">
+    <h3>9. 动态系统理论</h3>
+    <div class="meta">Esther Thelen (1941–2004) · 美国发展心理学家</div>
+    <div class="body">
+      <p><strong style="color:var(--warm);">核心主张：</strong>发展不是预设程序的展开，而是多个子系统（神经、身体、环境、任务）在特定时刻的<strong>自组织</strong>过程。新行为模式以非线性的方式出现——微小变化可能触发质的飞跃。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 毕生发展阶段 ====== -->
+<section class="section" id="stages">
+  <h2 class="section-title">毕生发展九阶段</h2>
+  <div class="stages">
+    <div class="stage">
+      <div class="age">Conception – Birth</div>
+      <h4>1. 产前期</h4>
+      <p>合子期→胚胎期→胎儿期。神经管形成、器官分化、大脑皮层发育。致畸因子（酒精、药物、压力激素）的敏感期效应。2025–26年新研究关注孕期压力对后代脑发育的表观遗传影响。</p>
+    </div>
+    <div class="stage">
+      <div class="age">Birth – 2 years</div>
+      <h4>2. 婴儿期与学步期</h4>
+      <p>依恋形成关键期；感觉运动智能快速发展；大脑突触密度达到峰值后进行修剪。2025年研究揭示情绪维度敏感性（效价 vs 唤醒度）以不同轨迹分化。</p>
+    </div>
+    <div class="stage">
+      <div class="age">2 – 6 years</div>
+      <h4>3. 幼儿期（学前期）</h4>
+      <p>语言爆发期（词汇量从~200增至~10,000）；心理理论开始发展；前额叶执行功能快速成长。游戏是认知与社会性发展的核心媒介。</p>
+    </div>
+    <div class="stage">
+      <div class="age">7 – 11 years</div>
+      <h4>4. 童年中期（学龄期）</h4>
+      <p>逻辑思维取代直觉思维；自我概念从具体描述转向心理特征；同伴关系从游戏伙伴转向深层友谊。埃里克森的「勤奋 vs 自卑」阶段。</p>
+    </div>
+    <div class="stage">
+      <div class="age">12 – 18 years</div>
+      <h4>5. 青春期</h4>
+      <p>前额叶-边缘系统发育不同步（「高马力、弱刹车」模型）；同一性探索（Marcia的四状态：达成、延缓、早闭、扩散）；同伴影响达到峰值。</p>
+    </div>
+    <div class="stage">
+      <div class="age">18 – 30+ years</div>
+      <h4>6. 成年初显期 + 成年早期</h4>
+      <p><strong>2025年剑桥大学新发现：</strong>青春期神经重塑持续到约32岁（非此前认为的25岁）。此阶段大脑长程连接持续增强，支持高阶思维与情绪调节。</p>
+    </div>
+    <div class="stage">
+      <div class="age">30s – 60s</div>
+      <h4>7. 成年中期</h4>
+      <p>埃里克森「繁衍 vs 停滞」；晶体智力稳定甚至提升，流体智力开始缓慢下降。职业巅峰与社会角色的多重交织。认知储备的积累成为晚年保护因素。</p>
+    </div>
+    <div class="stage">
+      <div class="age">60s – 80s</div>
+      <h4>8. 成年晚期（年轻老人）</h4>
+      <p>~66岁起白质连接加速退化（剑桥大学2025）。但认知储备（教育、职业复杂度、休闲活动）可「延缓上调」补偿需求。有目的感的老人认知健康期更长。</p>
+    </div>
+    <div class="stage">
+      <div class="age">80+ years</div>
+      <h4>9. 高龄老年期</h4>
+      <p>神经网络局部化趋势加强；「超级老人」(Super-Agers)保持强大认知功能的关键：保持脑通信枢纽的完整性。代际社交网络的保护效应在晚年特别显著。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 2025-2026 最新研究 ====== -->
+<section class="section" id="research">
+  <h2 class="section-title">2025–2026 最新研究发现</h2>
+
+  <h3 style="color:var(--warm);margin-bottom:1.2rem;font-size:1.05rem;">脑与认知发展</h3>
+
+  <div class="research-card">
+    <h4>大脑发育持续到32岁，非25岁</h4>
+    <div class="src">剑桥大学 MRC 认知与脑科学研究所 · 2025年11月</div>
+    <div class="find">对4,216人的扩散MRI（新生儿到90岁）分析识别出四个转折点：9岁（童年拓扑结束）、<strong>32岁（青春期神经重塑终止）</strong>、66岁（白质退化加速）、83岁（局部化重组）。大脑在32–66岁间保持稳定配置。</div>
+  </div>
+
+  <div class="research-card">
+    <h4>海马-内嗅皮层网格编码预测智力发展</h4>
+    <div class="src">北京师范大学 · Cell 正刊 · 2026年3月</div>
+    <div class="find">203名8–25岁被试的fMRI显示，内嗅皮层<a style="color:var(--warm);">网格细胞样编码</a>随年龄增强，支持内侧前额叶编码抽象概念间的关系。这些编码的成熟度可预测真实世界推理能力和智力测量——首次将皮亚杰认知建构论落实到细胞层面。</div>
+  </div>
+
+  <div class="research-card">
+    <h4>儿童大脑从「感觉主导」转向「认知主导」</h4>
+    <div class="src">Child Mind Institute / Nature Communications · 2026年1月</div>
+    <div class="find">使用CPCA分析发现三种脑传播模式（S-A、TP-D、SM-V），<strong>自上而下加工（从高级联合皮层到感觉区域）随年龄增强</strong>，且比自下而上的传播更能预测认知表现。儿童大脑约8岁已呈现成人样模式，但各状态的停留时间随发育显著变化。</div>
+  </div>
+
+  <div class="research-card">
+    <h4>心理化网络连接呈毕生二次曲线轨迹</h4>
+    <div class="src">Communications Biology · 2026年</div>
+    <div class="find">181名参与者（6–14岁儿童 + 20–61岁成人）的研究显示，心理化网络的远程连接（额-后）随年龄从局部转向长程，<strong>约32岁达到峰值后下降</strong>。连接强度在儿童中中介了年龄与心理化能力的关系。</div>
+  </div>
+
+  <h3 style="color:var(--green);margin:1.8rem 0 1.2rem;font-size:1.05rem;">社会情绪与家庭发展</h3>
+
+  <div class="research-card">
+    <h4>触屏交互促进幼儿因果学习与迁移</h4>
+    <div class="src">陈英和课题组 / Developmental Psychology · 2025年11月</div>
+    <div class="find">393名4–5岁儿童实验：<strong>主动触屏交互</strong>显著优于被动观看视频或实验者演示，促进因果推理和向真实任务的迁移。4岁组在因果冲突任务中表现突出，5岁组在远近迁移中均有优势。</div>
+  </div>
+
+  <div class="research-card">
+    <h4>早期适应性技能「屏蔽」产前压力对大脑的影响</h4>
+    <div class="src">CUNY / Developmental Neuroscience · 2026年4月</div>
+    <div class="find">飓风桑迪孕期待产研究：8岁时fMRI扫描显示，<strong>早期适应技能较高（自理、沟通、社交）的儿童</strong>，其边缘系统激活模式与未暴露于灾变的对照组相当。适应性技能可能是对抗产前逆境的神经保护缓冲器。</div>
+  </div>
+
+  <div class="research-card">
+    <h4>仅一小时青少年社交游戏即可挽救压力脑回路</h4>
+    <div class="src">Developmental Psychobiology · 2025年</div>
+    <div class="find">仓鼠模型中，<strong>每天仅一小时的青少年（P21–43）二联社交游戏</strong>足以逆转同伴剥夺引起的条件性挫败反应，使内侧前额叶的PNN表达正常化。凸显社交游戏对神经可塑性和压力韧性的强大保护效应。</div>
+  </div>
+
+  <div class="research-card">
+    <h4>持续低正向情绪是早期逆境→内化障碍的中介</h4>
+    <div class="src">University of Pittsburgh / medRxiv / ABCD研究 · 2026年1月</div>
+    <div class="find">7,457名9–13岁儿童的6时间点轨迹聚类：<strong>「持续低正向情绪」轨迹</strong>特异性地中介了累计早期逆境与后来内化（非外化）障碍的关联。提示增进正向情绪体验可能是关键的干预靶点。</div>
+  </div>
+
+  <div class="research-card">
+    <h4>婴儿情绪注意遵循效价-唤醒度分化轨迹</h4>
+    <div class="src">Frontiers in Developmental Psychology · 2025/2026</div>
+    <div class="find">234名3–36月龄婴儿的眼动追踪：效价敏感性线性增强，但<strong>效价-唤醒度联合维度呈倒U型轨迹（8–12月龄峰值）</strong>。眼-嘴注视呈U型曲线（10–18月龄嘴关注增强），为后期类别化情绪识别搭建基础。</div>
+  </div>
+
+  <h3 style="color:var(--amber);margin:1.8rem 0 1.2rem;font-size:1.05rem;">成年发展与老化</h3>
+
+  <div class="research-card">
+    <h4>认知储备通过「延缓上调」保护老年大脑</h4>
+    <div class="src">中国科学院心理研究所 / PLOS Biology · 2025年7月</div>
+    <div class="find">以长期年长音乐家为天然高储备模型，fMRI语音感知任务证明：认知储备通过<strong>「延缓上调」</strong>（延迟补偿需求，保留更年轻的功能连接模式）而非「促进代偿」机制保护老年大脑。</div>
+  </div>
+
+  <div class="research-card">
+    <h4>年轻成人的一般认知能力是抵抗痴呆的真正因素</h4>
+    <div class="src">Alzheimer's & Dementia · 2025年6月</div>
+    <div class="find">瑞典16,619名男性52年生存分析：一旦控制<strong>青年期一般认知能力（GCA）</strong>后，教育和职业复杂度对痴呆风险不再有显著贡献。提示预防应聚焦童年-青少年期认知发展而非晚年认知训练。</div>
+  </div>
+
+  <div class="research-card">
+    <h4>年龄多样化社交网络预测认知与寿命</h4>
+    <div class="src">The Gerontologist · 2026年</div>
+    <div class="find">309人横断面 + 191人13年追踪：<strong>代际社交网络越丰富</strong>→流体认知越好→13年生存率越高。多数人与儿童和老年人互动时体验到最积极情绪（非同龄人）。</div>
+  </div>
+
+  <div class="research-card">
+    <h4>生活目标感延长认知健康期</h4>
+    <div class="src">Aging, Neuropsychology, and Cognition · 2025年</div>
+    <div class="find">记忆与老化项目（1,821人，19年）+ 健康与退休研究（10,542人，12年）的多状态生存模型：<strong>更高目标感的老人</strong> MCI风险更低（HR=0.82），从MCI恢复到正常的概率更高，无认知障碍寿命更长。</div>
+  </div>
+
+  <div class="research-card">
+    <h4>触屏交互中的感觉运动接地在5-6岁向抽象表征转变</h4>
+    <div class="src">Cognitive Development · 2026年1-3月</div>
+    <div class="find">手部旋转任务揭示：<strong>5岁依赖具身运动模拟，6岁已转向最短几何路径策略</strong>（抽象心理旋转），4岁无任何可辨识模式。支持皮亚杰式的认知发展顺序：身体→抽象。</div>
+  </div>
+</section>
+
+<!-- ====== 研究方法 ====== -->
+<section class="section" id="methods">
+  <h2 class="section-title">研究方法论</h2>
+  <div class="card-grid">
+    <div class="card">
+      <span class="tag tag-warm">核心设计</span>
+      <h3>纵向研究</h3>
+      <p>同一群体跨时间反复测量。可揭示真实的发展轨迹和个体内变化，但耗时长、流失率高、存在练习效应和年代效应。</p>
+    </div>
+    <div class="card">
+      <span class="tag tag-sky">核心设计</span>
+      <h3>横断研究</h3>
+      <p>同一时间点比较不同年龄组。高效经济，但只能揭示组间差异（不能揭示个体发展变化），且存在世代混淆效应。</p>
+    </div>
+    <div class="card">
+      <span class="tag tag-green">核心设计</span>
+      <h3>序列设计（队列-序列）</h3>
+      <p>结合纵向和横断：追踪多个出生队列跨时间。可分离年龄效应、世代效应和测量时间效应——方法论的「黄金标准」。</p>
+    </div>
+    <div class="card">
+      <span class="tag tag-rose">技术</span>
+      <h3>神经影像（fMRI/EEG/fNIRS）</h3>
+      <p>静息态/任务态功能连接分析；超扫描（双人同步EEG）揭示社交互动中的脑间同步。近红外(fNIRS)适合婴幼儿的无创成像。</p>
+    </div>
+    <div class="card">
+      <span class="tag tag-purple">技术</span>
+      <h3>多基因评分与表观遗传</h3>
+      <p>基因组关联研究(GWAS)产生多基因评分，与养育环境交互预测发展结局。基因-环境交互是当今发展心理病理学的核心范式。</p>
+    </div>
+    <div class="card">
+      <span class="tag tag-amber">技术</span>
+      <h3>大数据与机器学习</h3>
+      <p>大型队列（ABCD 11,000+人、UK Biobank 50万人）的轨迹聚类、稀疏PLS等算法识别发展亚型和脑-行为跨诊断特征。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 核心争议 ====== -->
+<section class="section" id="debates">
+  <h2 class="section-title">核心争议</h2>
+  <div class="debate-grid">
+    <div class="debate-card">
+      <h4>天性 vs 教养</h4>
+      <p>基因与环境谁更重要？现代共识：不是「谁更多」，而是基因-环境如何相互作用（G×E）。表观遗传学表明环境可改变基因表达。</p>
+    </div>
+    <div class="debate-card">
+      <h4>连续 vs 阶段</h4>
+      <p>发展是渐进连续的累积还是间断的质性飞跃？皮亚杰式阶段论 vs 信息加工的连续增量观。动态系统理论提供了折中：自组织可能产生阶跃式变化，但本质上来自连续互动。</p>
+    </div>
+    <div class="debate-card">
+      <h4>稳定性 vs 可塑性</h4>
+      <p>早期特质/经历是否终身不变？依恋理论强调早期经验的持久影响，但追踪数据显示明显的个人变化。敏感期确实存在，但大多数发展领域保持终生可塑性。</p>
+    </div>
+    <div class="debate-card">
+      <h4>普遍路径 vs 多元路径</h4>
+      <p>全人类共享统一的发展序列，还是各文化塑造不同的发展轨迹？WEIRD偏见（西方、受教育、工业化、富裕、民主）长期主导研究样本。跨文化证据日益挑战「普遍阶段」假设。</p>
+    </div>
+    <div class="debate-card">
+      <h4>主动儿童 vs 被动儿童</h4>
+      <p>儿童是主动建构者（皮亚杰）还是被社会化塑造的接受者（行为主义）？现代发展心理学坚定支持主动儿童模型——从新生儿起就有选择性地关注和作用于环境。</p>
+    </div>
+    <div class="debate-card">
+      <h4>领域一般 vs 领域特殊</h4>
+      <p>发展是全域性的心智能力提升（皮亚杰），还是模块化、领域特殊的机制独立成熟（乔姆斯基的语言模块、心智理论模块）？脑成像日益支持混合模型：有领域特殊神经基础，但也参与领域一般的网络交互。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 趋势总结 ====== -->
+<section class="section" id="trends">
+  <h2 class="section-title">学科趋势 (2025–2026)</h2>
+  <div class="trend-grid">
+    <div class="trend-card">
+      <h4>毕生观成为主流</h4>
+      <p>发展不再只是「儿童心理学」的代名词。从产前压力到超级老人的全生命周期整合——脑发育窗口延长到32岁、认知储备的毕生积累——正在重塑学科边界。</p>
+    </div>
+    <div class="trend-card">
+      <h4>WEIRD 偏见的打破</h4>
+      <p>研究者越来越意识到，心理学结论基于全球12%的人口（WEIRD样本）。原住民儿童发展路径、跨文化依恋模式、非西方道德推理等研究显著增加。</p>
+    </div>
+    <div class="trend-card">
+      <h4>脑-行为-基因多层级整合</h4>
+      <p>单一层面的解释已成过去。网格编码→认知建构、多基因评分→养育环境→脑激活模式的因果链成为新范式。</p>
+    </div>
+    <div class="trend-card">
+      <h4>个体内设计取代群体均值</h4>
+      <p>密集纵向追踪（每日日记/EMA）和个体内实验设计越来越主流。差异性易感性的识别揭示了「一刀切」的局限——什么对谁有效，在什么条件下有效。</p>
+    </div>
+    <div class="trend-card">
+      <h4>干预科学化</h4>
+      <p>从理论到循证干预的转化加速：低正向情绪→正念训练；适应性技能→产前压力缓冲；代际社交→老年认知保护。发展心理学的最终目标是改善真实生活中的人。</p>
+    </div>
+    <div class="trend-card">
+      <h4>数字化 + 自然化</h4>
+      <p>可穿戴设备、智能手机EMA、在线实验平台和计算机视觉分析，使研究者能在日常环境中捕捉真实的发展过程——而非仅在实验室中。触屏交互作为认知学习的正向工具被重新评价。</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  涵盖理论：Piaget, Vygotsky, Erikson, Bowlby/Ainsworth, Bandura, Bronfenbrenner, Kohlberg, 信息加工, 动态系统理论<br>
+  最新研究来源：Cell, Nature Communications, Developmental Psychology, PLOS Biology, Alzheimer's & Dementia, The Gerontologist 等<br>
+  生成于 2026 年 5 月 · 内容截至 2026 年 4 月底
+</footer>
+
+</body>
+</html>
